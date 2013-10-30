@@ -1,13 +1,12 @@
 package mobile.app.dev;
 
-import com.mad.R;
-
-import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
+
+import com.mad.R;
 
 import de.congrace.exp4j.Calculable;
 import de.congrace.exp4j.ExpressionBuilder;
@@ -67,7 +66,7 @@ public class MainActivity extends Activity {
                     String result =  calc.calculate()+"";
                     textView.setText(result);
                 } catch (Exception e){
-                    Log.d("Tag", "ohn weh");
+                	 textView.setText("Fehlerhafte Eingabe");
                 }
                 break;
         }
