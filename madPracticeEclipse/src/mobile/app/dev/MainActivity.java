@@ -12,7 +12,8 @@ import de.congrace.exp4j.Calculable;
 import de.congrace.exp4j.ExpressionBuilder;
 
 public class MainActivity extends Activity {
-    private TextView textView;
+    
+	private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
