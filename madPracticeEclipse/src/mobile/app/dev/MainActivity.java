@@ -6,8 +6,6 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
-import com.mad.R;
-
 import de.congrace.exp4j.Calculable;
 import de.congrace.exp4j.ExpressionBuilder;
 

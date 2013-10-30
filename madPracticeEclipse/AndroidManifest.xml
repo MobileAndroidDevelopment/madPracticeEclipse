@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mad"
+    package="mobile.app.dev"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -26,6 +26,10 @@
         <activity
             android:name="mobile.app.dev.ueb01.Calculator"
             android:label="@string/title_activity_calculator" >
+        </activity>
+        <activity
+            android:name="mobile.app.dev.ueb02.CalculatorExtended"
+            android:label="@string/title_activity_calculator_extended" >
         </activity>
     </application>
 
