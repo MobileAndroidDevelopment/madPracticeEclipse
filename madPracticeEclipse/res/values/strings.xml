@@ -22,5 +22,6 @@
     <string name="_0">0</string>
     <string name="title_activity_calculator">Calculator</string>
     <string name="title_activity_calculator_extended">CalculatorExtended</string>
+    <string name="others">Weitere</string>
 
 </resources>
