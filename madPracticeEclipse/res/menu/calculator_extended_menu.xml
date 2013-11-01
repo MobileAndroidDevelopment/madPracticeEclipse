@@ -3,7 +3,22 @@
 
     <item
         android:id="@+id/menu_search"
-        android:checkable="true"
-        android:title="@string/others"/>
+        android:title="@string/others">
+        <menu >
+            <item
+           		android:id="@+id/menu_sin"
+            	android:title="Sinus"/>
+            <item
+           		android:id="@+id/menu_cos"
+            	android:title="Cosinus"/>
+            <item
+           		android:id="@+id/menu_tan"
+            	android:title="Tangens"/>
+            <item
+           		android:id="@+id/menu_root"
+            	android:title="√"/>
+        </menu>
+        
+    </item>
 
 </menu>

@@ -31,7 +31,7 @@
         <activity
             android:name="mobile.app.dev.ueb02.CalculatorExtended"
             android:label="@string/title_activity_calculator_extended"
-            android:theme="@android:style/Theme.Holo.NoActionBar" >
+            android:theme="@android:style/Theme.Holo" >
         </activity>
     </application>
 
