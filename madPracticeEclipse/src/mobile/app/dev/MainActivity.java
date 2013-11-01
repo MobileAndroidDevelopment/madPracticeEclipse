@@ -1,74 +1,29 @@
 package mobile.app.dev;
 
+import mobile.app.dev.ueb01.Calculator;
+import mobile.app.dev.ueb02.CalculatorExtended;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.TextView;
-
-import de.congrace.exp4j.Calculable;
-import de.congrace.exp4j.ExpressionBuilder;
 
 public class MainActivity extends Activity {
     
-	private TextView textView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        textView = (TextView)findViewById(R.id.textView);
     }
 
-    public void onClick(View v){
-        switch (v.getId()){
-            case R.id.button_0:
-                textView.append("0"); break;
-            case R.id.button_1:
-                textView.append("1"); break;
-            case R.id.button_2:
-                textView.append("2"); break;
-            case R.id.button_3:
-                textView.append("3"); break;
-            case R.id.button_4:
-                textView.append("4"); break;
-            case R.id.button_5:
-                textView.append("5"); break;
-            case R.id.button_6:
-                textView.append("6"); break;
-            case R.id.button_7:
-                textView.append("7"); break;
-            case R.id.button_8:
-                textView.append("8"); break;
-            case R.id.button_9:
-                textView.append("9"); break;
-            case R.id.button_add:
-                textView.append("+"); break;
-            case R.id.button_mult:
-                textView.append("*"); break;
-            case R.id.button_sub:
-                textView.append("-"); break;
-            case R.id.button_back:
-                if(textView.length()>0){
-                    textView.setText(textView.getText().subSequence(0, textView.getText().length()-1));
-                }
-                break;
-            case R.id.button_div:
-                textView.append("/"); break;
-            case R.id.button_dot:
-                textView.append("."); break;
-            case R.id.button_eq:
-                try{
-                    String expression = textView.getText().toString();
-                    Calculable calc = new ExpressionBuilder(expression).build();
-                    String result =  calc.calculate()+"";
-                    textView.setText(result);
-                } catch (Exception e){
-                	 textView.setText("Fehlerhafte Eingabe");
-                }
-                break;
-        }
+    public void uebung1(View v){
+    	Intent intent = new Intent(this, Calculator.class);
+    	startActivity(intent);
+    }
+    
+    public void uebung2(View v){
+    	Intent intent = new Intent(this, CalculatorExtended.class);
+    	startActivity(intent);
     }
 
     @Override
