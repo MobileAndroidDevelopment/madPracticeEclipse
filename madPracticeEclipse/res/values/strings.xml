@@ -13,6 +13,9 @@
     <string name="_1">1</string>
     <string name="_2">2</string>
     <string name="_3">3</string>
+    <string name="bracketOpen">(</string>
+    <string name="bracketClose">)</string>
+    <string name="_C">C</string>
     <string name="MINUS">-</string>
     <string name="PERIOD">.</string>
     <string name="PLUS">+</string>
@@ -20,6 +23,10 @@
     <string name="DIVIDE">/</string>
     <string name="EQUALS">=</string>
     <string name="_0">0</string>
+    <string name="SIN">sin</string>
+    <string name="COS">cos</string>
+    <string name="TAN">tan</string>
+    <string name="SQRT">√</string>
     <string name="title_activity_calculator">Calculator</string>
     <string name="title_activity_calculator_extended">CalculatorExtended</string>
     <string name="others">Weitere</string>

@@ -28,7 +28,7 @@
 		<Button
             android:id="@+id/button_bracketOpen"
             android:layout_height="match_parent"
-            android:text="("
+            android:text="@string/bracketOpen"
             android:textSize="25sp"
             android:layout_weight=".25"
             android:textColor="@color/White"
@@ -38,7 +38,7 @@
         <Button
             android:id="@+id/button_bracketClose"
             android:layout_height="match_parent"
-            android:text=")"
+            android:text="@string/bracketClose"
             android:textSize="25sp"
             android:layout_weight=".25"
             android:textColor="@color/White"
@@ -48,7 +48,7 @@
 		<Button
             android:id="@+id/button_clear"
             android:layout_height="match_parent"
-            android:text="C"
+            android:text="@string/_C"
             android:textSize="25sp"
             android:layout_weight=".25"
             android:textColor="@color/White"

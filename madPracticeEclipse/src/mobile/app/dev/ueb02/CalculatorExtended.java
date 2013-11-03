@@ -176,8 +176,7 @@ public class CalculatorExtended extends Activity {
 			String result = calc.calculate() + "";
 			textView.setText(result);
 		} catch (Exception e) {
-			Toast toast = Toast.makeText(this, "Fehlerhafte Berechnung", Toast.LENGTH_SHORT);
-			toast.show();
+			Toast.makeText(this, "Fehlerhafte Berechnung", Toast.LENGTH_SHORT).show();
 		}
 	}
 }
