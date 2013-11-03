@@ -8,7 +8,7 @@
     android:weightSum="1"
     tools:context=".MainActivity" >
 
-    <TextView
+    <!-- <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -16,7 +16,23 @@
         android:gravity="right|center_vertical"
         android:singleLine="true"
         android:freezesText="true"
-        android:textSize="70sp" />
+        android:textSize="70sp" /> -->
+        
+    <EditText
+        android:id="@+id/textView"
+        style="@android:style/Widget.TextView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".3"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:freezesText="true"
+        android:gravity="right|center_vertical"
+        android:singleLine="true"
+        android:textSize="70sp"            
+        android:background="@null"/>
 
     <LinearLayout
         android:layout_width="match_parent"
