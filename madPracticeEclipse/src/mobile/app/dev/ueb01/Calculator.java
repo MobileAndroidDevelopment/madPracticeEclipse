@@ -18,7 +18,7 @@ public class Calculator extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calculator);
 
-		textView = (TextView) findViewById(R.id.textView);
+		textView = (TextView) findViewById(R.id.editText);
 	}
 
 	public void onClick(View v) {
