@@ -15,13 +15,22 @@
         android:id="@+id/button_uebung1"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:text="uebung1"
+        android:text="@string/UEBUNG_1"
         android:onClick="uebung1"/>
+    
+    <Button 
+        android:id="@+id/button_uebung2"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+		android:layout_below="@id/button_uebung1"
+        android:text="@string/UEBUNG_2"
+        android:onClick="uebung2"/>
     
     <Button 
         android:layout_width="match_parent"
         android:layout_height="55dp"
-		android:layout_below="@id/button_uebung1"
-        android:text="uebung2"
-        android:onClick="uebung2"/>
+		android:layout_below="@id/button_uebung2"
+        android:text="@string/UEBUNG_3"
+        android:onClick="uebung3"/>
+    
 </RelativeLayout>

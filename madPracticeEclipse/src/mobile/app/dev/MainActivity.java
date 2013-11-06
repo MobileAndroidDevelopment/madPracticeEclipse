@@ -25,6 +25,10 @@ public class MainActivity extends Activity {
     	Intent intent = new Intent(this, CalculatorExtended.class);
     	startActivity(intent);
     }
+    
+    public void uebung3(View v){
+    	// TODO: passende Activity starten
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

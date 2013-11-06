@@ -30,5 +30,8 @@
     <string name="title_activity_calculator">Calculator</string>
     <string name="title_activity_calculator_extended">CalculatorExtended</string>
     <string name="others">Weitere</string>
+    <string name="UEBUNG_1">Übung 1</string>
+    <string name="UEBUNG_2">Übung 2</string>
+    <string name="UEBUNG_3">Übung 3</string>
 
 </resources>
