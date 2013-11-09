@@ -1,40 +1,42 @@
 package mobile.app.dev.ueb03;
 
+import java.util.LinkedList;
+
 import mobile.app.dev.R;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class TodoListActivity extends ListActivity {
 
-	private static final String[] BIG_BANG = new String[] {
-			"Leonard Hofstadter", "Sheldon Cooper", "Penny", "Howard Wolowitz",
-			"Dr. Rajesh Koothrappali", "Bernadette Rostenkowski", "Amy Farrah Fowler"
-	};
-
-	private ArrayAdapter<String> adapter;
+	public static final String ENTRY = "entry";
+	private TodoListArrayAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-		for (int i = 0; i < BIG_BANG.length; i++) {
-			adapter.add(BIG_BANG[i]);
-		}
+		adapter = new TodoListArrayAdapter(this, new LinkedList<Todo>());
 		setListAdapter(adapter);
 		setTitle(R.string.title_activity_todo_list);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.todo_list, menu);
+		getMenuInflater().inflate(R.menu.todo_list_menu, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent = new Intent(this, TodoDetailActivity.class);
+    	startActivity(intent);
+		return super.onOptionsItemSelected(item);
 	}
 
 	/* wird aufgerufen, wenn ein Element aus der Liste ausgewählt wurde */

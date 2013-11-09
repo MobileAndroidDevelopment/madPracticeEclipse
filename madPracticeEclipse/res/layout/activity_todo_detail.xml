@@ -35,7 +35,7 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/textEditDesc"
+        android:id="@+id/editTextDesc"
         android:layout_below="@id/textViewDesc"
         android:inputType="textMultiLine"
         android:lines="6"
@@ -44,7 +44,7 @@
 
     <TextView
         android:id="@+id/textViewPrio"
-        android:layout_below="@id/textEditDesc"
+        android:layout_below="@id/editTextDesc"
         android:text="Priorität"
         android:paddingTop="10dp"
         android:textSize="20sp"
@@ -66,6 +66,8 @@
         android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Speichern"/>
+        android:textSize="20sp"
+        android:onClick="saveClicked"
+        android:text="+"/>
 
 </RelativeLayout>

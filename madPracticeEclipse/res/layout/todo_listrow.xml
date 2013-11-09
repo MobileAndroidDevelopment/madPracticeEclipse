@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="15dp"
+    android:layout_height="match_parent" >
+    
+    <TextView 
+        android:id="@+id/textViewRowTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textSize="20sp"
+        android:gravity="left"/>
+    
+    <TextView 
+        android:id="@+id/textViewRowPrio"
+        android:text="Prio"
+        android:textStyle="italic"
+        android:layout_below="@id/textViewRowTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:gravity="right"/>
+    
+</RelativeLayout>

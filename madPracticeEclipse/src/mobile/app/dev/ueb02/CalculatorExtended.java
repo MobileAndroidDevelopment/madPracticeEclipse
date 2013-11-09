@@ -44,7 +44,7 @@ public class CalculatorExtended extends Activity {
 		setContentView(R.layout.activity_calculator_extended);
 		setTitle(TITLE);
 
-		textView = (TextView) findViewById(R.id.editText);
+		textView = (TextView) findViewById(R.id.editTextCalc);
 	}
 
 	@Override

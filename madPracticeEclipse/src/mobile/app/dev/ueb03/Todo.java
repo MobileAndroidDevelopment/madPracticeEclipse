@@ -1,15 +1,24 @@
 package mobile.app.dev.ueb03;
 
-public class Todo {
+import java.io.Serializable;
 
+public class Todo implements Serializable{
+	private static int identifier = 0;
+	
+	private int iD;
 	private String title;
-	private String remark;
-	private Priority priority;
+	private String desc;
+	private String priority;
 
-	public Todo(String title, String remark, Priority priority) {
+	public Todo(String title, String desc, String priority) {
+		this.iD = identifier++;
 		this.title = title;
-		this.remark = remark;
+		this.desc = desc;
 		this.priority = priority;
+	}
+
+	public int getiD() {
+		return iD;
 	}
 
 	public String getTitle() {
@@ -20,25 +29,25 @@ public class Todo {
 		this.title = title;
 	}
 
-	public String getRemark() {
-		return remark;
+	public String getDesc() {
+		return desc;
 	}
 
-	public void setRemark(String remark) {
-		this.remark = remark;
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 
-	public Priority getPriority() {
+	public String getPriority() {
 		return priority;
 	}
 
-	public void setPriority(Priority priority) {
+	public void setPriority(String priority) {
 		this.priority = priority;
 	}
 
 	@Override
 	public String toString() {
-		return "Todo [title=" + title + ", remark=" + remark + ", priority=" + priority + "]";
+		return "Todo [title=" + title + ", desc=" + desc + ", priority=" + priority + "]";
 	}
 
 }
