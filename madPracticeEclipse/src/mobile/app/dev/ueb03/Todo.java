@@ -50,6 +50,10 @@ public class Todo implements Serializable {
 		return "Todo [title=" + title + ", desc=" + desc + ", priority=" + priority + "]";
 	}
 
+	/**
+	 * Ueberschreibt die Werte mit Werten aus einem uebergebenen Todo. Die ID wird dabei nicht angeruehrt.
+	 * @param todo
+	 */
 	public void setValues(Todo todo) {
 		this.title = todo.title;
 		this.desc = todo.desc;

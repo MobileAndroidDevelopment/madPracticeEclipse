@@ -20,6 +20,11 @@ public class TodoList extends LinkedList<Todo> {
 	private TodoList() {
 	}
 
+	/**
+	 * Sucht nach einem existierenden Element in der Liste und ueberschreibt dessen Werte. Referenziert wird
+	 * dabei auf die ID
+	 * @param todo
+	 */
 	public void overrideExisting(Todo todo) {
 		for (Todo nextTodo : this) {
 			if (nextTodo.getiD() == todo.getiD()) {

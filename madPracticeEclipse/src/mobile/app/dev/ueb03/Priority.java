@@ -8,6 +8,7 @@ public enum Priority {
 		this.position = position;
 	}
 	
+	/** Position innerhalb der Auswahl */
 	private final int position;
 
 	public int getPosition() {
