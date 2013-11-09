@@ -2,7 +2,7 @@ package mobile.app.dev.ueb03;
 
 import java.io.Serializable;
 
-public class Todo implements Serializable {
+public class Todo implements Serializable, Comparable<Todo> {
 	private static int identifier = 0;
 
 	private int iD;
@@ -17,7 +17,7 @@ public class Todo implements Serializable {
 		this.priority = priority;
 	}
 
-	public int getiD() {
+	public Integer getiD() {
 		return iD;
 	}
 
@@ -58,5 +58,10 @@ public class Todo implements Serializable {
 		this.title = todo.title;
 		this.desc = todo.desc;
 		this.priority = todo.priority;
+	}
+	
+	@Override
+	public int compareTo(Todo another) {
+		return getiD().compareTo(another.getiD());
 	}
 }
