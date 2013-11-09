@@ -14,7 +14,7 @@ public class TodoListArrayAdapter extends ArrayAdapter<Todo> {
     private final Context context;
     private final LinkedList<Todo> values;
 
-    public TodoListArrayAdapter(Context context, LinkedList<Todo> values) {
+    public TodoListArrayAdapter(Context context, TodoList values) {
         super(context, R.layout.todo_listrow, values);
         this.context = context;
         this.values = values;

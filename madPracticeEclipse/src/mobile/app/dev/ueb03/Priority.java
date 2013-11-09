@@ -8,13 +8,9 @@ public enum Priority {
 		this.position = position;
 	}
 	
-	private int position;
+	private final int position;
 
 	public int getPosition() {
 		return position;
-	}
-
-	public void setPosition(int position) {
-		this.position = position;
 	}
 }

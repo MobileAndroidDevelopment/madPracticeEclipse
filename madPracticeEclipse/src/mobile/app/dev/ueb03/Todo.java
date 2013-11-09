@@ -2,9 +2,9 @@ package mobile.app.dev.ueb03;
 
 import java.io.Serializable;
 
-public class Todo implements Serializable{
+public class Todo implements Serializable {
 	private static int identifier = 0;
-	
+
 	private int iD;
 	private String title;
 	private String desc;
@@ -50,4 +50,9 @@ public class Todo implements Serializable{
 		return "Todo [title=" + title + ", desc=" + desc + ", priority=" + priority + "]";
 	}
 
+	public void setValues(Todo todo) {
+		this.title = todo.title;
+		this.desc = todo.desc;
+		this.priority = todo.priority;
+	}
 }
