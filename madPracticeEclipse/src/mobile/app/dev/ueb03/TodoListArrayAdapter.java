@@ -29,7 +29,7 @@ public class TodoListArrayAdapter extends ArrayAdapter<Todo> {
         TextView prio = (TextView)rowView.findViewById(R.id.textViewRowPrio);
         
         title.setText(values.get(position).getTitle());
-        prio.setText(values.get(position).getPriority());
+        prio.setText(values.get(position).getPriority().toString());
         return rowView;
     }
 }

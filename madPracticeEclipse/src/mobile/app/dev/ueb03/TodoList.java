@@ -2,6 +2,10 @@ package mobile.app.dev.ueb03;
 
 import java.util.LinkedList;
 
+/**
+ * Singleton-Implementierung der Todo-Liste
+ * @author Benne
+ */
 public class TodoList extends LinkedList<Todo>{
 
 	private static TodoList instance;
@@ -14,6 +18,5 @@ public class TodoList extends LinkedList<Todo>{
 	}
 	
 	private TodoList(){
-		
 	}
 }

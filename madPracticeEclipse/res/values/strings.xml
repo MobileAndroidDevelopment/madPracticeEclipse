@@ -36,11 +36,13 @@
     <string name="title_activity_todo_list">TodoListActivity</string>
     <string name="title_activity_todo_detail">TodoDetailActivity</string>
     <string name="title_activity_todo_settings">TodoSettingsActivity</string>
+    <string name="newTodo">Neu</string>
 
     <string-array name="Prios">
-        <item>Hoch</item>
-        <item>Mittel</item>
-        <item>Niedrig</item>
+        <item>hoch</item>
+        <item>mittel</item>
+        <item>niedrig</item>
     </string-array>
+
 
 </resources>

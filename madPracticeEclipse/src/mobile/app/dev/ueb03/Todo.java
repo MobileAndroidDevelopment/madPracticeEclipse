@@ -8,9 +8,9 @@ public class Todo implements Serializable{
 	private int iD;
 	private String title;
 	private String desc;
-	private String priority;
+	private Priority priority;
 
-	public Todo(String title, String desc, String priority) {
+	public Todo(String title, String desc, Priority priority) {
 		this.iD = identifier++;
 		this.title = title;
 		this.desc = desc;
@@ -37,11 +37,11 @@ public class Todo implements Serializable{
 		this.desc = desc;
 	}
 
-	public String getPriority() {
+	public Priority getPriority() {
 		return priority;
 	}
 
-	public void setPriority(String priority) {
+	public void setPriority(Priority priority) {
 		this.priority = priority;
 	}
 

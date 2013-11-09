@@ -1,16 +1,14 @@
 package mobile.app.dev.ueb03;
 
-import java.util.LinkedList;
-
 import mobile.app.dev.R;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class TodoListActivity extends ListActivity {
 
@@ -21,9 +19,18 @@ public class TodoListActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		adapter = new TodoListArrayAdapter(this, new LinkedList<Todo>());
+		Log.d("CREATE", "Bin wieder hier");
+		adapter = new TodoListArrayAdapter(this, TodoList.getInstance());
 		setListAdapter(adapter);
 		setTitle(R.string.title_activity_todo_list);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.d("RESUME", "Bin wieder hier");
+		adapter = new TodoListArrayAdapter(this, TodoList.getInstance());
+		setListAdapter(adapter);
 	}
 
 	@Override
@@ -39,10 +46,10 @@ public class TodoListActivity extends ListActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	/* wird aufgerufen, wenn ein Element aus der Liste ausgewählt wurde */
 	@Override
 	protected void onListItemClick(ListView listView, View view, int position, long id) {
-		Toast.makeText(this, listView.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent(this, TodoDetailActivity.class);
+		intent.putExtra(ENTRY, (Todo)listView.getItemAtPosition(position));
+    	startActivity(intent);
 	}
-
 }
