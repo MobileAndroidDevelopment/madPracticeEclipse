@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class TodoDetailActivity extends Activity {
 
@@ -35,18 +36,23 @@ public class TodoDetailActivity extends Activity {
 		String desc = ((EditText) findViewById(R.id.editTextDesc)).getText().toString();
 		String prioAsString = ((Spinner) findViewById(R.id.spinnerPrio)).getSelectedItem().toString();
 		Priority priority = Priority.valueOf(prioAsString);
-
-		if (todo == null) {
-			// neuen Todo speichern
-			todo = new Todo(title, desc, priority);
-			TodoList.getInstance().add(todo);
+		
+		// Leerer Titel nicht moeglich
+		if (title == null || title.isEmpty()) {
+			Toast.makeText(this, "Leerer Titel nicht moeglich", Toast.LENGTH_SHORT).show();
 		} else {
-			// bisherigen Todo abändern
-			todo.setTitle(title);
-			todo.setDesc(desc);
-			todo.setPriority(priority);
-			TodoList.getInstance().overrideExisting(todo);
+			if (todo == null) {
+				// neuen Todo speichern
+				todo = new Todo(title, desc, priority);
+				TodoList.getInstance().add(todo);
+			} else {
+				// bisherigen Todo abändern
+				todo.setTitle(title);
+				todo.setDesc(desc);
+				todo.setPriority(priority);
+				TodoList.getInstance().overrideExisting(todo);
+			}
+			finish();
 		}
-		finish();
 	}
 }
