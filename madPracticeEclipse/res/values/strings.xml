@@ -33,5 +33,8 @@
     <string name="UEBUNG_1">Übung 1</string>
     <string name="UEBUNG_2">Übung 2</string>
     <string name="UEBUNG_3">Übung 3</string>
+    <string name="title_activity_todo_list">TodoListActivity</string>
+    <string name="title_activity_todo_detail">TodoDetailActivity</string>
+    <string name="title_activity_todo_settings">TodoSettingsActivity</string>
 
 </resources>

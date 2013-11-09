@@ -33,6 +33,21 @@
             android:label="@string/title_activity_calculator_extended"
             android:theme="@android:style/Theme.Holo" >
         </activity>
+        <activity
+            android:name="mobile.app.dev.ueb03.TodoListActivity"
+            android:label="@string/title_activity_todo_list"
+            android:theme="@android:style/Theme.Holo" >
+        </activity>
+        <activity
+            android:name="mobile.app.dev.ueb03.TodoDetailActivity"
+            android:label="@string/title_activity_todo_detail"
+            android:theme="@android:style/Theme.Holo" >
+        </activity>
+        <activity
+            android:name="mobile.app.dev.ueb03.TodoSettingsActivity"
+            android:label="@string/title_activity_todo_settings"
+            android:theme="@android:style/Theme.Holo" >
+        </activity>
     </application>
 
 </manifest>
