@@ -2,6 +2,7 @@ package mobile.app.dev;
 
 import mobile.app.dev.ueb01.Calculator;
 import mobile.app.dev.ueb02.CalculatorExtended;
+import mobile.app.dev.ueb03.TodoDetailActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +28,8 @@ public class MainActivity extends Activity {
     }
     
     public void uebung3(View v){
-    	// TODO: passende Activity starten
+    	Intent intent = new Intent(this, TodoDetailActivity.class);
+    	startActivity(intent);
     }
 
     @Override

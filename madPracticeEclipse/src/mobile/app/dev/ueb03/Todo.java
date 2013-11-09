@@ -4,9 +4,9 @@ public class Todo {
 
 	private String title;
 	private String remark;
-	private String priority;
+	private Priority priority;
 
-	public Todo(String title, String remark, String priority) {
+	public Todo(String title, String remark, Priority priority) {
 		this.title = title;
 		this.remark = remark;
 		this.priority = priority;
@@ -28,11 +28,11 @@ public class Todo {
 		this.remark = remark;
 	}
 
-	public String getPriority() {
+	public Priority getPriority() {
 		return priority;
 	}
 
-	public void setPriority(String priority) {
+	public void setPriority(Priority priority) {
 		this.priority = priority;
 	}
 

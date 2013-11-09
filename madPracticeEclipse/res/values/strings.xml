@@ -37,4 +37,10 @@
     <string name="title_activity_todo_detail">TodoDetailActivity</string>
     <string name="title_activity_todo_settings">TodoSettingsActivity</string>
 
+    <string-array name="Prios">
+        <item>Hoch</item>
+        <item>Mittel</item>
+        <item>Niedrig</item>
+    </string-array>
+
 </resources>

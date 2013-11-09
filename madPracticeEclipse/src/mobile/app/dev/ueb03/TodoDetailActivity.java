@@ -4,13 +4,21 @@ import mobile.app.dev.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 public class TodoDetailActivity extends Activity {
 
+	private Spinner spinner;
+	private EditText editTextTitle;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_todo_detail);
+		
+		spinner = (Spinner)findViewById(R.id.spinnerPrio);
+		editTextTitle = (EditText)findViewById(R.id.editTextTitle);
 	}
 
 	@Override
