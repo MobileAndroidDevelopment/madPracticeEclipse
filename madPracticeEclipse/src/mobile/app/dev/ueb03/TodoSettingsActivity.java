@@ -1,23 +1,27 @@
 package mobile.app.dev.ueb03;
 
+import java.util.Collections;
+
 import mobile.app.dev.R;
-import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
-import android.view.Menu;
+import android.widget.Toast;
 
-public class TodoSettingsActivity extends Activity {
 
+public class TodoSettingsActivity extends ListActivity {
+
+	private TodoSettingsListArrayAdapter adapter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_todo_settings);
-	}
+		Setting setting = new Setting(getString(R.string.fontSize));
+		//TodoSettingsList.getInstance().add(setting);
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.todo_settings, menu);
-		return true;
+		TodoSettingsList elements = TodoSettingsList.getInstance();
+		elements.add(setting);		
+		Collections.sort(elements, Collections.reverseOrder());
+		adapter = new TodoSettingsListArrayAdapter(this, elements);		
+		setListAdapter(adapter);
 	}
-
 }

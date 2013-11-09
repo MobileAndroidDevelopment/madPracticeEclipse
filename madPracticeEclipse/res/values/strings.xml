@@ -35,8 +35,10 @@
     <string name="UEBUNG_3">Übung 3</string>
     <string name="title_activity_todo_list">TodoListActivity</string>
     <string name="title_activity_todo_detail">TodoDetailActivity</string>
-    <string name="title_activity_todo_settings">TodoSettingsActivity</string>
+    <string name="title_activity_todo_settings">Einstellungen</string>
     <string name="newTodo">Neu</string>
+    <string name="settings">Einstellungen</string>
+    <string name="fontSize">Schriftgröße</string>
 
     <string-array name="Prios">
         <item>hoch</item>

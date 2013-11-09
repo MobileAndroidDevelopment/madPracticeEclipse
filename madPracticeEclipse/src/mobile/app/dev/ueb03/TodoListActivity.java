@@ -39,9 +39,20 @@ public class TodoListActivity extends ListActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent intent = new Intent(this, TodoDetailActivity.class);
-    	startActivity(intent);
-		return super.onOptionsItemSelected(item);
+		Intent intent;
+    	
+		switch (item.getItemId()) {
+		case R.id.todo_new:
+			intent = new Intent(this, TodoDetailActivity.class);
+			startActivity(intent);
+			return super.onOptionsItemSelected(item);
+		case R.id.todo_settings:
+			intent = new Intent(this, TodoSettingsActivity.class);
+			startActivity(intent);
+			return super.onOptionsItemSelected(item);		
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	@Override
