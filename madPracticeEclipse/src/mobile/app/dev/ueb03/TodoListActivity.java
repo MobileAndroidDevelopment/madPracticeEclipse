@@ -1,10 +1,11 @@
 package mobile.app.dev.ueb03;
 
+import java.util.Collections;
+
 import mobile.app.dev.R;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,18 +19,15 @@ public class TodoListActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		Log.d("CREATE", "Bin wieder hier");
-		adapter = new TodoListArrayAdapter(this, TodoList.getInstance());
-		setListAdapter(adapter);
 		setTitle(R.string.title_activity_todo_list);
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Log.d("RESUME", "Bin wieder hier");
-		adapter = new TodoListArrayAdapter(this, TodoList.getInstance());
+		TodoList elements =  TodoList.getInstance();
+		Collections.sort(elements, Collections.reverseOrder());
+		adapter = new TodoListArrayAdapter(this, elements);
 		setListAdapter(adapter);
 	}
 
