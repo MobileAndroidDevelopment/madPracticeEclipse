@@ -47,5 +47,6 @@ public class TodoDetailActivity extends Activity {
 			todo.setPriority(priority);
 			TodoList.getInstance().overrideExisting(todo);
 		}
+		finish();
 	}
 }
