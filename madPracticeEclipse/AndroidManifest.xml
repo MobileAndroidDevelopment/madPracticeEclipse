@@ -48,6 +48,11 @@
             android:label="@string/title_activity_todo_settings"
             android:theme="@android:style/Theme.Holo" >
         </activity>
+        <activity
+            android:name="mobile.app.dev.ueb03.TodoNumberPickerActivity"
+            android:label="@string/title_activity_todo_number_picker"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

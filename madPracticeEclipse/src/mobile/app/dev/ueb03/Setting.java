@@ -1,16 +1,27 @@
 package mobile.app.dev.ueb03;
 
-public class Setting {
-	
-	private static String settingTitle;
+import java.io.Serializable;
+
+public class Setting implements Serializable, Comparable<Setting> {
+	private static int identifier = 0;
+	private String settingTitle;
+	private int iD;
 	
 	public Setting(String settingTitle) {
+		this.iD = identifier++;
 		this.settingTitle = settingTitle;		
+	}
+	
+	public Integer getiD() {
+		return iD;
 	}
 	
 	public String getTitle() {		
 		return settingTitle;
-	}
+	}	
 	
-	//ToDo: Hier muss noch angegeben werden was ausgefuehrt werden soll wenn auf das Listenelement gedrueckt wird!!!!!
+	@Override
+	public int compareTo(Setting another) {
+		return getiD().compareTo(another.getiD());
+	}
 }

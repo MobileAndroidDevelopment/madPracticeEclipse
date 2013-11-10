@@ -39,6 +39,8 @@
     <string name="newTodo">Neu</string>
     <string name="settings">Einstellungen</string>
     <string name="fontSize">Schriftgröße</string>
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Abbrechen</string>
 
     <string-array name="Prios">
         <item>hoch</item>
@@ -46,5 +48,6 @@
         <item>niedrig</item>
     </string-array>
 
+    <string name="title_activity_todo_number_picker">TodoNumberPickerActivity</string>
 
 </resources>
