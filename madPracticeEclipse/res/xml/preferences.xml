@@ -5,8 +5,7 @@
         android:defaultValue="12"
         android:key="fontSize"
         android:order="1"
-        android:summary="Schriftgröße"
-        android:title="Schriftgröße"
+        android:title="@string/preferenceTextSize"
         android:inputType="number"/>
 
 </PreferenceScreen>

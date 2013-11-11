@@ -12,6 +12,8 @@ import android.view.Menu;
 @SuppressWarnings("deprecation")
 public class SettingsActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
+	private static final String DEFAULT_FONT_SIZE = "20";
+	private static final String FONT_SIZE_KEY = "fontSize";
 	private EditTextPreference fontSizePreference;
 	
 	@Override
@@ -20,14 +22,14 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 
 		addPreferencesFromResource(R.xml.preferences);
 
-		fontSizePreference = (EditTextPreference) getPreferenceScreen().findPreference("fontSize");
+		fontSizePreference = (EditTextPreference) getPreferenceScreen().findPreference(FONT_SIZE_KEY);
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		fontSizePreference.setSummary(prefs.getString("fontSize", "20"));
+		fontSizePreference.setSummary(prefs.getString(FONT_SIZE_KEY, DEFAULT_FONT_SIZE));
 		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 	}
 	
@@ -44,10 +46,9 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		if(key.equals("fontSize")){
-			fontSizePreference.setSummary(sharedPreferences.getString(key, "20"));
+		if(key.equals(FONT_SIZE_KEY)){
+			fontSizePreference.setSummary(sharedPreferences.getString(key, DEFAULT_FONT_SIZE));
 		}
-		
 	}
 	
 }

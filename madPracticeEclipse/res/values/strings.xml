@@ -56,4 +56,6 @@
 
     <string name="detailLabelTitle">Titel</string>
 
+    <string name="preferenceTextSize">Schriftgröße</string>
+
 </resources>
