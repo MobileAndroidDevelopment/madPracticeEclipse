@@ -55,4 +55,11 @@ public class TodoDetailActivity extends Activity {
 			finish();
 		}
 	}
+	
+	public void deleteClicked(View v){
+		if (todo != null) {
+			TodoList.getInstance().remove(todo);
+		}
+		finish();
+	}
 }

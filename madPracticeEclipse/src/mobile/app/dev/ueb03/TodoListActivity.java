@@ -5,7 +5,9 @@ import java.util.Collections;
 import mobile.app.dev.R;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +29,15 @@ public class TodoListActivity extends ListActivity {
 		super.onResume();
 		TodoList elements =  TodoList.getInstance();
 		Collections.sort(elements, Collections.reverseOrder());
-		adapter = new TodoListArrayAdapter(this, elements);
+		
+		/* Über den PreferenceManager können die SharedPreferences
+		  abgerufen werden */
+		  SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		  /* Entsprechend der verschiedenen Preference Views gibt es
+		  Methoden zum Auslesen der gesetzten Werte */
+		  int fontSize = Integer.parseInt(prefs.getString("fontSize", "12"));
+		
+		adapter = new TodoListArrayAdapter(this, elements, fontSize);
 		setListAdapter(adapter);
 	}
 
@@ -47,7 +57,7 @@ public class TodoListActivity extends ListActivity {
 			startActivity(intent);
 			return super.onOptionsItemSelected(item);
 		case R.id.todo_settings:
-			intent = new Intent(this, TodoSettingsActivity.class);
+			intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
 			return super.onOptionsItemSelected(item);		
 		default:
