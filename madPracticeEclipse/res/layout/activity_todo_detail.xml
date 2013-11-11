@@ -60,14 +60,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Button 
-        android:id="@+id/buttonSave"
-        android:layout_centerHorizontal="true"
+    <LinearLayout
+        android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_width="wrap_content"
+        android:weightSum="1">
+        
+	<Button 
+        android:id="@+id/buttonSave"
+		android:layout_weight=".5"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:onClick="saveClicked"
-        android:text="+"/>
+        android:text="Speichern"/>
+	
+	<Button 
+        android:id="@+id/buttonDelete"
+		android:layout_weight=".5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:onClick="deleteClicked"
+        android:text="Löschen"/>
+        
+    </LinearLayout>
 
 </RelativeLayout>
