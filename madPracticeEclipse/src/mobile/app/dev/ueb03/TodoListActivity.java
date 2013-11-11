@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 public class TodoListActivity extends ListActivity {
 
+	private static final String DEFAULT_SIZE = "20";
 	public static final String ENTRY = "entry";
 	private TodoListArrayAdapter adapter;
 
@@ -30,13 +31,9 @@ public class TodoListActivity extends ListActivity {
 		TodoList elements =  TodoList.getInstance();
 		Collections.sort(elements, Collections.reverseOrder());
 		
-		/* Über den PreferenceManager können die SharedPreferences
-		  abgerufen werden */
-		  SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		  /* Entsprechend der verschiedenen Preference Views gibt es
-		  Methoden zum Auslesen der gesetzten Werte */
-		  int fontSize = Integer.parseInt(prefs.getString("fontSize", "12"));
-		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		int fontSize = Integer.parseInt(prefs.getString("fontSize", DEFAULT_SIZE));
+
 		adapter = new TodoListArrayAdapter(this, elements, fontSize);
 		setListAdapter(adapter);
 	}

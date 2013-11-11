@@ -8,13 +8,12 @@
         android:id="@+id/textViewRowTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:singleLine="true"
         android:textSize="20sp"
         android:gravity="left"/>
     
     <TextView 
         android:id="@+id/textViewRowPrio"
-        android:text="Prio"
         android:textStyle="italic"
         android:layout_below="@id/textViewRowTitle"
         android:layout_width="match_parent"

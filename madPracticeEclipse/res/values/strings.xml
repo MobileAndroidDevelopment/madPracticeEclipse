@@ -50,4 +50,10 @@
 
     <string name="title_activity_todo_number_picker">TodoNumberPickerActivity</string>
 
+    <string name="listRowTitle">Title</string>
+
+    <string name="detailLabelDescription">Beschreibung</string>
+
+    <string name="detailLabelTitle">Titel</string>
+
 </resources>

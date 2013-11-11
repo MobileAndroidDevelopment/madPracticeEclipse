@@ -13,7 +13,7 @@
         android:id="@+id/textViewTitle"
         android:paddingTop="10dp"
         android:layout_width="match_parent"
-        android:text="Titel"
+        android:text="@string/detailLabelTitle"
         android:textColor="@android:color/holo_blue_bright"
         android:textSize="20sp"
         android:layout_height="wrap_content" />
@@ -26,7 +26,7 @@
 
     <TextView
         android:id="@+id/textViewDesc"
-        android:text="Beschreibung"
+        android:text="@string/detailLabelDescription"
         android:paddingTop="10dp"
         android:layout_below="@id/editTextTitle"
         android:textSize="20sp"
