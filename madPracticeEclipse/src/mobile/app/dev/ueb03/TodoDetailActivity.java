@@ -2,7 +2,9 @@ package mobile.app.dev.ueb03;
 
 import mobile.app.dev.R;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -23,6 +25,10 @@ public class TodoDetailActivity extends Activity {
 			((EditText) findViewById(R.id.editTextTitle)).setText(todo.getTitle());
 			((EditText) findViewById(R.id.editTextDesc)).setText(todo.getDesc());
 			((Spinner) findViewById(R.id.spinnerPrio)).setSelection(todo.getPriority().getPosition());
+		} else {
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+			String defaultPriority = prefs.getString(SettingsActivity.DEFAULT_PRIORITY_KEY, SettingsActivity.DEFAULT_PRIORITY);
+			((Spinner) findViewById(R.id.spinnerPrio)).setSelection(Priority.valueOf(defaultPriority).getPosition());
 		}
 	}
 

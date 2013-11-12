@@ -3,6 +3,8 @@ package mobile.app.dev.ueb03;
 import java.io.Serializable;
 
 public class Todo implements Serializable, Comparable<Todo> {
+
+	/** hochzaehlbare ID fuer die Generierung der Identifier */
 	private static int identifier = 0;
 
 	private int iD;

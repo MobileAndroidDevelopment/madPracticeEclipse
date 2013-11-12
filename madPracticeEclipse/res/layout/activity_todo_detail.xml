@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:onClick="saveClicked"
-        android:text="Speichern"/>
+        android:text="@string/saveButtonText"/>
 	
 	<Button 
         android:id="@+id/buttonDelete"
@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:onClick="deleteClicked"
-        android:text="Löschen"/>
+        android:text="@string/deleteButtonText"/>
         
     </LinearLayout>
 

@@ -58,4 +58,12 @@
 
     <string name="preferenceTextSize">Schriftgröße</string>
 
+    <string name="defaultPriority">hoch</string>
+
+    <string name="defaultPriorityTitle">Vorausgewählte Priorität</string>
+
+    <string name="deleteButtonText">Löschen</string>
+
+    <string name="saveButtonText">Speichern</string>
+
 </resources>
