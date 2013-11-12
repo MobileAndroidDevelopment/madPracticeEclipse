@@ -61,9 +61,31 @@ public class Todo implements Serializable, Comparable<Todo> {
 		this.desc = todo.desc;
 		this.priority = todo.priority;
 	}
-	
+
 	@Override
 	public int compareTo(Todo another) {
 		return getiD().compareTo(another.getiD());
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + iD;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Todo other = (Todo) obj;
+		if (iD != other.iD)
+			return false;
+		return true;
 	}
 }

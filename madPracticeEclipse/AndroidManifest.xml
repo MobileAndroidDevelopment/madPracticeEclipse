@@ -44,18 +44,9 @@
             android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
         <activity
-            android:name="mobile.app.dev.ueb03.TodoSettingsActivity"
-            android:label="@string/title_activity_todo_settings"
-            android:theme="@android:style/Theme.Holo" >
-        </activity>
-        <activity
-            android:name="mobile.app.dev.ueb03.TodoNumberPickerActivity"
-            android:label="@string/title_activity_todo_number_picker"
-            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" >
-        </activity>
-        <activity
             android:name="mobile.app.dev.ueb03.SettingsActivity"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/title_activity_settings"
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
     </application>
 

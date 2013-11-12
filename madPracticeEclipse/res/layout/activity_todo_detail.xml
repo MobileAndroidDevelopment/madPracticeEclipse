@@ -39,6 +39,8 @@
         android:layout_below="@id/textViewDesc"
         android:inputType="textMultiLine"
         android:lines="6"
+        android:gravity="top"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
