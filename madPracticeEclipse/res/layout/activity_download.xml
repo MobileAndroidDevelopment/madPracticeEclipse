@@ -8,9 +8,40 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".DownloadActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-
+    <RelativeLayout 
+        android:id="@+id/layoutDownload"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <TextView 
+            android:id="@+id/textViewDownload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="File URL"/>	
+           
+        <EditText 
+            android:id="@+id/editTextLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewDownload"/>
+        
+        <ProgressBar 
+            android:id="@+id/progressBarDownload"
+            android:layout_below="@id/editTextLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+			style="@android:style/Widget.ProgressBar.Horizontal"/>
+        
+        <Button 
+            android:id="@+id/buttonDownload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Download"
+            android:layout_below="@id/progressBarDownload"
+            android:layout_alignParentRight="true"/>
+        
+    </RelativeLayout>
+    
 </RelativeLayout>

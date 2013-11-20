@@ -50,6 +50,7 @@
         </activity>
         <activity
             android:name="mobile.app.dev.ueb04.DownloadActivity"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
             android:label="@string/title_activity_download" >
         </activity>
     </application>
