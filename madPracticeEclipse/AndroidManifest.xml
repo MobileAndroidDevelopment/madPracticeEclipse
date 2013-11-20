@@ -48,6 +48,10 @@
             android:label="@string/title_activity_settings"
             android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
+        <activity
+            android:name="mobile.app.dev.ueb04.DownloadActivity"
+            android:label="@string/title_activity_download" >
+        </activity>
     </application>
 
 </manifest>

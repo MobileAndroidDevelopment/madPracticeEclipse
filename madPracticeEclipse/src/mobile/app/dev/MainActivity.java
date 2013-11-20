@@ -3,6 +3,7 @@ package mobile.app.dev;
 import mobile.app.dev.ueb01.Calculator;
 import mobile.app.dev.ueb02.CalculatorExtended;
 import mobile.app.dev.ueb03.TodoListActivity;
+import mobile.app.dev.ueb04.DownloadActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +30,11 @@ public class MainActivity extends Activity {
     
     public void uebung3(View v){
     	Intent intent = new Intent(this, TodoListActivity.class);
+    	startActivity(intent);
+    }
+    
+    public void uebung4(View v){
+    	Intent intent = new Intent(this, DownloadActivity.class);
     	startActivity(intent);
     }
 

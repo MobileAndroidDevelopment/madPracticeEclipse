@@ -21,7 +21,7 @@ public class TodoListActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle(R.string.title_activity_todo_list);
+		setTitle("Deine Todos");
 	}
 	
 	@Override

@@ -33,6 +33,7 @@
     <string name="UEBUNG_1">Übung 1</string>
     <string name="UEBUNG_2">Übung 2</string>
     <string name="UEBUNG_3">Übung 3</string>
+	<string name="UEBUNG_4">Übung 4</string>
     <string name="title_activity_todo_list">TodoListActivity</string>
     <string name="title_activity_todo_detail">TodoDetailActivity</string>
     <string name="title_activity_todo_settings">Einstellungen</string>
@@ -49,19 +50,13 @@
     </string-array>
 
     <string name="listRowTitle">Title</string>
-
     <string name="detailLabelDescription">Beschreibung</string>
-
     <string name="detailLabelTitle">Titel</string>
-
     <string name="preferenceTextSize">Schriftgröße</string>
-
     <string name="defaultPriority">hoch</string>
-
     <string name="defaultPriorityTitle">Vorausgewählte Priorität</string>
-
     <string name="deleteButtonText">Löschen</string>
-
     <string name="saveButtonText">Speichern</string>
+    <string name="title_activity_download">DownloadActivity</string>
 
 </resources>
