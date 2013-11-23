@@ -50,6 +50,7 @@ public class DownloaderService extends IntentService {
 			// download the file
 			input = connection.getInputStream();
 			output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath() + "/file_name.extension");
+			Log.d("DOWNLOAD", "Schreibe Datei nach: "+Environment.getExternalStorageDirectory().getPath() + "/file_name.extension");
 
 			byte data[] = new byte[4096];
 			long total = 0;
@@ -62,6 +63,7 @@ public class DownloaderService extends IntentService {
 				}
 				output.write(data, 0, count);
 			}
+			Log.d("DOWNLOAD", "Prozent: "+downloadPercentage);
 		} catch (Exception e) {
 			Log.e("DOWNLOAD", e.getMessage());
 		} finally {
@@ -73,6 +75,7 @@ public class DownloaderService extends IntentService {
 			} catch (IOException ignored) {
 			}
 
+			Log.d("DOWNLOAD", "Download wurde abgeschlossen");
 			if (connection != null)
 				connection.disconnect();
 		}

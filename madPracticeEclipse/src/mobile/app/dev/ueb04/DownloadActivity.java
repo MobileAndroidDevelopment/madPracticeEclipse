@@ -19,7 +19,6 @@ import android.widget.Toast;
 /**
  * TODO: Settings für Standard-Ordner
  * TODO: Zugriff auf Service nachdem gestartet wurde
- * @author Benne
  */
 public class DownloadActivity extends Activity {
 
