@@ -18,16 +18,18 @@ import android.util.Log;
 
 public class DownloaderService extends IntentService {
 
-	public static final String URL_KEY = "URL";
 	private static final String TITLE = "File-Download";
 	private int downloadPercentage = 0;
 	private final IBinder downloaderBinder = new DownloaderBinder();
+	private boolean hasFinished;
 	
 	private int errorCase=0;
 	public static final int OK = 0;
 	public static final int HTTP_NOT_OK = 1;
 	public static final int SAVING_NOT_POSSIBLE=2;
 	public static final int UNKNOWN_ERROR = 3;
+	public static final int FILE_LENGTH_UNKNOWN = -1;
+	public static final String URL_KEY = "URL";
 
 	public DownloaderService() {
 		super(TITLE);
@@ -36,6 +38,7 @@ public class DownloaderService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		errorCase=OK;
+		hasFinished=false;
 		String downloadUrl = intent.getStringExtra(URL_KEY);
 		InputStream input = null;
 		OutputStream output = null;
@@ -57,7 +60,6 @@ public class DownloaderService extends IntentService {
 
 			// download the file
 			input = connection.getInputStream();
-			// TODO: Dateiname raussuchen
 			
 			output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath() + "/file_name.extension");
 			String fileName = downloadUrl.substring(downloadUrl.lastIndexOf('/')+1);
@@ -71,11 +73,14 @@ public class DownloaderService extends IntentService {
 				// publishing the progress....
 				if (fileLength > 0) { // only if total length is known
 					downloadPercentage = (int) (total * 100 / fileLength);
+				} else {
+					downloadPercentage = FILE_LENGTH_UNKNOWN;
 				}
 				output.write(data, 0, count);
 			}
 			output.flush();
 			errorCase = OK;
+			hasFinished = true;
 			Log.d("DOWNLOAD", "Prozent: "+downloadPercentage);
 		} catch(HttpException e){
 			Log.d("DOWNLOAD", "Problem bei der HTTP Verbindung");
@@ -105,12 +110,20 @@ public class DownloaderService extends IntentService {
 		return downloadPercentage;
 	}
 	
+	public boolean fileSizeUnknown(){
+		return downloadPercentage == DownloaderService.FILE_LENGTH_UNKNOWN;
+	}
+	
 	public int getErrorCase(){
 		return errorCase;
 	}
 	
 	public boolean isOk(){
 		return errorCase==OK;
+	}
+	
+	public boolean hasFinished(){
+		return hasFinished;
 	}
 
 	public class DownloaderBinder extends Binder {

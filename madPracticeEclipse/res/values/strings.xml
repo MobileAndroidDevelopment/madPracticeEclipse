@@ -64,5 +64,9 @@
     <string name="refresh">Aktualisieren</string>
     <string name="supplyUrl">Bitte eine URL angeben</string>
     <string name="DOWNLOAD_STARTED">Download wird gestartet!</string>
+    <string name="FILE_SIZE_UNKNOWN">Dateigröße unbekannt</string>
+    <string name="HTTP_PROBLEM">Probleme bei der HTTP-Verbindung. Überprüfen Sie bitte den Link!</string>
+    <string name="READ_WRITE_ERROR">Lesen oder Schreiben der Datei war nicht möglich!</string>
+    <string name="UNKNOWN_ERROR">Es ist ein unbekannter Fehler aufgetreten</string>
 
 </resources>

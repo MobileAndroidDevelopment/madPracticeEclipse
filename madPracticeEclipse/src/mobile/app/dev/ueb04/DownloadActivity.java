@@ -47,6 +47,12 @@ public class DownloadActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * Dient dem Starten des Downloads. Hier wird zunaechst ueberprüft, ob der Link auch nicht leer ist, dann wird einfach eine Meldung ausgegeben.
+	 * <p> Zum Starten des Downloads wird der DownloaderService gebunden und gestartet. Gab es beim Binden Probleme, so wird direkt eine Meldung ausgegeben,
+	 * ansonsten wird eine Meldung ausgegeben, dass der Download nun gestartet wird.
+	 * @param view
+	 */
 	public void startDownload(View view) {
 		String url = ((EditText) findViewById(R.id.editTextDownloadLink)).getText().toString();
 		if (url == null || "".equals(url)) {
@@ -66,13 +72,18 @@ public class DownloadActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Frägt den Prozentwert des Downloads ab und setzt entsprechend die Progressbar. Ist der Download fertig,
+	 * wird der Service unbound und gestoppt, der Downloadbutton wieder aktiv und die Progressbar auf 0 gesetzt.
+	 * Ist er noch nicht fertig und die Dateigröße nicht bekannt, so wird eine Meldung ausgegeben.
+	 */
 	public void refresh() {
 		if (serviceBound) {
 			if (downloaderService.isOk()) {
 				int percentage = downloaderService.getPercentage();
 				progressBar.setProgress(percentage);
 				Log.d("REFRESH", "Prozent: " + percentage);
-				if (percentage >= 100) {
+				if (downloaderService.hasFinished()) {
 					Toast.makeText(this, R.string.DOWNLOAD_FINISHED, Toast.LENGTH_LONG).show();
 					unbindService(serviceConnection);
 					serviceBound = false;
@@ -80,26 +91,32 @@ public class DownloadActivity extends Activity {
 					stopService(downloaderServiceIntent);
 					downloadButton.setActivated(true);
 					progressBar.setProgress(0);
+				} else if (downloaderService.fileSizeUnknown()) {
+					Toast.makeText(this, R.string.FILE_SIZE_UNKNOWN, Toast.LENGTH_SHORT).show();
 				}
 			} else {
-				String errorText = "";
-				switch (downloaderService.getErrorCase()) {
-					case DownloaderService.HTTP_NOT_OK: {
-						errorText = "Probleme bei der HTTP-Verbindung. Überprüfen Sie bitte den Link!";
-						break;
-					}
-					case DownloaderService.SAVING_NOT_POSSIBLE: {
-						errorText = "Lesen oder Schreiben der Datei war nicht möglich!";
-						break;
-					}
-					case DownloaderService.UNKNOWN_ERROR: {
-						errorText = "Es ist ein unbekannter Fehler aufgetreten";
-						break;
-					}
-				}
-				Toast.makeText(this, errorText, Toast.LENGTH_LONG).show();
+				showErrorText();
 			}
 		}
+	}
+
+	private void showErrorText() {
+		String errorText = "";
+		switch (downloaderService.getErrorCase()) {
+			case DownloaderService.HTTP_NOT_OK: {
+				errorText = getString(R.string.HTTP_PROBLEM);
+				break;
+			}
+			case DownloaderService.SAVING_NOT_POSSIBLE: {
+				errorText = getString(R.string.READ_WRITE_ERROR);
+				break;
+			}
+			case DownloaderService.UNKNOWN_ERROR: {
+				errorText = getString(R.string.UNKNOWN_ERROR);
+				break;
+			}
+		}
+		Toast.makeText(this, errorText, Toast.LENGTH_LONG).show();
 	}
 
 	@Override
@@ -144,6 +161,4 @@ public class DownloadActivity extends Activity {
 			serviceBound = false;
 		}
 	}
-	
-	
 }
