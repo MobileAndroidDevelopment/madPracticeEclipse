@@ -19,17 +19,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:text="File URL"/>	
+            android:text="@string/labelFileUrl"/>	
            
         <EditText 
-            android:id="@+id/editTextLink"
+            android:id="@+id/editTextDownloadLink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textViewDownload"/>
         
         <ProgressBar 
             android:id="@+id/progressBarDownload"
-            android:layout_below="@id/editTextLink"
+            android:layout_below="@id/editTextDownloadLink"
             android:layout_width="match_parent"
             android:max="100"
             android:layout_height="wrap_content"
@@ -39,9 +39,10 @@
             android:id="@+id/buttonDownload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Download"
+            android:text="@string/download"
             android:layout_below="@id/progressBarDownload"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:onClick="startDownload"/>
         
     </RelativeLayout>
     

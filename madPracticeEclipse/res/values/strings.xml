@@ -58,5 +58,7 @@
     <string name="deleteButtonText">Löschen</string>
     <string name="saveButtonText">Speichern</string>
     <string name="title_activity_download">DownloadActivity</string>
+    <string name="download">Download</string>
+    <string name="labelFileUrl">File URL</string>
 
 </resources>
