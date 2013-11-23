@@ -63,9 +63,10 @@ public class DownloaderService extends IntentService {
 				}
 				output.write(data, 0, count);
 			}
+			output.flush();
 			Log.d("DOWNLOAD", "Prozent: "+downloadPercentage);
 		} catch (Exception e) {
-			Log.e("DOWNLOAD", e.getMessage());
+			Log.e("DOWNLOAD", "Download leider nicht erfolgreich!" +e.getMessage());
 		} finally {
 			try {
 				if (output != null)

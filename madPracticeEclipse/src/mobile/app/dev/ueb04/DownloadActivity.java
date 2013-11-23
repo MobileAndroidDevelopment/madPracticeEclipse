@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 /**
@@ -25,6 +26,7 @@ public class DownloadActivity extends Activity {
 	private DownloaderService downloaderService;
 	private boolean serviceBound;
 	private Intent downloaderServiceIntent;
+	private ProgressBar progressBar;
 
 	/** Verbindung zum DownloaderService */
 	private ServiceConnection serviceConnection = new DownloaderServiceConnection();
@@ -33,6 +35,7 @@ public class DownloadActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_download);
+		progressBar = (ProgressBar) findViewById(R.id.progressBarDownload);
 	}
 
 	@Override
@@ -57,6 +60,7 @@ public class DownloadActivity extends Activity {
 	public void refresh() {
 		if (serviceBound) {
 			int percentage = downloaderService.getPercentage();
+			progressBar.setProgress(percentage);
 			Log.d("REFRESH", "Prozent: " + percentage);
 			// TODO: progressbar updaten
 			if (percentage >= 100) {

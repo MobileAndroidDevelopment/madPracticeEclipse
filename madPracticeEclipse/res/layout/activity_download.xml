@@ -25,7 +25,8 @@
             android:id="@+id/editTextDownloadLink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textViewDownload"/>
+            android:layout_below="@id/textViewDownload"
+            android:text="http://download.thinkbroadband.com/5MB.zip"/>
         
         <ProgressBar 
             android:id="@+id/progressBarDownload"
