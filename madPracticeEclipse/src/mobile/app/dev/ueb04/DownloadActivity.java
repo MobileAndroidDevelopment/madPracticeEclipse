@@ -39,6 +39,8 @@ public class DownloadActivity extends Activity {
 		setContentView(R.layout.activity_download);
 		progressBar = (ProgressBar) findViewById(R.id.progressBarDownload);
 		downloadButton = (Button) findViewById(R.id.buttonDownload);
+		downloaderServiceIntent = new Intent(this, DownloaderService.class);
+		bindService(downloaderServiceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
 	}
 
 	@Override
@@ -59,10 +61,8 @@ public class DownloadActivity extends Activity {
 			Toast.makeText(this, R.string.supplyUrl, Toast.LENGTH_SHORT).show();
 		} else {
 			Log.d("DOWNLOAD", "Starte Download von " + url);
-			downloaderServiceIntent = new Intent(this, DownloaderService.class);
 			downloaderServiceIntent.putExtra(DownloaderService.URL_KEY, url);
 			startService(downloaderServiceIntent);
-			serviceBound = bindService(downloaderServiceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
 			if (serviceBound) {
 				Toast.makeText(this, R.string.DOWNLOAD_STARTED, Toast.LENGTH_LONG).show();
 				downloadButton.setActivated(false);
@@ -144,6 +144,7 @@ public class DownloadActivity extends Activity {
 	protected void onDestroy() {
 		Log.d("DESTROY", "Connection wird zerstört");
 		unbindService(serviceConnection);
+		serviceBound=false;
 	}
 
 	private class DownloaderServiceConnection implements ServiceConnection {

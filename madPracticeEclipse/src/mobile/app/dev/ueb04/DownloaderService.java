@@ -61,7 +61,7 @@ public class DownloaderService extends IntentService {
 			// download the file
 			input = connection.getInputStream();
 
-			String fileName = downloadUrl.substring(downloadUrl.lastIndexOf('/')+1);
+			String fileName = downloadUrl.substring(downloadUrl.lastIndexOf('/'));
 			Log.d("DOWNLOAD", "Schreibe Datei nach: "+Environment.getExternalStorageDirectory().getPath() +fileName);
 			output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath() + fileName);
 
