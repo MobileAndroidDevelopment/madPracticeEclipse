@@ -33,14 +33,6 @@ public class DownloaderService extends IntentService {
 		super(TITLE);
 	}
 	
-	//http://www.google.de/mein/file.zip
-	private String parseFileName(String url){
-		int lastIndexOfDot = url.lastIndexOf(".");
-		String suffix = url.substring(lastIndexOfDot);
-		String fileName = url.substring(url.lastIndexOf("/"), lastIndexOfDot);
-		return fileName+"."+suffix;
-	}
-	
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		errorCase=OK;
@@ -68,7 +60,8 @@ public class DownloaderService extends IntentService {
 			// TODO: Dateiname raussuchen
 			
 			output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath() + "/file_name.extension");
-			Log.d("DOWNLOAD", "Schreibe Datei nach: "+Environment.getExternalStorageDirectory().getPath() + parseFileName(downloadUrl));
+			String fileName = downloadUrl.substring(downloadUrl.lastIndexOf('/')+1);
+			Log.d("DOWNLOAD", "Schreibe Datei nach: "+Environment.getExternalStorageDirectory().getPath() +fileName);
 
 			byte data[] = new byte[4096];
 			long total = 0;
