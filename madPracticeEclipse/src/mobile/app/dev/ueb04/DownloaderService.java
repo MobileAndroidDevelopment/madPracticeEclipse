@@ -140,4 +140,8 @@ public class DownloaderService extends IntentService {
 	public IBinder onBind(Intent intent) {
 		return downloaderBinder;
 	}
+
+	public void isStarted() {
+		hasFinished = false;
+	}
 }

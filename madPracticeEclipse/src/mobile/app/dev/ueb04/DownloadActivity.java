@@ -166,19 +166,21 @@ public class DownloadActivity extends Activity {
 	private boolean isRefreshing = false;
 
 	private void automaticRefresh() {
-		Log.d("AUTOREFRESH", "IsRe " + isRefreshing + ", downloader: " + (downloaderService != null)+", hasFinsihed="+downloaderService.hasFinished());
+		Log.d("AUTOREFRESH", "IsRe " + isRefreshing + ", downloader: " + (downloaderService != null) + ", hasFinsihed=" + downloaderService.hasFinished());
 		if (!isRefreshing && downloaderService != null) {
 			isRefreshing = true;
 			new Thread(new Runnable() {
 				public void run() {
-					while (!downloaderService.hasFinished()) {
-						try {
+					try {
+						Thread.sleep(200);
+						while (!downloaderService.hasFinished()) {
 							Thread.sleep(10);
 							downloadButton.setEnabled(false);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
+							refresh();
 						}
-						refresh();
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 					isRefreshing = false;
 				}
