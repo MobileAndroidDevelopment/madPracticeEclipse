@@ -68,6 +68,14 @@ public class DownloadActivity extends Activity {
 		}
 	}
 
+	private void setDownloadButtonEnabled(final boolean enabled) {
+		runOnUiThread(new Runnable() {
+			public void run() {
+				downloadButton.setEnabled(enabled);
+			}
+		});
+	}
+
 	/**
 	 * Frägt den Prozentwert des Downloads ab und setzt entsprechend die Progressbar. Ist der Download fertig,
 	 * wird der Service unbound und gestoppt, der Downloadbutton wieder aktiv und die Progressbar auf 0 gesetzt.
@@ -79,13 +87,7 @@ public class DownloadActivity extends Activity {
 				int percentage = downloaderService.getPercentage();
 				progressBar.setProgress(percentage);
 				if (downloaderService.hasFinished()) {
-					runOnUiThread(new Runnable() {
-						public void run() {
-							Toast.makeText(DownloadActivity.this, R.string.DOWNLOAD_FINISHED, Toast.LENGTH_LONG).show();
-							downloadButton.setEnabled(true);
-							progressBar.setProgress(0);
-						}
-					});
+					refreshFinished();
 					stopService(downloaderServiceIntent);
 				} else if (downloaderService.fileSizeUnknown()) {
 					Toast.makeText(this, R.string.FILE_SIZE_UNKNOWN, Toast.LENGTH_SHORT).show();
@@ -94,6 +96,16 @@ public class DownloadActivity extends Activity {
 				showErrorText();
 			}
 		}
+	}
+
+	private void refreshFinished() {
+		runOnUiThread(new Runnable() {
+			public void run() {
+				Toast.makeText(DownloadActivity.this, R.string.DOWNLOAD_FINISHED, Toast.LENGTH_LONG).show();
+				downloadButton.setEnabled(true);
+				progressBar.setProgress(0);
+			}
+		});
 	}
 
 	private void showErrorText() {
@@ -175,7 +187,7 @@ public class DownloadActivity extends Activity {
 						Thread.sleep(200);
 						while (!downloaderService.hasFinished()) {
 							Thread.sleep(10);
-							downloadButton.setEnabled(false);
+							setDownloadButtonEnabled(false);
 							refresh();
 						}
 					} catch (InterruptedException e1) {
