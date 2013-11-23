@@ -9,9 +9,11 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * TODO: Refresh-Button
@@ -27,7 +29,7 @@ public class DownloadActivity extends Activity {
 	private Intent downloaderServiceIntent;
 
 	/** Verbindung zum DownloaderService */
-	private ServiceConnection connection = new DownloaderServiceConnection();
+	private ServiceConnection serviceConnection = new DownloaderServiceConnection();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,24 +46,39 @@ public class DownloadActivity extends Activity {
 
 	public void startDownload(View view) {
 		String url = ((EditText) findViewById(R.id.editTextDownloadLink)).getText().toString();
+		Log.d("DOWNLOAD","Starte Download von "+url);
 		downloaderServiceIntent = new Intent(this, DownloaderService.class);
 		downloaderServiceIntent.putExtra(DownloaderService.URL_KEY, url);
 		startService(downloaderServiceIntent);
-
-		bindService(downloaderServiceIntent, connection, Context.BIND_AUTO_CREATE);
+		bindService(downloaderServiceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
 	}
-	
-	public void refresh(){
-		if(serviceBound){
+
+	public void refresh() {
+		if (serviceBound) {
 			int percentage = downloaderService.getPercentage();
+			Log.d("REFRESH", "Prozent: " + percentage);
 			// TODO: progressbar updaten
+			if(percentage>=100){
+				Toast.makeText(this, R.string.DOWNLOAD_FINISHED, Toast.LENGTH_LONG).show();
+				unbindService(serviceConnection);
+				stopService(downloaderServiceIntent);
+			}
+		} else {
+			// nix eigentlich
 		}
 	}
 
 	@Override
 	protected void onResume() {
-		bindService(downloaderServiceIntent, connection, Context.BIND_AUTO_CREATE);
+		Log.d("RESUME", "Wieder da!");
+		bindService(downloaderServiceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
 		refresh();
+	}
+
+	@Override
+	protected void onDestroy() {
+		Log.d("DESTROY", "Connection wird zerstört");
+		unbindService(serviceConnection);
 	}
 
 	private class DownloaderServiceConnection implements ServiceConnection {
