@@ -144,4 +144,6 @@ public class DownloadActivity extends Activity {
 			serviceBound = false;
 		}
 	}
+	
+	
 }
