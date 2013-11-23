@@ -39,16 +39,17 @@ public class DownloaderService extends IntentService {
 
 			// expect HTTP200
 			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-				Log.e("DOWNLOAD", "keine Connection!");
-				// TODO: Fehlerhandling
+				throw new IOException("HTTP nicht ok! !=200");
 			}
 
 			// this will be useful to display download percentage
 			// might be -1: server did not report the length
 			int fileLength = connection.getContentLength();
+			// TODO: fileLength -1 abfangen
 
 			// download the file
 			input = connection.getInputStream();
+			// TODO: Dateiname raussuchen
 			output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath() + "/file_name.extension");
 			Log.d("DOWNLOAD", "Schreibe Datei nach: "+Environment.getExternalStorageDirectory().getPath() + "/file_name.extension");
 
