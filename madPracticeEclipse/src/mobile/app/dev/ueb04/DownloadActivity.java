@@ -44,11 +44,15 @@ public class DownloadActivity extends Activity {
 
 	public void startDownload(View view) {
 		String url = ((EditText) findViewById(R.id.editTextDownloadLink)).getText().toString();
-		Log.d("DOWNLOAD", "Starte Download von " + url);
-		downloaderServiceIntent = new Intent(this, DownloaderService.class);
-		downloaderServiceIntent.putExtra(DownloaderService.URL_KEY, url);
-		startService(downloaderServiceIntent);
-		bindService(downloaderServiceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+		if (url == null || "".equals(url)) {
+			Toast.makeText(this, R.string.supplyUrl, Toast.LENGTH_SHORT).show();
+		} else {
+			Log.d("DOWNLOAD", "Starte Download von " + url);
+			downloaderServiceIntent = new Intent(this, DownloaderService.class);
+			downloaderServiceIntent.putExtra(DownloaderService.URL_KEY, url);
+			startService(downloaderServiceIntent);
+			bindService(downloaderServiceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+		}
 	}
 
 	public void refresh() {
