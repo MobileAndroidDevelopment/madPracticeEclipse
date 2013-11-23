@@ -11,15 +11,14 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 /**
- * TODO: Refresh-Button
  * TODO: Settings für Standard-Ordner
  * TODO: Zugriff auf Service nachdem gestartet wurde
- * TODO: Service binden
  * @author Benne
  */
 public class DownloadActivity extends Activity {
@@ -39,14 +38,13 @@ public class DownloadActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.download, menu);
 		return true;
 	}
 
 	public void startDownload(View view) {
 		String url = ((EditText) findViewById(R.id.editTextDownloadLink)).getText().toString();
-		Log.d("DOWNLOAD","Starte Download von "+url);
+		Log.d("DOWNLOAD", "Starte Download von " + url);
 		downloaderServiceIntent = new Intent(this, DownloaderService.class);
 		downloaderServiceIntent.putExtra(DownloaderService.URL_KEY, url);
 		startService(downloaderServiceIntent);
@@ -58,7 +56,7 @@ public class DownloadActivity extends Activity {
 			int percentage = downloaderService.getPercentage();
 			Log.d("REFRESH", "Prozent: " + percentage);
 			// TODO: progressbar updaten
-			if(percentage>=100){
+			if (percentage >= 100) {
 				Toast.makeText(this, R.string.DOWNLOAD_FINISHED, Toast.LENGTH_LONG).show();
 				unbindService(serviceConnection);
 				stopService(downloaderServiceIntent);
@@ -69,10 +67,24 @@ public class DownloadActivity extends Activity {
 	}
 
 	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.downloader_refresh:
+				refresh();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
 	protected void onResume() {
-		Log.d("RESUME", "Wieder da!");
-		bindService(downloaderServiceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
-		refresh();
+		Log.d("RESUME", "Wieder da! ");
+		if (downloaderServiceIntent != null) {
+			bindService(downloaderServiceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+			refresh();
+		}
+		super.onResume();
 	}
 
 	@Override

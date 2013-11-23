@@ -61,5 +61,6 @@
     <string name="download">Download</string>
     <string name="labelFileUrl">File URL</string>
     <string name="DOWNLOAD_FINISHED">Download wurde abgeschlossen!</string>
+    <string name="refresh">Aktualisieren</string>
 
 </resources>
