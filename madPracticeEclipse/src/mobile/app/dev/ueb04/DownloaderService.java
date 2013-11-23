@@ -9,13 +9,18 @@ import java.net.URL;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Environment;
+import android.os.IBinder;
 import android.util.Log;
 
 public class DownloaderService extends IntentService {
 
 	public static final String URL_KEY = "URL";
 	private static final String TITLE = "File-Download";
+	private int downloadPercentage = 0;
+
+	private final IBinder downloaderBinder = new DownloaderBinder();
 
 	public DownloaderService() {
 		super(TITLE);
@@ -44,7 +49,7 @@ public class DownloaderService extends IntentService {
 
 			// download the file
 			input = connection.getInputStream();
-			output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath()+"/file_name.extension");
+			output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath() + "/file_name.extension");
 
 			byte data[] = new byte[4096];
 			long total = 0;
@@ -53,9 +58,7 @@ public class DownloaderService extends IntentService {
 				total += count;
 				// publishing the progress....
 				if (fileLength > 0) { // only if total length is known
-				//                        onProgressUpdate((int) (total * 100 / fileLength));
-					;
-					// TODO: Download-Status publishen
+					downloadPercentage = (int) (total * 100 / fileLength);
 				}
 				output.write(data, 0, count);
 			}
@@ -73,5 +76,20 @@ public class DownloaderService extends IntentService {
 			if (connection != null)
 				connection.disconnect();
 		}
+	}
+
+	public int getPercentage() {
+		return downloadPercentage;
+	}
+
+	public class DownloaderBinder extends Binder {
+		public DownloaderService getService() {
+			return DownloaderService.this;
+		}
+	}
+
+	@Override
+	public IBinder onBind(Intent intent) {
+		return downloaderBinder;
 	}
 }
