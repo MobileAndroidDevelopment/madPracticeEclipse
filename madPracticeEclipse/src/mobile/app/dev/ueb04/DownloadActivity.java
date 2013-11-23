@@ -23,7 +23,6 @@ import android.widget.Toast;
  */
 public class DownloadActivity extends Activity {
 
-	private static final String DOWNLOAD_NOT_STARTED = "Download konnte nicht gestartet werden";
 	private DownloaderService downloaderService;
 	private boolean serviceBound;
 	private Intent downloaderServiceIntent;
@@ -63,12 +62,9 @@ public class DownloadActivity extends Activity {
 			Log.d("DOWNLOAD", "Starte Download von " + url);
 			downloaderServiceIntent.putExtra(DownloaderService.URL_KEY, url);
 			startService(downloaderServiceIntent);
-			if (serviceBound) {
-				Toast.makeText(this, R.string.DOWNLOAD_STARTED, Toast.LENGTH_LONG).show();
-				downloadButton.setActivated(false);
-			} else {
-				Toast.makeText(this, DOWNLOAD_NOT_STARTED, Toast.LENGTH_LONG).show();
-			}
+			Toast.makeText(this, R.string.DOWNLOAD_STARTED, Toast.LENGTH_LONG).show();
+			downloadButton.setEnabled(false);
+			automaticRefresh();
 		}
 	}
 
@@ -82,15 +78,15 @@ public class DownloadActivity extends Activity {
 			if (downloaderService.isOk()) {
 				int percentage = downloaderService.getPercentage();
 				progressBar.setProgress(percentage);
-				Log.d("REFRESH", "Prozent: " + percentage);
 				if (downloaderService.hasFinished()) {
-					Toast.makeText(this, R.string.DOWNLOAD_FINISHED, Toast.LENGTH_LONG).show();
-					unbindService(serviceConnection);
-					serviceBound = false;
-					Log.d("REFRESH", "Service sollte nun unbound sein!");
+					runOnUiThread(new Runnable() {
+						public void run() {
+							Toast.makeText(DownloadActivity.this, R.string.DOWNLOAD_FINISHED, Toast.LENGTH_LONG).show();
+							downloadButton.setEnabled(true);
+							progressBar.setProgress(0);
+						}
+					});
 					stopService(downloaderServiceIntent);
-					downloadButton.setActivated(true);
-					progressBar.setProgress(0);
 				} else if (downloaderService.fileSizeUnknown()) {
 					Toast.makeText(this, R.string.FILE_SIZE_UNKNOWN, Toast.LENGTH_SHORT).show();
 				}
@@ -135,7 +131,7 @@ public class DownloadActivity extends Activity {
 		Log.d("RESUME", "Wieder da! ");
 		if (downloaderServiceIntent != null) {
 			bindService(downloaderServiceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
-			refresh();
+			isRefreshing = false;
 		}
 		super.onResume();
 	}
@@ -143,8 +139,11 @@ public class DownloadActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		Log.d("DESTROY", "Connection wird zerstört");
-		unbindService(serviceConnection);
-		serviceBound=false;
+		if (serviceBound) {
+			unbindService(serviceConnection);
+			serviceBound = false;
+		}
+		super.onDestroy();
 	}
 
 	private class DownloaderServiceConnection implements ServiceConnection {
@@ -154,12 +153,36 @@ public class DownloadActivity extends Activity {
 			DownloaderBinder downloaderBinder = (DownloaderBinder) service;
 			downloaderService = downloaderBinder.getService();
 			serviceBound = true;
+			automaticRefresh();
 		}
 
 		@Override
 		public void onServiceDisconnected(ComponentName name) {
 			Log.d("SERVICE-DISCONNECTED", "Service Bound = false");
 			serviceBound = false;
+		}
+	}
+
+	private boolean isRefreshing = false;
+
+	private void automaticRefresh() {
+		Log.d("AUTOREFRESH", "IsRe " + isRefreshing + ", downloader: " + (downloaderService != null)+", hasFinsihed="+downloaderService.hasFinished());
+		if (!isRefreshing && downloaderService != null) {
+			isRefreshing = true;
+			new Thread(new Runnable() {
+				public void run() {
+					while (!downloaderService.hasFinished()) {
+						try {
+							Thread.sleep(10);
+							downloadButton.setEnabled(false);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						refresh();
+					}
+					isRefreshing = false;
+				}
+			}).start();
 		}
 	}
 }

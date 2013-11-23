@@ -21,12 +21,12 @@ public class DownloaderService extends IntentService {
 	private static final String TITLE = "File-Download";
 	private int downloadPercentage = 0;
 	private final IBinder downloaderBinder = new DownloaderBinder();
-	private boolean hasFinished;
-	
-	private int errorCase=0;
+	private boolean hasFinished = true;
+
+	private int errorCase = 0;
 	public static final int OK = 0;
 	public static final int HTTP_NOT_OK = 1;
-	public static final int SAVING_NOT_POSSIBLE=2;
+	public static final int SAVING_NOT_POSSIBLE = 2;
 	public static final int UNKNOWN_ERROR = 3;
 	public static final int FILE_LENGTH_UNKNOWN = -1;
 	public static final String URL_KEY = "URL";
@@ -34,11 +34,11 @@ public class DownloaderService extends IntentService {
 	public DownloaderService() {
 		super(TITLE);
 	}
-	
+
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		errorCase=OK;
-		hasFinished=false;
+		errorCase = OK;
+		hasFinished = false;
 		String downloadUrl = intent.getStringExtra(URL_KEY);
 		InputStream input = null;
 		OutputStream output = null;
@@ -62,7 +62,7 @@ public class DownloaderService extends IntentService {
 			input = connection.getInputStream();
 
 			String fileName = downloadUrl.substring(downloadUrl.lastIndexOf('/'));
-			Log.d("DOWNLOAD", "Schreibe Datei nach: "+Environment.getExternalStorageDirectory().getPath() +fileName);
+			Log.d("DOWNLOAD", "Schreibe Datei nach: " + Environment.getExternalStorageDirectory().getPath() + fileName);
 			output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath() + fileName);
 
 			byte data[] = new byte[4096];
@@ -80,16 +80,15 @@ public class DownloaderService extends IntentService {
 			}
 			output.flush();
 			errorCase = OK;
-			hasFinished = true;
-			Log.d("DOWNLOAD", "Prozent: "+downloadPercentage);
-		} catch(HttpException e){
+			Log.d("DOWNLOAD", "Prozent: " + downloadPercentage);
+		} catch (HttpException e) {
 			Log.d("DOWNLOAD", "Problem bei der HTTP Verbindung");
 			errorCase = HTTP_NOT_OK;
-		} catch(IOException e) {
+		} catch (IOException e) {
 			Log.d("DOWNLOAD", "Schreiben der Datei nicht moeglich");
 			errorCase = SAVING_NOT_POSSIBLE;
-		}catch (Exception e) {
-			Log.e("DOWNLOAD", "Download leider nicht erfolgreich!" +e.getMessage());
+		} catch (Exception e) {
+			Log.e("DOWNLOAD", "Download leider nicht erfolgreich!" + e.getMessage());
 			errorCase = UNKNOWN_ERROR;
 		} finally {
 			try {
@@ -103,26 +102,31 @@ public class DownloaderService extends IntentService {
 			Log.d("DOWNLOAD", "Download wurde abgeschlossen");
 			if (connection != null)
 				connection.disconnect();
+
+			hasFinished = true;
 		}
 	}
 
 	public int getPercentage() {
-		return downloadPercentage;
+		if (hasFinished)
+			return 0;
+		else
+			return downloadPercentage;
 	}
-	
-	public boolean fileSizeUnknown(){
+
+	public boolean fileSizeUnknown() {
 		return downloadPercentage == DownloaderService.FILE_LENGTH_UNKNOWN;
 	}
-	
-	public int getErrorCase(){
+
+	public int getErrorCase() {
 		return errorCase;
 	}
-	
-	public boolean isOk(){
-		return errorCase==OK;
+
+	public boolean isOk() {
+		return errorCase == OK;
 	}
-	
-	public boolean hasFinished(){
+
+	public boolean hasFinished() {
 		return hasFinished;
 	}
 
