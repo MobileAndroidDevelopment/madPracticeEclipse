@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Uebung1</string>
+    <string name="app_name">MADPractice</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">I can count !</string>
     <string name="_7">7</string>
@@ -63,5 +63,6 @@
     <string name="DOWNLOAD_FINISHED">Download wurde abgeschlossen!</string>
     <string name="refresh">Aktualisieren</string>
     <string name="supplyUrl">Bitte eine URL angeben</string>
+    <string name="DOWNLOAD_STARTED">Download wird gestartet!</string>
 
 </resources>

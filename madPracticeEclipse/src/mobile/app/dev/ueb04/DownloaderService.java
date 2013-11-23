@@ -7,6 +7,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.apache.http.HttpException;
+
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Binder;
@@ -19,8 +21,13 @@ public class DownloaderService extends IntentService {
 	public static final String URL_KEY = "URL";
 	private static final String TITLE = "File-Download";
 	private int downloadPercentage = 0;
-
 	private final IBinder downloaderBinder = new DownloaderBinder();
+	
+	private int errorCase=0;
+	public static final int OK = 0;
+	public static final int HTTP_NOT_OK = 1;
+	public static final int SAVING_NOT_POSSIBLE=2;
+	public static final int UNKNOWN_ERROR = 3;
 
 	public DownloaderService() {
 		super(TITLE);
@@ -28,6 +35,7 @@ public class DownloaderService extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
+		errorCase=OK;
 		String downloadUrl = intent.getStringExtra(URL_KEY);
 		InputStream input = null;
 		OutputStream output = null;
@@ -39,7 +47,7 @@ public class DownloaderService extends IntentService {
 
 			// expect HTTP200
 			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-				throw new IOException("HTTP nicht ok! !=200");
+				throw new HttpException("HTTP nicht ok! !=200");
 			}
 
 			// this will be useful to display download percentage
@@ -65,9 +73,17 @@ public class DownloaderService extends IntentService {
 				output.write(data, 0, count);
 			}
 			output.flush();
+			errorCase = OK;
 			Log.d("DOWNLOAD", "Prozent: "+downloadPercentage);
-		} catch (Exception e) {
+		} catch(HttpException e){
+			Log.d("DOWNLOAD", "Problem bei der HTTP Verbindung");
+			errorCase = HTTP_NOT_OK;
+		} catch(IOException e) {
+			Log.d("DOWNLOAD", "Schreiben der Datei nicht moeglich");
+			errorCase = SAVING_NOT_POSSIBLE;
+		}catch (Exception e) {
 			Log.e("DOWNLOAD", "Download leider nicht erfolgreich!" +e.getMessage());
+			errorCase = UNKNOWN_ERROR;
 		} finally {
 			try {
 				if (output != null)
@@ -85,6 +101,14 @@ public class DownloaderService extends IntentService {
 
 	public int getPercentage() {
 		return downloadPercentage;
+	}
+	
+	public int getErrorCase(){
+		return errorCase;
+	}
+	
+	public boolean isOk(){
+		return errorCase==OK;
 	}
 
 	public class DownloaderBinder extends Binder {
