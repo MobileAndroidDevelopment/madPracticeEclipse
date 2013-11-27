@@ -53,7 +53,7 @@
         </activity>
         <activity
             android:name="mobile.app.dev.ueb04.DownloadActivity"
-            android:theme="@android:style/Theme.Holo"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
             android:label="@string/title_activity_download" >
         </activity>
         <service android:enabled="true" android:name="mobile.app.dev.ueb04.DownloaderService" />

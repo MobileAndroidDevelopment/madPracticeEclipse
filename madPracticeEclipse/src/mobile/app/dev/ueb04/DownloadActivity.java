@@ -10,8 +10,6 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,13 +17,17 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 /**
- * TODO: Settings für Standard-Ordner
+ * Download-Activity zum Herunterladen einer Datei über eine URL.
  */
 public class DownloadActivity extends Activity {
 
+	/** der eigentliche Service zum Downloaden */
 	private DownloaderService downloaderService;
+	/** Service gebunden oder nicht */
 	private boolean serviceBound;
+	/** Intent für den Downloader-Service */
 	private Intent downloaderServiceIntent;
+	
 	private ProgressBar progressBar;
 	private Button downloadButton;
 
@@ -40,12 +42,6 @@ public class DownloadActivity extends Activity {
 		downloadButton = (Button) findViewById(R.id.buttonDownload);
 		downloaderServiceIntent = new Intent(this, DownloaderService.class);
 		bindService(downloaderServiceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.download, menu);
-		return true;
 	}
 
 	/**
@@ -98,6 +94,11 @@ public class DownloadActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Refreshed die Oberfläche nachdem der Download beendet wurde. Dies muss über runOnUiThread geregelt werden,
+	 * da die Funktion nicht vom MainThread aufgerufen wird, Oberflächenänderungen jedoch nur vom MainThread durchgeführt
+	 * werden dürfen.
+	 */
 	private void refreshFinished() {
 		runOnUiThread(new Runnable() {
 			public void run() {
@@ -128,17 +129,6 @@ public class DownloadActivity extends Activity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.downloader_refresh:
-				refresh();
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
-	}
-
-	@Override
 	protected void onResume() {
 		Log.d("RESUME", "Wieder da! ");
 		if (downloaderServiceIntent != null) {
@@ -158,6 +148,10 @@ public class DownloadActivity extends Activity {
 		super.onDestroy();
 	}
 
+	/**
+	 * Callback für das Binden des Downloader-Services.<p>
+	 * Ist der Service verbunden, so wird der automatische Refresh für die Oberfläche gestartet.
+	 */
 	private class DownloaderServiceConnection implements ServiceConnection {
 
 		@Override
@@ -177,6 +171,10 @@ public class DownloadActivity extends Activity {
 
 	private boolean isRefreshing = false;
 
+	/**
+	 * Automatisches Aktualisieren der Oberfläche während des Downloads. Dies muss als eigener Thread laufen, damit der
+	 * MainThread nicht blockiert wird. Der Refresh-Vorgang kann zur Laufzeit immer nur genau einmal durchlaufen werden.
+	 */
 	private void automaticRefresh() {
 		Log.d("AUTOREFRESH", "IsRe " + isRefreshing + ", downloader: " + (downloaderService != null) + ", hasFinsihed=" + downloaderService.hasFinished());
 		if (!isRefreshing && downloaderService != null) {
@@ -190,10 +188,7 @@ public class DownloadActivity extends Activity {
 							setDownloadButtonEnabled(false);
 							refresh();
 						}
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					} catch (InterruptedException e1) {}
 					isRefreshing = false;
 				}
 			}).start();

@@ -53,10 +53,7 @@ public class DownloaderService extends IntentService {
 				throw new HttpException("HTTP nicht ok! !=200");
 			}
 
-			// this will be useful to display download percentage
-			// might be -1: server did not report the length
 			int fileLength = connection.getContentLength();
-			// TODO: fileLength -1 abfangen
 
 			// download the file
 			input = connection.getInputStream();
@@ -85,7 +82,7 @@ public class DownloaderService extends IntentService {
 			Log.d("DOWNLOAD", "Problem bei der HTTP Verbindung");
 			errorCase = HTTP_NOT_OK;
 		} catch (IOException e) {
-			Log.d("DOWNLOAD", "Schreiben der Datei nicht moeglich");
+			Log.d("DOWNLOAD", "Schreiben der Datei nicht moeglich",e);
 			errorCase = SAVING_NOT_POSSIBLE;
 		} catch (Exception e) {
 			Log.e("DOWNLOAD", "Download leider nicht erfolgreich!" + e.getMessage());
@@ -107,6 +104,9 @@ public class DownloaderService extends IntentService {
 		}
 	}
 
+	/**
+	 * @return Download-Prozent-Status. Falls bereits beendet immer 0
+	 */
 	public int getPercentage() {
 		if (hasFinished)
 			return 0;
@@ -139,9 +139,5 @@ public class DownloaderService extends IntentService {
 	@Override
 	public IBinder onBind(Intent intent) {
 		return downloaderBinder;
-	}
-
-	public void isStarted() {
-		hasFinished = false;
 	}
 }
