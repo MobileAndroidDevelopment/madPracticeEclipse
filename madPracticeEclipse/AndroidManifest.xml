@@ -8,9 +8,9 @@
         android:minSdkVersion="17"
         android:targetSdkVersion="18" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -53,10 +53,24 @@
         </activity>
         <activity
             android:name="mobile.app.dev.ueb04.DownloadActivity"
-            android:theme="@android:style/Theme.Holo.NoActionBar"
-            android:label="@string/title_activity_download" >
+            android:label="@string/title_activity_download"
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
-        <service android:enabled="true" android:name="mobile.app.dev.ueb04.DownloaderService" />
+
+        <service
+            android:name="mobile.app.dev.ueb04.DownloaderService"
+            android:enabled="true" />
+
+        <activity
+            android:name="mobile.app.dev.ueb05.AlarmActivity"
+            android:label="@string/title_activity_alarm"
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
+        </activity>
+        <activity
+            android:name="mobile.app.dev.ueb05.SnoozeActivity"
+            android:label="@string/title_activity_snooze" 
+            android:theme="@android:style/Theme.Holo.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

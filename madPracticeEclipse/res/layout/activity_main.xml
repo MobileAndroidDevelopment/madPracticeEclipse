@@ -1,45 +1,52 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:weightSum="1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingTop="20dp"
+    android:weightSum="1"
+    tools:context=".MainActivity" >
 
-    tools:context=".MainActivity"
-    android:clickable="true">
-
-    <Button 
+    <Button
         android:id="@+id/button_uebung1"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:text="@string/UEBUNG_1"
-        android:onClick="uebung1"/>
-    
-    <Button 
+        android:onClick="uebung1"
+        android:text="@string/UEBUNG_1" />
+
+    <Button
         android:id="@+id/button_uebung2"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-		android:layout_below="@id/button_uebung1"
-        android:text="@string/UEBUNG_2"
-        android:onClick="uebung2"/>
-    
-    <Button 
+        android:layout_below="@id/button_uebung1"
+        android:onClick="uebung2"
+        android:text="@string/UEBUNG_2" />
+
+    <Button
         android:id="@+id/button_uebung3"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-		android:layout_below="@id/button_uebung2"
-        android:text="@string/UEBUNG_3"
-        android:onClick="uebung3"/>
-    
-	<Button 
-	    android:id="@+id/button_uebung4"
+        android:layout_below="@id/button_uebung2"
+        android:onClick="uebung3"
+        android:text="@string/UEBUNG_3" />
+
+    <Button
+        android:id="@+id/button_uebung4"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-		android:layout_below="@id/button_uebung3"
-        android:text="@string/UEBUNG_4"
-        android:onClick="uebung4"/>
-    
+        android:layout_below="@id/button_uebung3"
+        android:onClick="uebung4"
+        android:text="@string/UEBUNG_4" />
+
+    <Button
+        android:id="@+id/button_uebung5"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@id/button_uebung4"
+        android:onClick="uebung5"
+        android:text="@string/UEBUNG_5" />
+
 </RelativeLayout>

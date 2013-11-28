@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:weightSum="1"
+    tools:context=".SnoozeActivity" >
+
+    <ImageView
+        android:id="@+id/imageViewSnooze"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".5"
+        android:contentDescription="Sonne"
+        android:src="@drawable/sonne" />
+
+    <NumberPicker
+        android:id="@+id/numberPickerSnooze"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight=".3" />
+
+    <Button
+        android:id="@+id/buttonSnooze"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Oh boy, just snooze it!" />
+
+</LinearLayout>
