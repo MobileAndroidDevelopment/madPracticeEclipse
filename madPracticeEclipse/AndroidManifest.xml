@@ -10,8 +10,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -62,8 +61,6 @@
         <service
             android:name="mobile.app.dev.ueb04.DownloaderService"
             android:enabled="true" />
-            
-    	<receiver  android:process=":remote" android:name="Alarm"></receiver>
 
         <activity
             android:name="mobile.app.dev.ueb05.AlarmActivity"
@@ -72,9 +69,14 @@
         </activity>
         <activity
             android:name="mobile.app.dev.ueb05.SnoozeActivity"
-            android:label="@string/title_activity_snooze" 
-            android:theme="@android:style/Theme.Holo.NoActionBar">
+            android:label="@string/title_activity_snooze"
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
+
+        <receiver
+            android:name="mobile.app.dev.ueb05.Alarm"
+            android:enabled="true" >
+        </receiver>
     </application>
 
 </manifest>

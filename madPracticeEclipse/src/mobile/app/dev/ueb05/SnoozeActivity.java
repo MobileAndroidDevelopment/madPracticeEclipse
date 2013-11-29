@@ -12,7 +12,12 @@ public class SnoozeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_snooze);
-		
+		//		MediaPlayer player = MediaPlayer.create(context, R.raw.);
+		//		player.setLooping(true);
+		//		player.start();
+		//		SystemClock.sleep(20000);
+		//		player.stop();
+
 	}
 
 	@Override
