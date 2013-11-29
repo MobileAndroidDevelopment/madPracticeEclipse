@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_weight=".5"
             android:layout_width="0dp"
+            android:onClick="setAlarm"
             android:text="@string/activate_alarm" />
 
         <Button
