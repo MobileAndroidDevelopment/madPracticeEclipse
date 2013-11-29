@@ -48,6 +48,7 @@
             android:layout_weight=".5"
             android:layout_width="0dp"
             android:enabled="false"
+            android:onClick="cancelAlarm"
             android:text="@string/cancel_alarm" />
     </LinearLayout>
 

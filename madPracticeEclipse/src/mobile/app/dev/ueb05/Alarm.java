@@ -1,14 +1,11 @@
 package mobile.app.dev.ueb05;
 
-import android.R;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.PowerManager;
-import android.os.SystemClock;
 import android.widget.Toast;
 
 public class Alarm extends BroadcastReceiver {
@@ -33,9 +30,9 @@ public class Alarm extends BroadcastReceiver {
 
 	public void setAlarm(Context context, long alarmTime) {
 		AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-		Intent i = new Intent(context, Alarm.class);
-		PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, 0);
-		am.set(AlarmManager.RTC_WAKEUP, alarmTime, pi); 
+		Intent intent = new Intent(context, Alarm.class);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+		am.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime, 1000 * 60 * 60 * 24, pendingIntent);  //alle 24 std
 //		am.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime, 1000 * 60 * 10, pi); // Millisec * Second * Minute
 
 	}
