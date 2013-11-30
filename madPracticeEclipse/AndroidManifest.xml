@@ -65,11 +65,16 @@
         <activity
             android:name="mobile.app.dev.ueb05.AlarmActivity"
             android:label="@string/title_activity_alarm"
-            android:theme="@android:style/Theme.Holo.NoActionBar" >
+            android:theme="@android:style/Theme.Holo" >
         </activity>
         <activity
             android:name="mobile.app.dev.ueb05.SnoozeActivity"
             android:label="@string/title_activity_snooze"
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
+        </activity>
+        <activity
+            android:name="mobile.app.dev.ueb05.AlarmSettingsActivity"
+            android:label="Alarm Settings"
             android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
 
@@ -77,6 +82,7 @@
             android:name="mobile.app.dev.ueb05.Alarm"
             android:enabled="true" >
         </receiver>
+
     </application>
 
 </manifest>

@@ -10,9 +10,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TimePicker;
@@ -37,7 +37,19 @@ public class AlarmActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.alarm, menu);
-		return false;
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.alarm_settings:
+				Intent intent = new Intent(this, AlarmSettingsActivity.class);
+				startActivity(intent);
+				return super.onOptionsItemSelected(item);
+			default:
+				return super.onOptionsItemSelected(item);
+		}
 	}
 
 	public void setAlarm(View button) {
@@ -45,8 +57,10 @@ public class AlarmActivity extends Activity {
 			AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 			Intent intent = new Intent(this, Alarm.class);
 			PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-			alarmManager.set(AlarmManager.RTC_WAKEUP, getAlarmTimeInMillis(), pendingIntent); 
-			Toast.makeText(this, "Wecker klingelt in " + (getAlarmTimeInMillis()-Calendar.getInstance(Locale.GERMANY).getTimeInMillis())/1000 + " Sekunden", Toast.LENGTH_LONG).show();
+			alarmManager.set(AlarmManager.RTC_WAKEUP, getAlarmTimeInMillis(), pendingIntent);
+			Toast.makeText(this,
+					"Wecker klingelt in " + (getAlarmTimeInMillis() - Calendar.getInstance(Locale.GERMANY).getTimeInMillis()) / 1000 + " Sekunden",
+					Toast.LENGTH_LONG).show();
 			Log.d("alarm gesetzt", "yo");
 			cancelButton.setEnabled(true);
 			activateButton.setEnabled(false);
@@ -73,10 +87,10 @@ public class AlarmActivity extends Activity {
 		calendar.set(Calendar.MINUTE, minute);
 		calendar.set(Calendar.SECOND, 0); //der jung will ja pünktlich geweckt werden, nicht um 19:00:59 ! 
 		long alarmTimeInMillis = calendar.getTimeInMillis();
-		
+
 		Log.d("Alarmtime in millis", calendar.getTimeInMillis() + "ms");
 		Log.d("Alarm Date", calendar.getTime().toString());
-		Log.d("Der Wecker klingelt in:", ((alarmTimeInMillis-Calendar.getInstance(Locale.GERMANY).getTimeInMillis())/1000)+" sek");
+		Log.d("Der Wecker klingelt in:", ((alarmTimeInMillis - Calendar.getInstance(Locale.GERMANY).getTimeInMillis()) / 1000) + " sek");
 		return alarmTimeInMillis;
 	}
 
