@@ -1,6 +1,7 @@
 package mobile.app.dev.ueb05;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import mobile.app.dev.R;
@@ -32,6 +33,8 @@ public class AlarmActivity extends Activity {
 		setContentView(R.layout.activity_alarm);
 		timePicker = (TimePicker) findViewById(R.id.timePickerAlarm);
 		timePicker.setIs24HourView(true);
+		//Bug in der API setzt Wert des TimePickers nicht im 24Stunden Modus
+		timePicker.setCurrentHour(new Date().getHours());
 		activateButton = (Button) findViewById(R.id.buttonActivateAlarm);
 		cancelButton = (Button) findViewById(R.id.buttonCancelAlarm);
 
@@ -64,6 +67,7 @@ public class AlarmActivity extends Activity {
 		}
 	}
 
+
 	public void setAlarm(View button) {
 		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 		long newTime = getAlarmTimeInMillis();
@@ -71,13 +75,48 @@ public class AlarmActivity extends Activity {
 		cancelButton.setEnabled(true);
 		activateButton.setEnabled(false);
 	}
-
+	
+	private static String getAlarmString(long millisToAlarm)
+	{
+		String alarmString;
+		int hours = (int) (millisToAlarm/1000/3600);
+		millisToAlarm = millisToAlarm - (hours*1000*3600);
+		int minutes = (int) (millisToAlarm/1000/60);
+		millisToAlarm = millisToAlarm - (minutes*1000*60);
+		int seconds = (int) (millisToAlarm/1000);
+		
+		if(hours != 0)
+		{
+			alarmString = "Wecker klingelt in " + hours + " Stunden und " + minutes + " Minuten";
+		}
+		else
+		{
+			if(minutes != 0)
+			{
+				alarmString = "Wecker klingelt in " + minutes + " Minuten und " + seconds + " Sekunden";
+			}
+			else
+			{
+				alarmString = "Wecker klingelt in " + seconds + " Sekunden";
+			}
+		}				
+		
+		return alarmString;		
+	}
+	
 	public static void initAlarmAt(long millis, Context context, AlarmManager manager) {
 		Intent intent = new Intent(context, Alarm.class);
+		Long actuellTimeInMillis =  Calendar.getInstance(Locale.GERMANY).getTimeInMillis();
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+				
+		//wenn Alarm erst am nächsten Tag erfolgt		
+		if((millis - actuellTimeInMillis) < 0)		
+		{	//dann rechne einen Tag drauf
+			millis += 86400*1000;
+		}
+		
 		manager.set(AlarmManager.RTC_WAKEUP, millis, pendingIntent);
-		Toast.makeText(context, "Wecker klingelt in " + (millis - Calendar.getInstance(Locale.GERMANY).getTimeInMillis()) / 1000 + " Sekunden",
-				Toast.LENGTH_LONG).show();
+		Toast.makeText(context, getAlarmString(millis - actuellTimeInMillis), Toast.LENGTH_LONG).show();
 		Log.d("alarm gesetzt", "yo");
 		saveAlarmPreferenceSet(millis, context);
 	}
@@ -116,8 +155,8 @@ public class AlarmActivity extends Activity {
 		calendar.set(Calendar.HOUR_OF_DAY, hour);
 		calendar.set(Calendar.MINUTE, minute);
 		calendar.set(Calendar.SECOND, 0); //der jung will ja pünktlich geweckt werden, nicht um 19:00:59 ! 
-		long alarmTimeInMillis = calendar.getTimeInMillis();
-
+		long alarmTimeInMillis = calendar.getTimeInMillis();		
+		
 		Log.d("Alarmtime in millis", calendar.getTimeInMillis() + "ms");
 		Log.d("Alarm Date", calendar.getTime().toString());
 		Log.d("Der Wecker klingelt in:", ((alarmTimeInMillis - Calendar.getInstance(Locale.GERMANY).getTimeInMillis()) / 1000) + " sek");

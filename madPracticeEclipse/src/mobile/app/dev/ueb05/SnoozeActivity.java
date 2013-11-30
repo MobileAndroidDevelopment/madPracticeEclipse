@@ -11,6 +11,7 @@ import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
@@ -18,14 +19,16 @@ import android.util.Log;
 import android.view.View;
 
 public class SnoozeActivity extends Activity {
-
+	
+	MediaPlayer player;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_snooze);
-		//		MediaPlayer player = MediaPlayer.create(context, R.raw.);
-		//		player.setLooping(true);
-		//		player.start();
+				player = MediaPlayer.create(this, R.raw.pippilangstrompessang);
+				player.setLooping(true);
+				player.start();
 		//		SystemClock.sleep(20000);
 		//		player.stop();
 	}
@@ -64,9 +67,13 @@ public class SnoozeActivity extends Activity {
 
 		finish();
 	}
-
-	public void stop(View view) {
-		// TODO: Musik stoppen
+	
+	 @Override
+	    public void onStop() {
+	        super.onStop();
+	        player.stop();
+	    }
+	public void stop(View view) {		
 		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 		AlarmActivity.cancelAlarm(this, alarmManager);
 		finish();
