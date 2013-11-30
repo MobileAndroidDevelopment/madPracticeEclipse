@@ -65,4 +65,11 @@ public class SnoozeActivity extends Activity {
 		finish();
 	}
 
+	public void stop(View view) {
+		// TODO: Musik stoppen
+		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+		AlarmActivity.cancelAlarm(this, alarmManager);
+		finish();
+	}
+
 }

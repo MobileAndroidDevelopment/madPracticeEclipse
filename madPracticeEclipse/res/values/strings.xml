@@ -77,5 +77,6 @@
     <string name="nextAlarm">Nächster Alarm</string>
     <string name="not_set">nicht gesetzt</string>
     <string name="SNOOZE_TEXT">Oh boy, just snooze it!</string>
+    <string name="sun">Sonne</string>
 
 </resources>

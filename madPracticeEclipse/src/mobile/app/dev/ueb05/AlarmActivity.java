@@ -92,14 +92,18 @@ public class AlarmActivity extends Activity {
 	}
 
 	public void cancelAlarm(View button) {
-		Intent intent = new Intent(this, Alarm.class);
-		PendingIntent sender = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-		alarmManager.cancel(sender);
+		cancelAlarm(this, alarmManager);
 		cancelButton.setEnabled(false);
 		activateButton.setEnabled(true);
+	}
+	
+	public static void cancelAlarm(Context context, AlarmManager manager){
+		Intent intent = new Intent(context, Alarm.class);
+		PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		manager.cancel(sender);
 
-		saveAlarmPreferenceSet(0, this);
+		saveAlarmPreferenceSet(0, context);
 	}
 
 	private long getAlarmTimeInMillis() {
