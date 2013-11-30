@@ -39,12 +39,11 @@ public class SnoozeActivity extends Activity {
 		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 		AlarmActivity.initAlarmAt(newAlarmTime, this, alarmManager);
 
-		NotificationCompat.Builder mBuilder =
-				new NotificationCompat.Builder(this)
-						.setSmallIcon(R.drawable.ic_launcher)
-						.setContentTitle("Snooze")
-						.setContentText(AlarmSettingsActivity.DATE_FORMATTER.format(new Date(newAlarmTime)))
-						.setAutoCancel(true);
+		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+				.setSmallIcon(R.drawable.ic_launcher)
+				.setContentTitle("Snooze")
+				.setContentText(AlarmSettingsActivity.DATE_FORMATTER.format(new Date(newAlarmTime)))
+				.setAutoCancel(true);
 		// Creates an explicit intent for an Activity in your app
 		Intent resultIntent = new Intent(this, AlarmActivity.class);
 
@@ -62,7 +61,7 @@ public class SnoozeActivity extends Activity {
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		// mId allows you to update the notification later on.
 		mNotificationManager.notify(12, mBuilder.build());
-		
+
 		finish();
 	}
 
