@@ -19,18 +19,12 @@
         android:contentDescription="Sonne"
         android:src="@drawable/sonne" />
 
-    <NumberPicker
-        android:id="@+id/numberPickerSnooze"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight=".3" />
-
     <Button
         android:id="@+id/buttonSnooze"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="snooze"
-        android:text="Oh boy, just snooze it!" />
+        android:text="@string/SNOOZE_TEXT" />
 
 </LinearLayout>
