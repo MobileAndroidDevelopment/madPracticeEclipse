@@ -9,7 +9,9 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +34,17 @@ public class AlarmActivity extends Activity {
 		timePicker.setIs24HourView(true);
 		activateButton = (Button) findViewById(R.id.buttonActivateAlarm);
 		cancelButton = (Button) findViewById(R.id.buttonCancelAlarm);
+		
+
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean alarmSet = prefs.getBoolean(AlarmSettingsActivity.ALARM_SET_KEY, AlarmSettingsActivity.DEFAULT_ALARM_SET);
+		if(alarmSet){
+			cancelButton.setEnabled(true);
+			activateButton.setEnabled(false);
+		} else {
+			cancelButton.setEnabled(false);
+			activateButton.setEnabled(true);
+		}
 	}
 
 	@Override
@@ -64,7 +77,18 @@ public class AlarmActivity extends Activity {
 			Log.d("alarm gesetzt", "yo");
 			cancelButton.setEnabled(true);
 			activateButton.setEnabled(false);
+			
+			saveAlarmPreferenceSet(true);
 		}
+	}
+
+	private void saveAlarmPreferenceSet(boolean newValue) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putBoolean(AlarmSettingsActivity.ALARM_SET_KEY, newValue);
+		boolean preferencesSet = editor.commit();
+		if(!preferencesSet)
+			throw new RuntimeException("Da ging was schief");
 	}
 
 	public void cancelAlarm(View button) {
@@ -74,6 +98,8 @@ public class AlarmActivity extends Activity {
 		alarmManager.cancel(sender);
 		cancelButton.setEnabled(false);
 		activateButton.setEnabled(true);
+
+		saveAlarmPreferenceSet(false);
 	}
 
 	private long getAlarmTimeInMillis() {

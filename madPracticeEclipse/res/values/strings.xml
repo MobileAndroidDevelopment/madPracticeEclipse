@@ -74,5 +74,6 @@
     <string name="cancel_alarm">Cancel</string>
     <string name="title_activity_snooze">SnoozeActivity</string>
     <string name="snooze">Snooze</string>
+    <string name="alarmSet">Alarm angeschaltet</string>
 
 </resources>

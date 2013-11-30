@@ -7,4 +7,11 @@
         android:key="snooze"
         android:order="1"
         android:title="@string/snooze" />
+    
+    <Preference
+        android:key="alarmSet"
+        android:order="2"
+        android:defaultValue="false"
+        android:title="@string/alarmSet" />
+    
 </PreferenceScreen>
