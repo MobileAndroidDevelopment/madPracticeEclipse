@@ -34,11 +34,10 @@ public class AlarmActivity extends Activity {
 		timePicker.setIs24HourView(true);
 		activateButton = (Button) findViewById(R.id.buttonActivateAlarm);
 		cancelButton = (Button) findViewById(R.id.buttonCancelAlarm);
-		
 
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		boolean alarmSet = prefs.getBoolean(AlarmSettingsActivity.ALARM_SET_KEY, AlarmSettingsActivity.DEFAULT_ALARM_SET);
-		if(alarmSet){
+		long time = Long.parseLong(prefs.getString(AlarmSettingsActivity.NEXT_ALARM_KEY, AlarmSettingsActivity.DEFAULT_ALARM_SET));
+		if (time != 0) {
 			cancelButton.setEnabled(true);
 			activateButton.setEnabled(false);
 		} else {
@@ -66,28 +65,29 @@ public class AlarmActivity extends Activity {
 	}
 
 	public void setAlarm(View button) {
-		if (!alarmDoesNotExist()) {
-			AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-			Intent intent = new Intent(this, Alarm.class);
-			PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-			alarmManager.set(AlarmManager.RTC_WAKEUP, getAlarmTimeInMillis(), pendingIntent);
-			Toast.makeText(this,
-					"Wecker klingelt in " + (getAlarmTimeInMillis() - Calendar.getInstance(Locale.GERMANY).getTimeInMillis()) / 1000 + " Sekunden",
-					Toast.LENGTH_LONG).show();
-			Log.d("alarm gesetzt", "yo");
-			cancelButton.setEnabled(true);
-			activateButton.setEnabled(false);
-			
-			saveAlarmPreferenceSet(true);
-		}
+		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+		long newTime = getAlarmTimeInMillis();
+		initAlarmAt(newTime, this, alarmManager);
+		cancelButton.setEnabled(true);
+		activateButton.setEnabled(false);
 	}
 
-	private void saveAlarmPreferenceSet(boolean newValue) {
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+	public static void initAlarmAt(long millis, Context context, AlarmManager manager) {
+		Intent intent = new Intent(context, Alarm.class);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		manager.set(AlarmManager.RTC_WAKEUP, millis, pendingIntent);
+		Toast.makeText(context, "Wecker klingelt in " + (millis - Calendar.getInstance(Locale.GERMANY).getTimeInMillis()) / 1000 + " Sekunden",
+				Toast.LENGTH_LONG).show();
+		Log.d("alarm gesetzt", "yo");
+		saveAlarmPreferenceSet(millis, context);
+	}
+
+	private static void saveAlarmPreferenceSet(long millis, Context context) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		SharedPreferences.Editor editor = prefs.edit();
-		editor.putBoolean(AlarmSettingsActivity.ALARM_SET_KEY, newValue);
+		editor.putString(AlarmSettingsActivity.NEXT_ALARM_KEY, millis + "");
 		boolean preferencesSet = editor.commit();
-		if(!preferencesSet)
+		if (!preferencesSet)
 			throw new RuntimeException("Da ging was schief");
 	}
 
@@ -99,7 +99,7 @@ public class AlarmActivity extends Activity {
 		cancelButton.setEnabled(false);
 		activateButton.setEnabled(true);
 
-		saveAlarmPreferenceSet(false);
+		saveAlarmPreferenceSet(0, this);
 	}
 
 	private long getAlarmTimeInMillis() {
@@ -118,10 +118,5 @@ public class AlarmActivity extends Activity {
 		Log.d("Alarm Date", calendar.getTime().toString());
 		Log.d("Der Wecker klingelt in:", ((alarmTimeInMillis - Calendar.getInstance(Locale.GERMANY).getTimeInMillis()) / 1000) + " sek");
 		return alarmTimeInMillis;
-	}
-
-	private boolean alarmDoesNotExist() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

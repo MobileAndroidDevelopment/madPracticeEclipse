@@ -9,9 +9,9 @@
         android:title="@string/snooze" />
     
     <Preference
-        android:key="alarmSet"
+        android:key="nextAlarm"
         android:order="2"
-        android:defaultValue="false"
-        android:title="@string/alarmSet" />
+        android:defaultValue="0"
+        android:title="@string/nextAlarm" />
     
 </PreferenceScreen>

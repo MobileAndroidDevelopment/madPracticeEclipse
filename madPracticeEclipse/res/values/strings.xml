@@ -74,6 +74,7 @@
     <string name="cancel_alarm">Cancel</string>
     <string name="title_activity_snooze">SnoozeActivity</string>
     <string name="snooze">Snooze</string>
-    <string name="alarmSet">Alarm angeschaltet</string>
+    <string name="nextAlarm">Nächster Alarm</string>
+    <string name="not_set">nicht gesetzt</string>
 
 </resources>
