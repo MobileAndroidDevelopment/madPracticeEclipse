@@ -19,18 +19,17 @@ import android.util.Log;
 import android.view.View;
 
 public class SnoozeActivity extends Activity {
-	
+
+	private static final int NOTIFICATION_ID = 12;
 	MediaPlayer player;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_snooze);
-				player = MediaPlayer.create(this, R.raw.pippilangstrompessang);
-				player.setLooping(true);
-				player.start();
-		//		SystemClock.sleep(20000);
-		//		player.stop();
+		player = MediaPlayer.create(this, R.raw.pippilangstrompessang);
+		player.setLooping(true);
+		player.start();
 	}
 
 	public void snooze(View view) {
@@ -41,17 +40,20 @@ public class SnoozeActivity extends Activity {
 		newAlarmTime -= newAlarmTime % (60 * 1000);
 		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 		AlarmActivity.initAlarmAt(newAlarmTime, this, alarmManager);
+		createNotification(newAlarmTime);
 
+		finish();
+	}
+
+	private void createNotification(long newAlarmTime) {
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
 				.setSmallIcon(R.drawable.ic_launcher)
-				.setContentTitle("Snooze")
+				.setContentTitle(getString(R.string.SNOOZE_NOTIFICATION_TITLE))
 				.setContentText(AlarmSettingsActivity.DATE_FORMATTER.format(new Date(newAlarmTime)))
 				.setAutoCancel(true);
-		// Creates an explicit intent for an Activity in your app
 		Intent resultIntent = new Intent(this, AlarmActivity.class);
 
-		// The stack builder object will contain an artificial back stack for the
-		// started Activity.
+		// The stack builder object will contain an artificial back stack for the started Activity.
 		// This ensures that navigating backward from the Activity leads out of
 		// your application to the Home screen.
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
@@ -62,18 +64,16 @@ public class SnoozeActivity extends Activity {
 		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 		mBuilder.setContentIntent(resultPendingIntent);
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		// mId allows you to update the notification later on.
-		mNotificationManager.notify(12, mBuilder.build());
-
-		finish();
+		mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
 	}
-	
-	 @Override
-	    public void onStop() {
-	        super.onStop();
-	        player.stop();
-	    }
-	public void stop(View view) {		
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		player.stop();
+	}
+
+	public void stop(View view) {
 		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 		AlarmActivity.cancelAlarm(this, alarmManager);
 		finish();

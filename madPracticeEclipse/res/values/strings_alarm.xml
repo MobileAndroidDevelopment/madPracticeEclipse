@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_alarm">Alaaarm! Aaalaaarm!</string>
+    <string name="activate_alarm">Activate</string>
+    <string name="cancel_alarm">Cancel</string>
+    <string name="title_activity_snooze">SnoozeActivity</string>
+    <string name="snooze">Snooze-Zeit in Minuten</string>
+    <string name="nextAlarm">Nächster Alarm</string>
+    <string name="not_set">nicht gesetzt</string>
+    <string name="SNOOZE_TEXT">Oh boy, just snooze it!</string>
+    <string name="sun">Sonne</string>
+    <string name="SNOOZE_NOTIFICATION_TITLE">Wecker klingelt wieder um</string>
+</resources>

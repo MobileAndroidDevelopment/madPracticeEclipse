@@ -12,6 +12,7 @@
         android:key="nextAlarm"
         android:order="2"
         android:defaultValue="0"
+        android:enabled="false"
         android:title="@string/nextAlarm" />
     
 </PreferenceScreen>

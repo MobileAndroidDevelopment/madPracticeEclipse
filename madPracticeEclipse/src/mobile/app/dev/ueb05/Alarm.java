@@ -1,5 +1,6 @@
 package mobile.app.dev.ueb05;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ public class Alarm extends BroadcastReceiver {
 	
 	public static final String BC_ACTION = "MAD_BROADCAST";
 	
+	@SuppressLint("Wakelock")
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);

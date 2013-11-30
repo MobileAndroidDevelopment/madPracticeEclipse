@@ -21,9 +21,11 @@ public class AlarmSettingsActivity extends PreferenceActivity implements OnShare
 	public static final String SNOOZE_KEY = "snooze";
 	public static final String NEXT_ALARM_KEY = "nextAlarm";
 	public static final String DEFAULT_SNOOZE_TIME = "5";
+	public static final int NO_ALARM_TIME_SET = 0;
+	public static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("HH:mm", Locale.GERMAN);
+	
 	private EditTextPreference snoozePreference;
 	private Preference alarmSetPreference;
-	public static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("HH:mm", Locale.GERMAN);
 
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class AlarmSettingsActivity extends PreferenceActivity implements OnShare
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		snoozePreference.setSummary(prefs.getString(SNOOZE_KEY, DEFAULT_SNOOZE_TIME));
 		long time = Long.parseLong(prefs.getString(NEXT_ALARM_KEY, DEFAULT_ALARM_SET));
-		alarmSetPreference.setSummary(time != 0 ? DATE_FORMATTER.format(new Date(time)) : getString(R.string.not_set));
+		alarmSetPreference.setSummary(time != NO_ALARM_TIME_SET ? DATE_FORMATTER.format(new Date(time)) : getString(R.string.not_set));
 
 		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 	}

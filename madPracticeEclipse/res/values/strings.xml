@@ -69,14 +69,6 @@
     <string name="HTTP_PROBLEM">Probleme bei der HTTP-Verbindung. Überprüfen Sie bitte den Link!</string>
     <string name="READ_WRITE_ERROR">Lesen oder Schreiben der Datei war nicht möglich!</string>
     <string name="UNKNOWN_ERROR">Es ist ein unbekannter Fehler aufgetreten</string>
-    <string name="title_activity_alarm">AlarmActivity</string>
-    <string name="activate_alarm">Activate</string>
-    <string name="cancel_alarm">Cancel</string>
-    <string name="title_activity_snooze">SnoozeActivity</string>
-    <string name="snooze">Snooze</string>
-    <string name="nextAlarm">Nächster Alarm</string>
-    <string name="not_set">nicht gesetzt</string>
-    <string name="SNOOZE_TEXT">Oh boy, just snooze it!</string>
-    <string name="sun">Sonne</string>
+    <string name="calculatorsettingsactivity">CalculatorSettingsActivity</string>
 
 </resources>
