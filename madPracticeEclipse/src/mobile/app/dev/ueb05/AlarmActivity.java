@@ -17,14 +17,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 public class AlarmActivity extends Activity {
 
+	private static final int SECONDS_PER_DAY = 86400;
+	private static final int SIXTY = 60;
+	private static final int SECONDS_PER_HOUR = 3600;
+	private static final int THOUSAND = 1000;
 	private TimePicker timePicker;
 	private Button activateButton;
 	private Button cancelButton;
@@ -84,11 +86,11 @@ public class AlarmActivity extends Activity {
 
 	private static String getAlarmString(long millisToAlarm) {
 		String alarmString;
-		int hours = (int) (millisToAlarm / 1000 / 3600);
-		millisToAlarm = millisToAlarm - (hours * 1000 * 3600);
-		int minutes = (int) (millisToAlarm / 1000 / 60);
-		millisToAlarm = millisToAlarm - (minutes * 1000 * 60);
-		int seconds = (int) (millisToAlarm / 1000);
+		int hours = (int) (millisToAlarm / THOUSAND / SECONDS_PER_HOUR);
+		millisToAlarm = millisToAlarm - (hours * THOUSAND * SECONDS_PER_HOUR);
+		int minutes = (int) (millisToAlarm / THOUSAND / SIXTY);
+		millisToAlarm = millisToAlarm - (minutes * THOUSAND * SIXTY);
+		int seconds = (int) (millisToAlarm / THOUSAND);
 
 		if (hours != 0) {
 			alarmString = "Wecker klingelt in " + hours + " Stunden und " + minutes + " Minuten";
@@ -116,7 +118,7 @@ public class AlarmActivity extends Activity {
 
 		//wenn Alarm erst am nächsten Tag erfolgt, rechne einen Tag drauf	
 		if ((alarmTimeMilliseconds - actuellTimeInMillis) < 0) {
-			alarmTimeMilliseconds += 86400 * 1000;
+			alarmTimeMilliseconds += SECONDS_PER_DAY * THOUSAND;
 		}
 
 		manager.set(AlarmManager.RTC_WAKEUP, alarmTimeMilliseconds, pendingIntent);
@@ -161,7 +163,7 @@ public class AlarmActivity extends Activity {
 
 		Log.d("Alarmtime in millis", calendar.getTimeInMillis() + "ms");
 		Log.d("Alarm Date", calendar.getTime().toString());
-		Log.d("Der Wecker klingelt in:", ((alarmTimeInMillis - Calendar.getInstance(Locale.GERMANY).getTimeInMillis()) / 1000) + " sek");
+		Log.d("Der Wecker klingelt in:", ((alarmTimeInMillis - Calendar.getInstance(Locale.GERMANY).getTimeInMillis()) / THOUSAND) + " sek");
 		return alarmTimeInMillis;
 	}
 }
