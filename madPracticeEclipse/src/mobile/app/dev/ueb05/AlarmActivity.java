@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -48,8 +50,9 @@ public class AlarmActivity extends Activity {
 			cancelButton.setEnabled(false);
 			activateButton.setEnabled(true);
 		}
-	}
-
+		
+	}		
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.alarm, menu);

@@ -10,8 +10,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
+    <uses-permission android:name="android.permission.WAKE_LOCK" />	
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -78,7 +79,7 @@
             android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
 
-        <receiver
+        <receiver            
             android:name="mobile.app.dev.ueb05.Alarm"
             android:enabled="true" >
         </receiver>
