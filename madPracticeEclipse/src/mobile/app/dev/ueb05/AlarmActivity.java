@@ -41,6 +41,12 @@ public class AlarmActivity extends Activity {
 		activateButton = (Button) findViewById(R.id.buttonActivateAlarm);
 		cancelButton = (Button) findViewById(R.id.buttonCancelAlarm);
 
+	}	
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		long time = Long.parseLong(prefs.getString(AlarmSettingsActivity.NEXT_ALARM_KEY, AlarmSettingsActivity.DEFAULT_ALARM_SET));
 		if (time != 0) {
@@ -50,8 +56,7 @@ public class AlarmActivity extends Activity {
 			cancelButton.setEnabled(false);
 			activateButton.setEnabled(true);
 		}
-		
-	}		
+	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
