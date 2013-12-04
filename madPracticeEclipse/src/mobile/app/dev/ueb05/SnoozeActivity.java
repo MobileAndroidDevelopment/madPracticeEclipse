@@ -21,7 +21,7 @@ import android.view.WindowManager;
 
 public class SnoozeActivity extends Activity {
 
-	private static final int NOTIFICATION_ID = 12;
+	public static final int NOTIFICATION_ID = 12;
 	MediaPlayer player;
 
 	@Override

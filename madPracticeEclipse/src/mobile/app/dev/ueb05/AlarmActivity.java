@@ -7,6 +7,7 @@ import java.util.Locale;
 import mobile.app.dev.R;
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +29,8 @@ public class AlarmActivity extends Activity {
 	private TimePicker timePicker;
 	private Button activateButton;
 	private Button cancelButton;
-
+	
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -138,10 +140,14 @@ public class AlarmActivity extends Activity {
 	}
 
 	public void cancelAlarm(View button) {
+		NotificationManager mgn = (NotificationManager)
+				getSystemService(Context.NOTIFICATION_SERVICE);
 		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 		cancelAlarm(this, alarmManager);
 		cancelButton.setEnabled(false);
 		activateButton.setEnabled(true);
+		
+		mgn.cancel(SnoozeActivity.NOTIFICATION_ID);
 	}
 
 	public static void cancelAlarm(Context context, AlarmManager manager) {
