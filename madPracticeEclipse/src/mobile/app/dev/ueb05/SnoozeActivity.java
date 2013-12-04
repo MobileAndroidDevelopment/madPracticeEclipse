@@ -30,6 +30,9 @@ public class SnoozeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_snooze);
+		
+		cancelNotification();
+		
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
 	            + WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
 	            + WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
@@ -40,6 +43,12 @@ public class SnoozeActivity extends Activity {
 		
 	}
 
+	
+	private void cancelNotification(){
+		NotificationManager mgn = (NotificationManager)
+				getSystemService(Context.NOTIFICATION_SERVICE);
+				mgn.cancel(NOTIFICATION_ID);
+	}
 	public void snooze(View view) {
 		Log.d("Test", "Es wurde auf Snooze gedrückt");
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
