@@ -21,7 +21,11 @@ import android.view.WindowManager;
 
 public class SnoozeActivity extends Activity {
 
+
+	private static final int MILLISECONDS_PER_SECOND = 1000;
+	private static final int SECONDS_PER_MINUTE = 60;
 	public static final int NOTIFICATION_ID = 12;
+
 	MediaPlayer player;
 
 	@Override
@@ -51,8 +55,8 @@ public class SnoozeActivity extends Activity {
 		Log.d("Test", "Es wurde auf Snooze gedrückt");
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		int snoozeMinutes = Integer.parseInt(prefs.getString(AlarmSettingsActivity.SNOOZE_KEY, AlarmSettingsActivity.DEFAULT_SNOOZE_TIME));
-		long newAlarmTime = System.currentTimeMillis() + (snoozeMinutes * 60 * 1000);
-		newAlarmTime -= newAlarmTime % (60 * 1000);
+		long newAlarmTime = System.currentTimeMillis() + (snoozeMinutes * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND);
+		newAlarmTime -= newAlarmTime % (SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND);
 		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 		AlarmActivity.initAlarmAt(newAlarmTime, this, alarmManager);
 		createNotification(newAlarmTime);

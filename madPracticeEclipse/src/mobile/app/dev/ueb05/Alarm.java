@@ -1,7 +1,6 @@
 package mobile.app.dev.ueb05;
 
 import android.annotation.SuppressLint;
-import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +12,7 @@ public class Alarm extends BroadcastReceiver {
 	
 	public static final String BC_ACTION = "MAD_BROADCAST";
 	
+	@SuppressWarnings("deprecation")
 	@SuppressLint("Wakelock")
 	@Override
 	public void onReceive(Context context, Intent intent) {
