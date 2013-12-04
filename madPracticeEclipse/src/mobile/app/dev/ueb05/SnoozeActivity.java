@@ -17,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 
 public class SnoozeActivity extends Activity {
 
@@ -27,9 +28,14 @@ public class SnoozeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_snooze);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+	            + WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+	            + WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+	            + WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 		player = MediaPlayer.create(this, R.raw.pippilangstrompessang);
 		player.setLooping(true);
 		player.start();
+		
 	}
 
 	public void snooze(View view) {
