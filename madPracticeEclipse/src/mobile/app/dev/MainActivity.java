@@ -5,6 +5,7 @@ import mobile.app.dev.ueb02.CalculatorExtended;
 import mobile.app.dev.ueb03.TodoListActivity;
 import mobile.app.dev.ueb04.DownloadActivity;
 import mobile.app.dev.ueb05.AlarmActivity;
+import mobile.app.dev.ueb06.TodoListDBActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,6 +42,12 @@ public class MainActivity extends Activity {
     
     public void uebung5(View v){
     	Intent intent = new Intent(this, AlarmActivity.class);
+    	startActivity(intent);
+    }
+    
+
+    public void uebung6(View v){
+    	Intent intent = new Intent(this, TodoListDBActivity.class);
     	startActivity(intent);
     }
 

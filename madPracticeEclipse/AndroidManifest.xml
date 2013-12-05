@@ -10,9 +10,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />	
-    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
-    
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -79,11 +79,19 @@
             android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
 
-        <receiver            
+        <receiver
             android:name="mobile.app.dev.ueb05.Alarm"
             android:enabled="true" >
         </receiver>
 
+        <activity
+            android:name="mobile.app.dev.ueb06.TodoDBActivity"
+            android:label="@string/title_activity_todo" >
+        </activity>
+        <activity
+            android:name="mobile.app.dev.ueb06.TodoListDBActivity"
+            android:label="@string/title_activity_todo_list_db" >
+        </activity>
     </application>
 
 </manifest>

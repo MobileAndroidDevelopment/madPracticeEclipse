@@ -35,6 +35,7 @@
     <string name="UEBUNG_3">Übung 3</string>
     <string name="UEBUNG_4">Übung 4</string>
     <string name="UEBUNG_5">Übung 5</string>
+    <string name="UEBUNG_6">Übung 6</string>
     <string name="title_activity_todo_list">TodoListActivity</string>
     <string name="title_activity_todo_detail">TodoDetailActivity</string>
     <string name="title_activity_todo_settings">Einstellungen</string>

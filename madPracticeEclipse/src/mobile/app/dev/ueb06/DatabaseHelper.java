@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
-import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
@@ -24,8 +23,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 
 	// the DAO object we use to access the Todo table
-	private Dao<Todo, Integer> simpleDao = null;
-	private RuntimeExceptionDao<Todo, Integer> simpleRuntimeDao = null;
+	private RuntimeExceptionDao<Todo, Integer> todoDao = null;
+	private RuntimeExceptionDao<Priority, Integer> priorityDao = null;
 
 	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -40,20 +39,21 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		try {
 			Log.i(DatabaseHelper.class.getName(), "onCreate");
 			TableUtils.createTable(connectionSource, Todo.class);
+			TableUtils.createTable(connectionSource, Priority.class);
 		} catch (SQLException e) {
 			Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
 			throw new RuntimeException(e);
 		}
 
 		// here we try inserting data in the on-create as a test
-		RuntimeExceptionDao<Todo, Integer> dao = getTodoDao();
-		long millis = System.currentTimeMillis();
-		// create some entries in the onCreate
-		Todo simple = new Todo();
-		dao.create(simple);
-		simple = new Todo();
-		dao.create(simple);
-		Log.i(DatabaseHelper.class.getName(), "created new entries in onCreate: " + millis);
+		//		RuntimeExceptionDao<Todo, Integer> dao = getTodoDao();
+		//		long millis = System.currentTimeMillis();
+		//		// create some entries in the onCreate
+		//		Todo simple = new Todo();
+		//		dao.create(simple);
+		//		simple = new Todo();
+		//		dao.create(simple);
+		//		Log.i(DatabaseHelper.class.getName(), "created new entries in onCreate: " + millis);
 	}
 
 	/**
@@ -74,25 +74,25 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	}
 
 	/**
-	 * Returns the Database Access Object (DAO) for our Todo class. It will create it or just give the cached
-	 * value.
+	 * Returns the RuntimeExceptionDao (Database Access Object) version of a Dao for our Todo class. It will
+	 * create it or just give the cached value. RuntimeExceptionDao only through RuntimeExceptions.
 	 */
-	public Dao<Todo, Integer> getDao() throws SQLException {
-		if (simpleDao == null) {
-			simpleDao = getDao(Todo.class);
+	public RuntimeExceptionDao<Todo, Integer> getTodoDao() {
+		if (todoDao == null) {
+			todoDao = getRuntimeExceptionDao(Todo.class);
 		}
-		return simpleDao;
+		return todoDao;
 	}
 
 	/**
 	 * Returns the RuntimeExceptionDao (Database Access Object) version of a Dao for our Todo class. It will
 	 * create it or just give the cached value. RuntimeExceptionDao only through RuntimeExceptions.
 	 */
-	public RuntimeExceptionDao<Todo, Integer> getTodoDao() {
-		if (simpleRuntimeDao == null) {
-			simpleRuntimeDao = getRuntimeExceptionDao(Todo.class);
+	public RuntimeExceptionDao<Priority, Integer> getPriorityDao() {
+		if (priorityDao == null) {
+			priorityDao = getRuntimeExceptionDao(Priority.class);
 		}
-		return simpleRuntimeDao;
+		return priorityDao;
 	}
 
 	/**
@@ -101,6 +101,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	@Override
 	public void close() {
 		super.close();
-		simpleRuntimeDao = null;
+		todoDao = null;
+		priorityDao = null;
 	}
 }

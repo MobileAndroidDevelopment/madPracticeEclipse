@@ -48,5 +48,14 @@
         android:layout_below="@id/button_uebung4"
         android:onClick="uebung5"
         android:text="@string/UEBUNG_5" />
+    
+    
+    <Button
+        android:id="@+id/button_uebung6"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@id/button_uebung5"
+        android:onClick="uebung6"
+        android:text="@string/UEBUNG_6" />
 
 </RelativeLayout>

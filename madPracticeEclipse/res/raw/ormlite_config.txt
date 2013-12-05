@@ -1,0 +1,37 @@
+#
+# generated on 2013/12/06 12:18:49
+#
+# --table-start--
+dataClass=mobile.app.dev.ueb06.Priority
+tableName=priority
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=name
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=mobile.app.dev.ueb06.Todo
+tableName=todo
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=date
+# --field-end--
+# --field-start--
+fieldName=title
+# --field-end--
+# --field-start--
+fieldName=description
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
