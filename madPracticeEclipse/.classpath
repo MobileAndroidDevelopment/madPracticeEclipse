@@ -4,6 +4,8 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="libs/exp4j-0.3.10.jar"/>
+	<classpathentry kind="lib" path="libs/ormlite-android-4.47.jar" sourcepath="libs/sources/ormlite-android-4.47-sources.jar"/>
+	<classpathentry kind="lib" path="libs/ormlite-core-4.47.jar" sourcepath="libs/sources/ormlite-core-4.47-sources.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="output" path="bin/classes"/>
