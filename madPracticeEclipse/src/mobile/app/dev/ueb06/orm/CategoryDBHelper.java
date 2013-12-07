@@ -9,9 +9,9 @@ import android.util.Log;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
-public class CategoryDBHelper extends AbstractDBHelper {
+public class CategoryDBHelper extends AbstractDBHelper<Category> {
 	
-	public List<Category> getAllCategories(Context context) throws SQLException {
+	public List<Category> getAll(Context context) throws SQLException {
 		Log.i(Category.class.getName(), "Show list again");
 		RuntimeExceptionDao<Category, Integer> dao = getHelper(context).getCategoryDao();
 		QueryBuilder<Category, Integer> builder = dao.queryBuilder();

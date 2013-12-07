@@ -9,9 +9,9 @@ import android.util.Log;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
-public class TodoDBHelper extends AbstractDBHelper {
+public class TodoDBHelper extends AbstractDBHelper<Todo> {
 
-	public List<Todo> getAllTodos(Context context) throws SQLException {
+	public List<Todo> getAll(Context context) throws SQLException {
 		Log.d(Todo.class.getName(), "Todos laden");
 		RuntimeExceptionDao<Todo, Integer> dao = getHelper(context).getTodoDao();
 		QueryBuilder<Todo, Integer> builder = dao.queryBuilder();

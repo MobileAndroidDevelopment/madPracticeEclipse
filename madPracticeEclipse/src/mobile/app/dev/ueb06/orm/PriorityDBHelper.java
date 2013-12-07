@@ -9,9 +9,9 @@ import android.util.Log;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
-public class PriorityDBHelper extends AbstractDBHelper {
+public class PriorityDBHelper extends AbstractDBHelper<Priority> {
 
-	public List<Priority> getAllPriorites(Context context) throws SQLException {
+	public List<Priority> getAll(Context context) throws SQLException {
 		Log.i(Priority.class.getName(), "Show list again");
 		RuntimeExceptionDao<Priority, Integer> dao = getHelper(context).getPriorityDao();
 		QueryBuilder<Priority, Integer> builder = dao.queryBuilder();

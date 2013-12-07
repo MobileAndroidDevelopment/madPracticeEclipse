@@ -1,5 +1,9 @@
 package mobile.app.dev.ueb06.orm;
 
+import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.List;
+
 import android.content.Context;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
@@ -7,7 +11,7 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 /**
  * Hilft bei Standardfunktionen, um in den Activities nicht immer das volle Prozedere mit dem DatabaseHelper durchzufuehren
  */
-public abstract class AbstractDBHelper {
+public abstract class AbstractDBHelper<T extends Serializable> {
 
 	private DatabaseHelper databaseHelper = null;
 
@@ -24,4 +28,10 @@ public abstract class AbstractDBHelper {
 			databaseHelper = null;
 		}
 	}
+
+	public abstract List<T> getAll(Context context) throws SQLException;
+
+	public abstract void createOrUpdate(Context context, T t);
+
+	public abstract void delete(Context context, T t);
 }

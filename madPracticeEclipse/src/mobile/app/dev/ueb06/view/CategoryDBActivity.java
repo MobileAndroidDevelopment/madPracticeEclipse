@@ -3,8 +3,6 @@ package mobile.app.dev.ueb06.view;
 import mobile.app.dev.R;
 import mobile.app.dev.ueb06.orm.Category;
 import mobile.app.dev.ueb06.orm.CategoryDBHelper;
-import mobile.app.dev.ueb06.orm.Priority;
-import mobile.app.dev.ueb06.orm.PriorityDBHelper;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,15 +14,15 @@ public class CategoryDBActivity extends Activity {
 
 	private Category category;
 	private CategoryDBHelper helper = null;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_category_db);		
+		setContentView(R.layout.activity_category_db);
 		helper = new CategoryDBHelper();
 
-		if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(CategoryListActivity.CATEGORY)) {
-			category = (Category) getIntent().getExtras().get(CategoryListActivity.CATEGORY);
+		if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(CategoryListActivity.CATEGORY_KEY)) {
+			category = (Category) getIntent().getExtras().get(CategoryListActivity.CATEGORY_KEY);
 			((EditText) findViewById(R.id.category_name)).setText(category.getName());
 		}
 	}

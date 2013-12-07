@@ -19,7 +19,7 @@ import android.widget.ListView;
 public class TodoListActivity extends ListActivity {
 
 	public static final String TODO_KEY = "TODO";
-	private TodoDBHelper dbHelper;
+	private TodoDBHelper todoDBHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +31,8 @@ public class TodoListActivity extends ListActivity {
 	protected void onResume() {
 		super.onResume();
 		try {
-			dbHelper = new TodoDBHelper();
-			List<Todo> list = dbHelper.getAllTodos(this);
+			todoDBHelper = new TodoDBHelper();
+			List<Todo> list = todoDBHelper.getAll(this);
 			ArrayAdapter<Todo> adapter = new ArrayAdapter<Todo>(this, android.R.layout.simple_list_item_1, list);
 			setListAdapter(adapter);
 		} catch (SQLException e) {

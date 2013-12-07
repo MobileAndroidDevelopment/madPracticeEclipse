@@ -19,7 +19,7 @@ import android.widget.ListView;
 public class PriorityListActivity extends ListActivity {
 
 	public static final String PRIORITY = "PRIORITY";
-	private PriorityDBHelper dbHelper = null;
+	private PriorityDBHelper priorityDBHelper = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +31,8 @@ public class PriorityListActivity extends ListActivity {
 	protected void onResume() {
 		super.onResume();
 		try {
-			dbHelper = new PriorityDBHelper();
-			List<Priority> list = dbHelper.getAllPriorites(this);
+			priorityDBHelper = new PriorityDBHelper();
+			List<Priority> list = priorityDBHelper.getAll(this);
 			ArrayAdapter<Priority> adapter = new ArrayAdapter<Priority>(this, android.R.layout.simple_list_item_1, list);
 			setListAdapter(adapter);
 		} catch (SQLException e) {
@@ -60,7 +60,7 @@ public class PriorityListActivity extends ListActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		dbHelper.close();
+		priorityDBHelper.close();
 	}
 
 	@Override
