@@ -1,10 +1,12 @@
 package mobile.app.dev.ueb06.orm;
 
+import java.io.Serializable;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable
-public class Category {
+public class Category implements Serializable{
 
 	@DatabaseField(generatedId = true)
 	private int id;
@@ -12,7 +14,7 @@ public class Category {
 	private String name;
 
 	/** leerer Konstruktor, wichtig fuer ORM */
-	private Category() {
+	public Category() {
 	}
 
 	public int getId() {

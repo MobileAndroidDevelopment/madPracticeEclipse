@@ -19,4 +19,14 @@ public class CategoryDBHelper extends AbstractDBHelper {
 		Log.d("CategoryDBHelper", "Liste geladen, Anzahl Elemente: " + list.size());
 		return list;
 	}
+	
+	public void createOrUpdate(Context context, Category category) {
+		RuntimeExceptionDao<Category, Integer> dao = getHelper(context).getCategoryDao();
+		dao.createOrUpdate(category);
+	}
+
+	public void delete(Context context, Category category) {
+		RuntimeExceptionDao<Category, Integer> dao = getHelper(context).getCategoryDao();
+		dao.delete(category);
+	}
 }

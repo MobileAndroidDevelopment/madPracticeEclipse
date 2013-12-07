@@ -12,13 +12,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class CategoryListActivity extends ListActivity {
 	
-	private static final String CATEGORY = "CATEGORY";
+	static final String CATEGORY = "CATEGORY";
 	private CategoryDBHelper helper = null;
 	
 	@Override
@@ -27,6 +28,14 @@ public class CategoryListActivity extends ListActivity {
 		setContentView(R.layout.activity_category_list);
 		
 		helper = new CategoryDBHelper();
+		
+	}
+	
+	
+	
+	@Override
+	protected void onResume() {		
+		super.onResume();
 		try {
 			List<Category> list = helper.getAllCategories(this);
 			ArrayAdapter<Category> adapter = new ArrayAdapter<Category>(this, android.R.layout.simple_list_item_1, list);
@@ -35,7 +44,7 @@ public class CategoryListActivity extends ListActivity {
 			Log.e("CAT_ACTIVITY", "Fehler beim SQL ausfuehren", e);
 		}
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -43,6 +52,17 @@ public class CategoryListActivity extends ListActivity {
 		return true;
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.new_category: {
+				Intent intent = new Intent(this, CategoryDBActivity.class);
+				startActivity(intent);
+			}
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -52,8 +72,8 @@ public class CategoryListActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView listView, View view, int position, long id) {
 		Intent intent = new Intent(this, CategoryDBActivity.class);
-		Log.d("ON_CLICK_PRIORITY", "Position: " + position);
-		intent.putExtra(CATEGORY, (Priority) listView.getItemAtPosition(position));
+		Log.d("ON_CLICK_CATEGORY", "Position: " + position);
+		intent.putExtra(CATEGORY, (Category) listView.getItemAtPosition(position));
 		startActivity(intent);
 	}
 	
