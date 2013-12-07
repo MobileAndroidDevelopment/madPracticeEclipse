@@ -4,8 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import mobile.app.dev.R;
-import mobile.app.dev.ueb06.orm.Priority;
-import mobile.app.dev.ueb06.orm.PriorityDBHelper;
+import mobile.app.dev.ueb06.orm.Todo;
+import mobile.app.dev.ueb06.orm.TodoDBHelper;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,24 +16,24 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class PriorityListActivity extends ListActivity {
+public class TodoListActivity extends ListActivity {
 
-	public static final String PRIORITY = "PRIORITY";
-	private PriorityDBHelper dbHelper = null;
+	public static final String TODO_KEY = "TODO";
+	private TodoDBHelper dbHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_priority_list);
+		setContentView(R.layout.activity_todo_list_db);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		try {
-			dbHelper = new PriorityDBHelper();
-			List<Priority> list = dbHelper.getAllPriorites(this);
-			ArrayAdapter<Priority> adapter = new ArrayAdapter<Priority>(this, android.R.layout.simple_list_item_1, list);
+			dbHelper = new TodoDBHelper();
+			List<Todo> list = dbHelper.getAllTodos(this);
+			ArrayAdapter<Todo> adapter = new ArrayAdapter<Todo>(this, android.R.layout.simple_list_item_1, list);
 			setListAdapter(adapter);
 		} catch (SQLException e) {
 			Log.e("PRIO_ACTIVITY", "Fehler beim SQL ausfuehren", e);
@@ -41,16 +41,18 @@ public class PriorityListActivity extends ListActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.priority_list, menu);
-		return true;
-	}
-
-	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.new_priority: {
-				Intent intent = new Intent(this, PriorityDBActivity.class);
+			case R.id.new_todo: {
+				Intent intent = new Intent(this, TodoDBActivity.class);
+				startActivity(intent);
+			}
+			case R.id.priority_administration: {
+				Intent intent = new Intent(this, PriorityListActivity.class);
+				startActivity(intent);
+			}
+			case R.id.category_administration: {
+				Intent intent = new Intent(this, CategoryListActivity.class);
 				startActivity(intent);
 			}
 		}
@@ -58,16 +60,17 @@ public class PriorityListActivity extends ListActivity {
 	}
 
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		dbHelper.close();
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.todo_list_db, menu);
+		return true;
 	}
 
 	@Override
 	protected void onListItemClick(ListView listView, View view, int position, long id) {
-		Intent intent = new Intent(this, PriorityDBActivity.class);
+		Intent intent = new Intent(this, TodoDBActivity.class);
 		Log.d("ON_CLICK_PRIORITY", "Position: " + position);
-		intent.putExtra(PRIORITY, (Priority) listView.getItemAtPosition(position));
+		intent.putExtra(TODO_KEY, (Todo) listView.getItemAtPosition(position));
 		startActivity(intent);
 	}
+
 }

@@ -6,4 +6,8 @@
     <string name="title_activity_priority_db">PriorityDBActivity</string>
     <string name="title_activity_category_list">CategoryListActivity</string>
     <string name="title_activity_category_db">CategoryDBActivity</string>
+    <string name="newPriority">Neue Priorität</string>
+    <string name="new_todo">Neues Todo</string>
+    <string name="admin_priorites">Prioritäten verwalten</string>
+    <string name="admin_categories">Kategorien verwalten</string>
 </resources>

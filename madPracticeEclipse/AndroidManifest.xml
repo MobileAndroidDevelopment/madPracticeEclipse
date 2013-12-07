@@ -90,7 +90,7 @@
             android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
         <activity
-            android:name="mobile.app.dev.ueb06.view.TodoListDBActivity"
+            android:name="mobile.app.dev.ueb06.view.TodoListActivity"
             android:label="@string/title_activity_todo_list_db"
             android:theme="@android:style/Theme.Holo" >
         </activity>

@@ -1,10 +1,12 @@
 package mobile.app.dev.ueb06.orm;
 
+import java.io.Serializable;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable
-public class Todo {
+public class Todo implements Serializable {
 
 	@DatabaseField(generatedId = true)
 	private int id;
@@ -14,9 +16,9 @@ public class Todo {
 	private String title;
 	@DatabaseField
 	private String description;
-	@DatabaseField(canBeNull = false, foreign=true, foreignAutoRefresh = true)
+	@DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true)
 	private Category category;
-	@DatabaseField(canBeNull = false, foreign=true, foreignAutoRefresh = true)
+	@DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true)
 	private Priority priority;
 
 	public int getId() {
@@ -69,7 +71,7 @@ public class Todo {
 
 	@Override
 	public String toString() {
-		return "Todo [id=" + id + ", date=" + date + ", title=" + title + ", description=" + description + "]";
+		return title;
 	}
 
 }
