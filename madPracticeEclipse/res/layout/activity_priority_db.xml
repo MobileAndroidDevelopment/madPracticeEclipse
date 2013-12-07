@@ -37,7 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
-            android:onClick="saveClicked"
+            android:onClick="save"
             android:text="@string/saveButtonText"
             android:textSize="20sp" />
 
@@ -46,7 +46,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
-            android:onClick="deleteClicked"
+            android:onClick="delete"
             android:text="@string/deleteButtonText"
             android:textSize="20sp" />
     </LinearLayout>

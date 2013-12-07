@@ -11,22 +11,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class PriorityListActivity extends ListActivity {
 
-	private static final String ENTRY = "ENTRY";
+	public static final String PRIORITY = "PRIORITY";
 	private PriorityDBHelper helper = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_priority_list);
+	}
 
-		helper = new PriorityDBHelper();
+	@Override
+	protected void onResume() {
+		super.onResume();
 		try {
+			helper = new PriorityDBHelper();
 			List<Priority> list = helper.getAllPriorites(this);
 			ArrayAdapter<Priority> adapter = new ArrayAdapter<Priority>(this, android.R.layout.simple_list_item_1, list);
 			setListAdapter(adapter);
@@ -42,6 +47,17 @@ public class PriorityListActivity extends ListActivity {
 	}
 
 	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.new_priority: {
+				Intent intent = new Intent(this, PriorityDBActivity.class);
+				startActivity(intent);
+			}
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		helper.close();
@@ -50,8 +66,8 @@ public class PriorityListActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView listView, View view, int position, long id) {
 		Intent intent = new Intent(this, PriorityDBActivity.class);
-		Log.d("ON_CLOCK", "Position: " + position);
-		intent.putExtra(ENTRY, (Priority) listView.getItemAtPosition(position));
+		Log.d("ON_CLICK_PRIORITY", "Position: " + position);
+		intent.putExtra(PRIORITY, (Priority) listView.getItemAtPosition(position));
 		startActivity(intent);
 	}
 }

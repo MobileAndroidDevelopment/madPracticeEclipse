@@ -86,27 +86,33 @@
 
         <activity
             android:name="mobile.app.dev.ueb06.view.TodoDBActivity"
-            android:label="@string/title_activity_todo" >
+            android:label="@string/title_activity_todo"
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
         <activity
             android:name="mobile.app.dev.ueb06.view.TodoListDBActivity"
-            android:label="@string/title_activity_todo_list_db" >
+            android:label="@string/title_activity_todo_list_db"
+            android:theme="@android:style/Theme.Holo" >
         </activity>
         <activity
             android:name="mobile.app.dev.ueb06.view.PriorityListActivity"
-            android:label="@string/title_activity_priority_list" >
+            android:label="@string/title_activity_priority_list"
+            android:theme="@android:style/Theme.Holo" >
         </activity>
         <activity
             android:name="mobile.app.dev.ueb06.view.PriorityDBActivity"
-            android:label="@string/title_activity_priority_db" >
+            android:label="@string/title_activity_priority_db"
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
         <activity
             android:name="mobile.app.dev.ueb06.view.CategoryListActivity"
-            android:label="@string/title_activity_category_list" >
+            android:label="@string/title_activity_category_list"
+            android:theme="@android:style/Theme.Holo" >
         </activity>
         <activity
-            android:name="mobile.app.dev.ueb06.view.CategoryDBActivityyDBActivity"
-            android:label="@string/title_activity_category_db" >
+            android:name="mobile.app.dev.ueb06.view.CategoryDBActivity"
+            android:label="@string/title_activity_category_db"
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
     </application>
 

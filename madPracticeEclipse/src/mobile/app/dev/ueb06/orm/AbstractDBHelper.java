@@ -9,7 +9,7 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
  */
 public abstract class AbstractDBHelper {
 
-	protected DatabaseHelper databaseHelper = null;
+	private DatabaseHelper databaseHelper = null;
 
 	public DatabaseHelper getHelper(Context context) {
 		if (databaseHelper == null) {
