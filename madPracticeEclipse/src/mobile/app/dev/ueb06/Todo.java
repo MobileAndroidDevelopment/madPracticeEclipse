@@ -14,6 +14,10 @@ public class Todo {
 	private String title;
 	@DatabaseField
 	private String description;
+	@DatabaseField(canBeNull = false, foreign=true, foreignAutoRefresh = true)
+	private Category category;
+	@DatabaseField(canBeNull = false, foreign=true, foreignAutoRefresh = true)
+	private Priority priority;
 
 	public int getId() {
 		return id;
@@ -45,6 +49,22 @@ public class Todo {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public Priority getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Priority priority) {
+		this.priority = priority;
 	}
 
 	@Override
