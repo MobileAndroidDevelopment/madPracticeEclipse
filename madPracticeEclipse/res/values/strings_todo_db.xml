@@ -10,4 +10,8 @@
     <string name="new_todo">Neues Todo</string>
     <string name="admin_priorites">Prioritäten verwalten</string>
     <string name="admin_categories">Kategorien verwalten</string>
+    <string name="title">Titel</string>
+    <string name="description">Beschreibung</string>
+    <string name="priority">Priorität</string>
+    <string name="category">Kategorie</string>
 </resources>

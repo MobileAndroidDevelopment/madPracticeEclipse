@@ -9,8 +9,99 @@
     tools:context=".TodoDBActivity" >
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/todoTitleLabel"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:paddingTop="10dp"
+        android:text="@string/title"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/todoTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/todoTitleLabel"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/todoDescriptionLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/todoTitle"
+        android:paddingTop="10dp"
+        android:text="@string/description"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/todoDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/todoDescriptionLabel"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:lines="6" />
+
+    <TextView
+        android:id="@+id/todoPriorityLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/todoDescription"
+        android:paddingTop="10dp"
+        android:text="@string/priority"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/spinnerPriority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/todoPriorityLabel"
+        android:spinnerMode="dialog" />
+
+    <TextView
+        android:id="@+id/todoCategoryLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/todoDescription"
+        android:paddingTop="10dp"
+        android:text="@string/category"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/spinnerCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/todoCategoryLabel"
+        android:spinnerMode="dialog" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:weightSum="1" >
+
+        <Button
+            android:id="@+id/saveTodoButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:onClick="save"
+            android:text="@string/saveButtonText"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/deleteTodoBUtton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:onClick="delete"
+            android:text="@string/deleteButtonText"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 </RelativeLayout>

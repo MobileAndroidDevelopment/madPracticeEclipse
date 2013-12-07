@@ -12,7 +12,7 @@ public class Category {
 	private String name;
 
 	/** leerer Konstruktor, wichtig fuer ORM */
-	private Category() {
+	public Category() {
 	}
 
 	public int getId() {
