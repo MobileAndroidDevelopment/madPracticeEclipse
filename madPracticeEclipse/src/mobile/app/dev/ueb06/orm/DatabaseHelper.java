@@ -17,6 +17,11 @@ import com.j256.ormlite.table.TableUtils;
  */
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
+	private static final String HAUSHALT = "Haushalt";
+	private static final String HIGH = "hoch";
+	private static final String MEDIUM = "mittel";
+	private static final String LOW = "niedrig";
+	private static final String UNI = "Uni";
 	// name of the database file for your application -- change to something appropriate for your app
 	private static final String DATABASE_NAME = "todo.db";
 	// any time you make changes to your database objects, you may have to increase the database version
@@ -54,19 +59,23 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	private void createCategories() {
 		RuntimeExceptionDao<Category, Integer> dao = getCategoryDao();
 		Category uniCategory = new Category();
-		uniCategory.setName("Uni");
+		uniCategory.setName(UNI);
 		dao.create(uniCategory);
+
+		Category homeCategory = new Category();
+		homeCategory.setName(HAUSHALT);
+		dao.create(homeCategory);
 	}
 
 	private void createPriorites() {
 		RuntimeExceptionDao<Priority, Integer> dao = getPriorityDao();
-		Priority lowPrio = new Priority("niedrig");
+		Priority lowPrio = new Priority(LOW);
 		dao.create(lowPrio);
 
-		Priority mediumPrio = new Priority("mittel");
+		Priority mediumPrio = new Priority(MEDIUM);
 		dao.create(mediumPrio);
 
-		Priority highPrio = new Priority("hoch");
+		Priority highPrio = new Priority(HIGH);
 		dao.create(highPrio);
 	}
 
