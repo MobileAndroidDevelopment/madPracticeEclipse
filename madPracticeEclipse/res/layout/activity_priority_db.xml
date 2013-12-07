@@ -9,8 +9,19 @@
     tools:context=".PriorityDBActivity" >
 
     <TextView
+        android:id="@+id/priority_name_label"
+        android:paddingTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="Name" 
+        android:labelFor="@id/priority_name"/>
+
+    <EditText
+        android:id="@+id/priority_name"
+        android:layout_below="@id/priority_name_label"
+        android:layout_width="match_parent"
+        android:singleLine="true"
+        android:layout_height="wrap_content"
+        android:inputType="text" />
 
 </RelativeLayout>

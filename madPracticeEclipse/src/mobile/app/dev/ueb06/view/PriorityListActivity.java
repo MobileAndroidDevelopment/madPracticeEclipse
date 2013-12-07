@@ -7,13 +7,17 @@ import mobile.app.dev.R;
 import mobile.app.dev.ueb06.orm.Priority;
 import mobile.app.dev.ueb06.orm.PriorityDBHelper;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class PriorityListActivity extends ListActivity {
 
+	private static final String ENTRY = "ENTRY";
 	private PriorityDBHelper helper = null;
 
 	@Override
@@ -41,5 +45,13 @@ public class PriorityListActivity extends ListActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		helper.close();
+	}
+
+	@Override
+	protected void onListItemClick(ListView listView, View view, int position, long id) {
+		Intent intent = new Intent(this, PriorityDBActivity.class);
+		Log.d("ON_CLOCK", "Position: " + position);
+		intent.putExtra(ENTRY, (Priority) listView.getItemAtPosition(position));
+		startActivity(intent);
 	}
 }

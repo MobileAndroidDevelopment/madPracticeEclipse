@@ -1,10 +1,12 @@
 package mobile.app.dev.ueb06.orm;
 
+import java.io.Serializable;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable
-public class Priority {
+public class Priority implements Serializable {
 
 	@DatabaseField(generatedId = true)
 	private int id;
@@ -13,7 +15,7 @@ public class Priority {
 
 	public Priority() {
 	}
-	
+
 	public Priority(String name) {
 		this.name = name;
 	}
