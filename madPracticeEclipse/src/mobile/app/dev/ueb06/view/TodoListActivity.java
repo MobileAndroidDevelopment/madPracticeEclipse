@@ -46,14 +46,17 @@ public class TodoListActivity extends ListActivity {
 			case R.id.new_todo: {
 				Intent intent = new Intent(this, TodoDBActivity.class);
 				startActivity(intent);
+				break;
 			}
 			case R.id.priority_administration: {
 				Intent intent = new Intent(this, PriorityListActivity.class);
 				startActivity(intent);
+				break;
 			}
 			case R.id.category_administration: {
 				Intent intent = new Intent(this, CategoryListActivity.class);
 				startActivity(intent);
+				break;
 			}
 		}
 		return super.onOptionsItemSelected(item);
