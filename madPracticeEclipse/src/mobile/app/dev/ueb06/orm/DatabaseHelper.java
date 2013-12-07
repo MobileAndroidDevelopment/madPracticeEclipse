@@ -20,13 +20,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	// name of the database file for your application -- change to something appropriate for your app
 	private static final String DATABASE_NAME = "todo.db";
 	// any time you make changes to your database objects, you may have to increase the database version
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 
 	// the DAO object we use to access the Todo table
 	private RuntimeExceptionDao<Todo, Integer> todoDao = null;
 	private RuntimeExceptionDao<Priority, Integer> priorityDao = null;
 	private RuntimeExceptionDao<Category, Integer> categoryDao = null;
-
 
 	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -48,25 +47,27 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			throw new RuntimeException(e);
 		}
 
+		createPriorites();
+		createCategories();
+	}
+
+	private void createCategories() {
+		RuntimeExceptionDao<Category, Integer> dao = getCategoryDao();
+		Category uniCategory = new Category();
+		uniCategory.setName("Uni");
+		dao.create(uniCategory);
+	}
+
+	private void createPriorites() {
 		RuntimeExceptionDao<Priority, Integer> dao = getPriorityDao();
 		Priority lowPrio = new Priority("niedrig");
 		dao.create(lowPrio);
-		
+
 		Priority mediumPrio = new Priority("mittel");
 		dao.create(mediumPrio);
-		
+
 		Priority highPrio = new Priority("hoch");
 		dao.create(highPrio);
-		
-		// here we try inserting data in the on-create as a test
-		//		RuntimeExceptionDao<Todo, Integer> dao = getTodoDao();
-		//		long millis = System.currentTimeMillis();
-		//		// create some entries in the onCreate
-		//		Todo simple = new Todo();
-		//		dao.create(simple);
-		//		simple = new Todo();
-		//		dao.create(simple);
-		//		Log.i(DatabaseHelper.class.getName(), "created new entries in onCreate: " + millis);
 	}
 
 	/**
@@ -78,6 +79,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		try {
 			Log.i(DatabaseHelper.class.getName(), "onUpgrade");
 			TableUtils.dropTable(connectionSource, Todo.class, true);
+			TableUtils.dropTable(connectionSource, Priority.class, true);
+			TableUtils.dropTable(connectionSource, Category.class, true);
 			// after we drop the old databases, we create the new ones
 			onCreate(db, connectionSource);
 		} catch (SQLException e) {
@@ -114,7 +117,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		}
 		return categoryDao;
 	}
-	
+
 	/**
 	 * Close the database connections and clear any cached DAOs.
 	 */
@@ -125,5 +128,4 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		priorityDao = null;
 	}
 
-	
 }
