@@ -25,6 +25,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	// the DAO object we use to access the Todo table
 	private RuntimeExceptionDao<Todo, Integer> todoDao = null;
 	private RuntimeExceptionDao<Priority, Integer> priorityDao = null;
+	private RuntimeExceptionDao<Category, Integer> categoryDao = null;
+
 
 	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -106,6 +108,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		return priorityDao;
 	}
 
+	public RuntimeExceptionDao<Category, Integer> getCategoryDao() {
+		if (categoryDao == null) {
+			categoryDao = getRuntimeExceptionDao(Category.class);
+		}
+		return categoryDao;
+	}
+	
 	/**
 	 * Close the database connections and clear any cached DAOs.
 	 */
@@ -115,4 +124,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		todoDao = null;
 		priorityDao = null;
 	}
+
+	
 }

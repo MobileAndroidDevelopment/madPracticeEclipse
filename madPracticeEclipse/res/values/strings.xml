@@ -71,5 +71,6 @@
     <string name="READ_WRITE_ERROR">Lesen oder Schreiben der Datei war nicht möglich!</string>
     <string name="UNKNOWN_ERROR">Es ist ein unbekannter Fehler aufgetreten</string>
     <string name="calculatorsettingsactivity">CalculatorSettingsActivity</string>
+    <string name="newCategory">Neue Kategorie</string>
 
 </resources>

@@ -1,16 +1,39 @@
 package mobile.app.dev.ueb06.view;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import mobile.app.dev.R;
-import android.app.Activity;
+import mobile.app.dev.ueb06.orm.Category;
+import mobile.app.dev.ueb06.orm.CategoryDBHelper;
+import mobile.app.dev.ueb06.orm.Priority;
+import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-public class CategoryListActivity extends Activity {
-
+public class CategoryListActivity extends ListActivity {
+	
+	private static final String CATEGORY = "CATEGORY";
+	private CategoryDBHelper helper = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_category_list);
+		
+		helper = new CategoryDBHelper();
+		try {
+			List<Category> list = helper.getAllCategories(this);
+			ArrayAdapter<Category> adapter = new ArrayAdapter<Category>(this, android.R.layout.simple_list_item_1, list);
+			setListAdapter(adapter);
+		} catch (SQLException e) {
+			Log.e("CAT_ACTIVITY", "Fehler beim SQL ausfuehren", e);
+		}
 	}
 
 	@Override
@@ -20,4 +43,18 @@ public class CategoryListActivity extends Activity {
 		return true;
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		helper.close();
+	}
+
+	@Override
+	protected void onListItemClick(ListView listView, View view, int position, long id) {
+		Intent intent = new Intent(this, CategoryDBActivity.class);
+		Log.d("ON_CLICK_PRIORITY", "Position: " + position);
+		intent.putExtra(CATEGORY, (Priority) listView.getItemAtPosition(position));
+		startActivity(intent);
+	}
+	
 }
