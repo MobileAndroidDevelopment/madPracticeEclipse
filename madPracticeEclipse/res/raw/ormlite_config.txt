@@ -1,8 +1,22 @@
 #
-# generated on 2013/12/06 12:18:49
+# generated on 2013/12/07 01:43:05
 #
 # --table-start--
-dataClass=mobile.app.dev.ueb06.Priority
+dataClass=mobile.app.dev.ueb06.orm.Category
+tableName=category
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=name
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=mobile.app.dev.ueb06.orm.Priority
 tableName=priority
 # --table-fields-start--
 # --field-start--
@@ -16,7 +30,7 @@ fieldName=name
 # --table-end--
 #################################
 # --table-start--
-dataClass=mobile.app.dev.ueb06.Todo
+dataClass=mobile.app.dev.ueb06.orm.Todo
 tableName=todo
 # --table-fields-start--
 # --field-start--
@@ -31,6 +45,18 @@ fieldName=title
 # --field-end--
 # --field-start--
 fieldName=description
+# --field-end--
+# --field-start--
+fieldName=category
+canBeNull=false
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=priority
+canBeNull=false
+foreign=true
+foreignAutoRefresh=true
 # --field-end--
 # --table-fields-end--
 # --table-end--

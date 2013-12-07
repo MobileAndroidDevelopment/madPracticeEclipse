@@ -10,37 +10,45 @@
 
     <TextView
         android:id="@+id/priority_name_label"
-        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="Name"
         android:textColor="@android:color/holo_blue_bright"
-        android:textSize="20sp"
-        android:text="Name" />
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/priority_name"
-        android:layout_below="@id/priority_name_label"
         android:layout_width="match_parent"
-        android:singleLine="true"
-        android:layout_height="wrap_content"  />
-    
-    
-	<Button 
-        android:id="@+id/buttonSave"
-		android:layout_weight=".5"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:onClick="saveClicked"
-        android:text="@string/saveButtonText"/>
-	
-	<Button 
-        android:id="@+id/buttonDelete"
-		android:layout_weight=".5"
-        android:layout_width="0dp"
+        android:layout_below="@id/priority_name_label"
+        android:singleLine="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:onClick="deleteClicked"
-        android:text="@string/deleteButtonText"/>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:weightSum="1" >
+
+        <Button
+            android:id="@+id/savePriorityButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:onClick="saveClicked"
+            android:text="@string/saveButtonText"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/deletePriorityButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:onClick="deleteClicked"
+            android:text="@string/deleteButtonText"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 </RelativeLayout>

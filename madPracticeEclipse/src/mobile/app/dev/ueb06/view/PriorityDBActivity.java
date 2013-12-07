@@ -4,6 +4,7 @@ import mobile.app.dev.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 
 public class PriorityDBActivity extends Activity {
 
@@ -15,9 +16,16 @@ public class PriorityDBActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.priority_db, menu);
 		return true;
+	}
+
+	public void save(View view) {
+		
+	}
+
+	public void delete(View view) {
+
 	}
 
 }
