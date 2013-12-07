@@ -85,12 +85,28 @@
         </receiver>
 
         <activity
-            android:name="mobile.app.dev.ueb06.TodoDBActivity"
+            android:name="mobile.app.dev.ueb06.view.TodoDBActivity"
             android:label="@string/title_activity_todo" >
         </activity>
         <activity
-            android:name="mobile.app.dev.ueb06.TodoListDBActivity"
+            android:name="mobile.app.dev.ueb06.view.TodoListDBActivity"
             android:label="@string/title_activity_todo_list_db" >
+        </activity>
+        <activity
+            android:name="mobile.app.dev.ueb06.view.PriorityListActivity"
+            android:label="@string/title_activity_priority_list" >
+        </activity>
+        <activity
+            android:name="mobile.app.dev.ueb06.view.PriorityDBActivity"
+            android:label="@string/title_activity_priority_db" >
+        </activity>
+        <activity
+            android:name="mobile.app.dev.ueb06.view.CategoryListActivity"
+            android:label="@string/title_activity_category_list" >
+        </activity>
+        <activity
+            android:name="mobile.app.dev.ueb06.view.CategoryDBActivityyDBActivity"
+            android:label="@string/title_activity_category_db" >
         </activity>
     </application>
 

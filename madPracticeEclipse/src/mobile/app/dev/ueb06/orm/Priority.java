@@ -1,4 +1,4 @@
-package mobile.app.dev.ueb06;
+package mobile.app.dev.ueb06.orm;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -10,6 +10,18 @@ public class Priority {
 	private int id;
 	@DatabaseField
 	private String name;
+
+	public Priority() {
+	}
+	
+	public Priority(String name) {
+		this.name = name;
+	}
+
+	public Priority(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
 
 	public int getId() {
 		return id;
@@ -29,7 +41,7 @@ public class Priority {
 
 	@Override
 	public String toString() {
-		return "Priority [id=" + id + ", name=" + name + "]";
+		return name + " (" + id + ")";
 	}
 
 }

@@ -1,4 +1,4 @@
-package mobile.app.dev.ueb06;
+package mobile.app.dev.ueb06.orm;
 
 import java.sql.SQLException;
 
@@ -46,6 +46,16 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			throw new RuntimeException(e);
 		}
 
+		RuntimeExceptionDao<Priority, Integer> dao = getPriorityDao();
+		Priority lowPrio = new Priority("niedrig");
+		dao.create(lowPrio);
+		
+		Priority mediumPrio = new Priority("mittel");
+		dao.create(mediumPrio);
+		
+		Priority highPrio = new Priority("hoch");
+		dao.create(highPrio);
+		
 		// here we try inserting data in the on-create as a test
 		//		RuntimeExceptionDao<Todo, Integer> dao = getTodoDao();
 		//		long millis = System.currentTimeMillis();

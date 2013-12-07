@@ -1,4 +1,4 @@
-package mobile.app.dev.ueb06;
+package mobile.app.dev.ueb06.orm;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;

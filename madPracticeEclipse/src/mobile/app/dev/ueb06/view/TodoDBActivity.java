@@ -1,6 +1,7 @@
-package mobile.app.dev.ueb06;
+package mobile.app.dev.ueb06.view;
 
 import mobile.app.dev.R;
+import mobile.app.dev.ueb06.orm.DatabaseHelper;
 import android.os.Bundle;
 import android.view.Menu;
 

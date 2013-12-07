@@ -1,4 +1,4 @@
-package mobile.app.dev.ueb06;
+package mobile.app.dev.ueb06.orm;
 
 import java.io.IOException;
 import java.sql.SQLException;
