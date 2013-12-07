@@ -11,17 +11,36 @@
     <TextView
         android:id="@+id/priority_name_label"
         android:paddingTop="10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name" 
-        android:labelFor="@id/priority_name"/>
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="20sp"
+        android:text="Name" />
 
     <EditText
         android:id="@+id/priority_name"
         android:layout_below="@id/priority_name_label"
         android:layout_width="match_parent"
         android:singleLine="true"
+        android:layout_height="wrap_content"  />
+    
+    
+	<Button 
+        android:id="@+id/buttonSave"
+		android:layout_weight=".5"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:inputType="text" />
+        android:textSize="20sp"
+        android:onClick="saveClicked"
+        android:text="@string/saveButtonText"/>
+	
+	<Button 
+        android:id="@+id/buttonDelete"
+		android:layout_weight=".5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:onClick="deleteClicked"
+        android:text="@string/deleteButtonText"/>
 
 </RelativeLayout>

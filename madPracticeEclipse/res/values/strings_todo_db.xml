@@ -2,4 +2,8 @@
 <resources>
     <string name="title_activity_todo">TodoActivity</string>
     <string name="title_activity_todo_list_db">TodoListDBActivity</string>
+    <string name="title_activity_priority_list">PriorityListActivity</string>
+    <string name="title_activity_priority_db">PriorityDBActivity</string>
+    <string name="title_activity_category_list">CategoryListActivity</string>
+    <string name="title_activity_category_db">CategoryDBActivity</string>
 </resources>
