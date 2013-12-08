@@ -35,7 +35,7 @@ public class Category implements Serializable {
 
 	@Override
 	public String toString() {
-		return name + " (" + id + ")";
+		return name;
 	}
 
 	@Override
