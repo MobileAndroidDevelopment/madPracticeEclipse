@@ -41,13 +41,31 @@
         android:layout_below="@id/todoDescriptionLabel"
         android:gravity="top"
         android:inputType="textMultiLine"
-        android:lines="6" />
+        android:lines="2" />
+
+    <TextView
+        android:id="@+id/todoDateLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/todoDescription"
+        android:paddingTop="10dp"
+        android:text="@string/todo_date"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/todoButtonSetDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/todoDateLabel"
+        android:onClick="showDatePickerDialog"
+        android:text="@string/pick_date" />
 
     <TextView
         android:id="@+id/todoPriorityLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/todoDescription"
+        android:layout_below="@id/todoButtonSetDate"
         android:paddingTop="10dp"
         android:text="@string/priority"
         android:textColor="@android:color/holo_blue_bright"
