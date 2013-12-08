@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class CategoryListActivity extends ListActivity {
 
@@ -38,6 +39,7 @@ public class CategoryListActivity extends ListActivity {
 			setListAdapter(adapter);
 		} catch (SQLException e) {
 			Log.e("CAT_ACTIVITY", "Fehler beim SQL ausfuehren", e);
+			Toast.makeText(this, R.string.not_able_to_show_categories, Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -71,5 +73,4 @@ public class CategoryListActivity extends ListActivity {
 		intent.putExtra(CATEGORY_KEY, (Category) listView.getItemAtPosition(position));
 		startActivity(intent);
 	}
-
 }

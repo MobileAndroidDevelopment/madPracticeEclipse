@@ -6,11 +6,11 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable
-public class Category implements Serializable{
+public class Category implements Serializable {
 
 	@DatabaseField(generatedId = true)
 	private int id;
-	@DatabaseField
+	@DatabaseField(unique = true)
 	private String name;
 
 	/** leerer Konstruktor, wichtig fuer ORM */
@@ -60,7 +60,5 @@ public class Category implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 
 }

@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/todoPriorityLabel"
-        android:spinnerMode="dialog" />
+        android:spinnerMode="dropdown" />
 
     <TextView
         android:id="@+id/todoCategoryLabel"
@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/todoCategoryLabel"
-        android:spinnerMode="dialog" />
+        android:spinnerMode="dropdown" />
 
     <LinearLayout
         android:layout_width="match_parent"

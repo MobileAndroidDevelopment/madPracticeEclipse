@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 
@@ -38,57 +39,71 @@ public class TodoDBActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		prioDBHelper = new PriorityDBHelper();
 		categoryDBHelper = new CategoryDBHelper();
 
-		try {
-			allPriorities = prioDBHelper.getAll(this);
-			ArrayAdapter<Priority> adapter = new ArrayAdapter<Priority>(this, android.R.layout.simple_spinner_item, allPriorities);
-			Spinner spinner = (Spinner) findViewById(R.id.spinnerPriority);
-			spinner.setAdapter(adapter);
-		} catch (SQLException e) {
-			// TODO Fehlerbehandlung Prioritaeten
-			e.printStackTrace();
-		}
+		loadPriorities();
+		loadCategories();
 
-		try {
-			allCategories = categoryDBHelper.getAll(this);
-			ArrayAdapter<Category> adapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, allCategories);
-			Spinner spinner = (Spinner) findViewById(R.id.spinnerCategory);
-			spinner.setAdapter(adapter);
-		} catch (SQLException e) {
-			// TODO Fehlerbehandlung Categories
-			e.printStackTrace();
-		}
+		ArrayAdapter<Priority> priorityAdapter = new ArrayAdapter<Priority>(this, android.R.layout.simple_spinner_item, allPriorities);
+		Spinner prioritySpinner = (Spinner) findViewById(R.id.spinnerPriority);
+		prioritySpinner.setAdapter(priorityAdapter);
+
+		ArrayAdapter<Category> categoryAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, allCategories);
+		Spinner categorySpinner = (Spinner) findViewById(R.id.spinnerCategory);
+		categorySpinner.setAdapter(categoryAdapter);
 
 		if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(TodoListActivity.TODO_KEY)) {
 			todo = (Todo) getIntent().getExtras().get(TodoListActivity.TODO_KEY);
 			((EditText) findViewById(R.id.todoTitle)).setText(todo.getTitle());
 			((EditText) findViewById(R.id.todoDescription)).setText(todo.getDescription());
-			int priorityPosition = getPriorityPosition(todo.getPriority());
+			int priorityPosition = getPositionInList(allPriorities, todo.getPriority());
 			((Spinner) findViewById(R.id.spinnerPriority)).setSelection(priorityPosition);
-			int categoryPosition = getCategoryPosition(todo.getCategory());
+			int categoryPosition = getPositionInList(allCategories, todo.getCategory());
 			((Spinner) findViewById(R.id.spinnerCategory)).setSelection(categoryPosition);
 		}
 	}
 
-	private int getPriorityPosition(Priority priority) {
-		int i = 0;
-		for (Priority nextPrio : allPriorities) {
-			if (nextPrio.equals(priority))
-				return i;
-			else
-				i++;
+	/**
+	 * Lädt die Prioritäten. Falls keine Prioritäten vorhanden sind, oder es zu Problemen beim Laden kam, muss die Activity beendet werden
+	 */
+	private void loadPriorities() {
+		try {
+			allPriorities = prioDBHelper.getAll(this);
+			if (allPriorities.size() == 0)
+				throw new SQLException("Keine Prioritäten da!");
+		} catch (SQLException e) {
+			Toast.makeText(this, "Fehler beim laden der Prioritäten. Kann kein neues Todo anlegen", Toast.LENGTH_LONG).show();
+			finish();
 		}
-		throw new RuntimeException("Nicht gefunden");
 	}
 
-	private int getCategoryPosition(Category category) {
+	/**
+	 * Lädt die Kategorien. Falls keine Kategorien vorhanden sind, oder es zu Problemen beim Laden kam, muss die Activity beendet werden
+	 */
+	private void loadCategories() {
+		try {
+			allCategories = categoryDBHelper.getAll(this);
+			if (allCategories.size() == 0)
+				throw new SQLException("Keine Kategorien da!");
+		} catch (SQLException e) {
+			Toast.makeText(this, "Fehler beim laden der Kategorien. Kann kein neues Todo anlegen", Toast.LENGTH_LONG).show();
+			finish();
+		}
+	}
+
+	/**
+	 * Durchsucht eine Collection nach einem Objekt und gibt die Stelle zurück, an der dieses zu finden ist. 0-basiert.
+	 * @param list
+	 * @param objectToLookFor
+	 * @return Stelle des Objekts. 0 falls nicht vorhanden.
+	 */
+	private <T> int getPositionInList(List<T> list, T objectToLookFor) {
 		int i = 0;
-		for (Category nextCategory : allCategories) {
-			if (nextCategory.equals(category))
+		for (T nextObject : list) {
+			if (nextObject.equals(objectToLookFor))
 				return i;
 			else
 				i++;
 		}
-		throw new RuntimeException("Nicht gefunden");
+		return 0;
 	}
 
 	@Override
@@ -101,8 +116,7 @@ public class TodoDBActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.todo_db, menu);
-		return true;
+		return false;
 	}
 
 	public void save(View view) {
@@ -113,15 +127,25 @@ public class TodoDBActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		todo.setDescription(((EditText) findViewById(R.id.todoDescription)).getText().toString());
 		todo.setPriority((Priority) ((Spinner) findViewById(R.id.spinnerPriority)).getSelectedItem());
 		todo.setCategory((Category) ((Spinner) findViewById(R.id.spinnerCategory)).getSelectedItem());
-		todoDBHelper.createOrUpdate(this, todo);
-		finish();
+		try {
+			todoDBHelper.createOrUpdate(this, todo);
+			finish();
+		} catch (SQLException e) {
+			Toast.makeText(this, R.string.saving_not_possible, Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	public void delete(View view) {
 		if (todo != null) {
-			Log.d("DELETE_PRIORITY", "Loesche Todo " + todo);
-			todoDBHelper.delete(this, todo);
+			try {
+				Log.d("DELETE_PRIORITY", "Loesche Todo " + todo);
+				todoDBHelper.delete(this, todo);
+				finish();
+			} catch (SQLException e) {
+				Toast.makeText(this, R.string.deleting_not_possible, Toast.LENGTH_SHORT).show();
+			}
+		} else {
+			finish();
 		}
-		finish();
 	}
 }

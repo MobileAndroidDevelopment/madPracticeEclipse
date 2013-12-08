@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
-import com.j256.ormlite.dao.RuntimeExceptionDao;
+import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -25,12 +25,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	// name of the database file for your application -- change to something appropriate for your app
 	private static final String DATABASE_NAME = "todo.db";
 	// any time you make changes to your database objects, you may have to increase the database version
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 4;
 
 	// the DAO object we use to access the Todo table
-	private RuntimeExceptionDao<Todo, Integer> todoDao = null;
-	private RuntimeExceptionDao<Priority, Integer> priorityDao = null;
-	private RuntimeExceptionDao<Category, Integer> categoryDao = null;
+	private Dao<Todo, Integer> todoDao = null;
+	private Dao<Priority, Integer> priorityDao = null;
+	private Dao<Category, Integer> categoryDao = null;
 
 	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -57,18 +57,23 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	}
 
 	private void createCategories() {
-		RuntimeExceptionDao<Category, Integer> dao = getCategoryDao();
-		Category uniCategory = new Category();
-		uniCategory.setName(UNI);
-		dao.create(uniCategory);
+		try {
+			Dao<Category, Integer> dao = getCategoryDao();
+			Category uniCategory = new Category();
+			uniCategory.setName(UNI);
+			dao.create(uniCategory);
 
-		Category homeCategory = new Category();
-		homeCategory.setName(HAUSHALT);
-		dao.create(homeCategory);
+			Category homeCategory = new Category();
+			homeCategory.setName(HAUSHALT);
+			dao.create(homeCategory);
+		} catch (SQLException e) {
+			Log.e("CATEGORY_CREATE", e.getMessage(), e);
+		}
 	}
 
 	private void createPriorites() {
-		RuntimeExceptionDao<Priority, Integer> dao = getPriorityDao();
+		try {
+		Dao<Priority, Integer> dao = getPriorityDao();
 		Priority lowPrio = new Priority(LOW);
 		dao.create(lowPrio);
 
@@ -77,6 +82,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 		Priority highPrio = new Priority(HIGH);
 		dao.create(highPrio);
+		} catch (SQLException e) {
+			Log.e("PRIORITY_CREATE", e.getMessage(), e);
+		}
 	}
 
 	/**
@@ -101,10 +109,11 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	/**
 	 * Returns the RuntimeExceptionDao (Database Access Object) version of a Dao for our Todo class. It will
 	 * create it or just give the cached value. RuntimeExceptionDao only through RuntimeExceptions.
+	 * @throws SQLException 
 	 */
-	public RuntimeExceptionDao<Todo, Integer> getTodoDao() {
+	public Dao<Todo, Integer> getTodoDao() throws SQLException {
 		if (todoDao == null) {
-			todoDao = getRuntimeExceptionDao(Todo.class);
+			todoDao = getDao(Todo.class);
 		}
 		return todoDao;
 	}
@@ -112,17 +121,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	/**
 	 * Returns the RuntimeExceptionDao (Database Access Object) version of a Dao for our Todo class. It will
 	 * create it or just give the cached value. RuntimeExceptionDao only through RuntimeExceptions.
+	 * @throws SQLException 
 	 */
-	public RuntimeExceptionDao<Priority, Integer> getPriorityDao() {
+	public Dao<Priority, Integer> getPriorityDao() throws SQLException {
 		if (priorityDao == null) {
-			priorityDao = getRuntimeExceptionDao(Priority.class);
+			priorityDao = getDao(Priority.class);
 		}
 		return priorityDao;
 	}
 
-	public RuntimeExceptionDao<Category, Integer> getCategoryDao() {
+	public Dao<Category, Integer> getCategoryDao() throws SQLException {
 		if (categoryDao == null) {
-			categoryDao = getRuntimeExceptionDao(Category.class);
+			categoryDao = getDao(Category.class);
 		}
 		return categoryDao;
 	}

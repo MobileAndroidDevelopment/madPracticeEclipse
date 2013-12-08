@@ -31,7 +31,7 @@ public abstract class AbstractDBHelper<T extends Serializable> {
 
 	public abstract List<T> getAll(Context context) throws SQLException;
 
-	public abstract void createOrUpdate(Context context, T t);
+	public abstract void createOrUpdate(Context context, T t) throws SQLException;
 
-	public abstract void delete(Context context, T t);
+	public abstract void delete(Context context, T t) throws SQLException;
 }

@@ -15,10 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class PriorityListActivity extends ListActivity {
 
-	public static final String PRIORITY = "PRIORITY";
+	public static final String PRIORITY_KEY = "PRIORITY";
 	private PriorityDBHelper priorityDBHelper = null;
 
 	@Override
@@ -37,6 +38,7 @@ public class PriorityListActivity extends ListActivity {
 			setListAdapter(adapter);
 		} catch (SQLException e) {
 			Log.e("PRIO_ACTIVITY", "Fehler beim SQL ausfuehren", e);
+			Toast.makeText(this, R.string.not_able_to_show_priorities, Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -67,7 +69,7 @@ public class PriorityListActivity extends ListActivity {
 	protected void onListItemClick(ListView listView, View view, int position, long id) {
 		Intent intent = new Intent(this, PriorityDBActivity.class);
 		Log.d("ON_CLICK_PRIORITY", "Position: " + position);
-		intent.putExtra(PRIORITY, (Priority) listView.getItemAtPosition(position));
+		intent.putExtra(PRIORITY_KEY, (Priority) listView.getItemAtPosition(position));
 		startActivity(intent);
 	}
 }

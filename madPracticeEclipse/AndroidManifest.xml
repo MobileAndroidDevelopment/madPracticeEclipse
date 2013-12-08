@@ -86,7 +86,7 @@
 
         <activity
             android:name="mobile.app.dev.ueb06.view.TodoDBActivity"
-            android:label="@string/title_activity_todo"
+            android:label="@string/title_activity_todo_db"
             android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
         <activity

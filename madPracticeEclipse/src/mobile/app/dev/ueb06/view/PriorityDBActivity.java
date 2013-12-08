@@ -1,42 +1,47 @@
 package mobile.app.dev.ueb06.view;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import mobile.app.dev.R;
 import mobile.app.dev.ueb06.orm.Priority;
 import mobile.app.dev.ueb06.orm.PriorityDBHelper;
+import mobile.app.dev.ueb06.orm.Todo;
+import mobile.app.dev.ueb06.orm.TodoDBHelper;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class PriorityDBActivity extends Activity {
 
 	private Priority priority;
-	private PriorityDBHelper helper = null;
+	private PriorityDBHelper priorityDBHelper = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_priority_db);
-		helper = new PriorityDBHelper();
+		priorityDBHelper = new PriorityDBHelper();
 
-		if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(PriorityListActivity.PRIORITY)) {
-			priority = (Priority) getIntent().getExtras().get(PriorityListActivity.PRIORITY);
+		if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(PriorityListActivity.PRIORITY_KEY)) {
+			priority = (Priority) getIntent().getExtras().get(PriorityListActivity.PRIORITY_KEY);
 			((EditText) findViewById(R.id.priority_name)).setText(priority.getName());
 		}
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.priority_db, menu);
-		return true;
+		return false;
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		helper.close();
+		priorityDBHelper.close();
 	}
 
 	public void save(View view) {
@@ -45,16 +50,33 @@ public class PriorityDBActivity extends Activity {
 		}
 		String name = ((EditText) findViewById(R.id.priority_name)).getText().toString();
 		priority.setName(name);
-		helper.createOrUpdate(this, priority);
-		finish();
+		try {
+			priorityDBHelper.createOrUpdate(this, priority);
+			finish();
+		} catch (SQLException e) {
+			Toast.makeText(this, R.string.name_already_exists, Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	public void delete(View view) {
 		if (priority != null) {
-			Log.d("DELETE_PRIORITY", "Loesche Prioritaet " + priority);
-			helper.delete(this, priority);
-		}
-		finish();
-	}
+			Log.d("DELETE_PRIORITY", "Versuche Prioritaet zu loeschen! " + priority);
+			TodoDBHelper todoDBHelper = new TodoDBHelper();
+			try {
+				List<Todo> todos = todoDBHelper.where(this, "category_id", priority.getId());
+				if (todos.size() != 0)
+					throw new SQLException("Kann nicht loeschen, bestehende Referenzen!");
 
+				Log.d("DELETE_PRIORITY", "Loesche Priorität " + priority);
+				priorityDBHelper.delete(this, priority);
+				finish();
+			} catch (SQLException e) {
+				Toast.makeText(this, R.string.priority_still_existing, Toast.LENGTH_SHORT).show();
+			} finally {
+				todoDBHelper.close();
+			}
+		} else {
+			finish();
+		}
+	}
 }

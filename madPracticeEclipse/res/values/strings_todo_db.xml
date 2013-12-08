@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title_activity_todo">TodoActivity</string>
-    <string name="title_activity_todo_list_db">TodoListDBActivity</string>
-    <string name="title_activity_priority_list">PriorityListActivity</string>
+
+    <string name="title_activity_todo_db">Todo bearbeiten</string>
+    <string name="title_activity_todo_list_db">Todos</string>
+    <string name="title_activity_priority_list">Prioritäten</string>
+    <string name="title_activity_category_list">Kategorien</string>
     <string name="title_activity_priority_db">PriorityDBActivity</string>
-    <string name="title_activity_category_list">CategoryListActivity</string>
     <string name="title_activity_category_db">CategoryDBActivity</string>
     <string name="newPriority">Neue Priorität</string>
     <string name="new_todo">Neues Todo</string>
+    <string name="newCategory">Neue Kategorie</string>
     <string name="admin_priorites">Prioritäten verwalten</string>
     <string name="admin_categories">Kategorien verwalten</string>
     <string name="title">Titel</string>
     <string name="description">Beschreibung</string>
     <string name="priority">Priorität</string>
     <string name="category">Kategorie</string>
+    <string name="name_already_exists">Name bereits vergeben</string>
+    <string name="category_still_existing">Kategorie kann nicht gelöscht werden. Sie wird noch verwendet.</string>
+    <string name="priority_still_existing">Priorität kann nicht gelöscht werden. Sie wird noch verwendet.</string>
+    <string name="saving_not_possible">Es tut uns leid. Speichern ist aktuell nicht möglich!</string>
+    <string name="deleting_not_possible">Es tut uns leid. Löschen ist aktuell nicht möglich!</string>
+    <string name="not_able_to_show_categories">Kann keine Kategorien anzeigen</string>
+    <string name="not_able_to_show_priorities">Kann keine Prioritäten anzeigen</string>
+    <string name="not_able_to_show_todos">Kann keine Todos anzeigen</string>
+
 </resources>

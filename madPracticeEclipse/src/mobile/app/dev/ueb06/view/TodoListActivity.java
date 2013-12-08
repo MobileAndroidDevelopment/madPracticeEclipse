@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class TodoListActivity extends ListActivity {
 
@@ -36,7 +37,8 @@ public class TodoListActivity extends ListActivity {
 			ArrayAdapter<Todo> adapter = new ArrayAdapter<Todo>(this, android.R.layout.simple_list_item_1, list);
 			setListAdapter(adapter);
 		} catch (SQLException e) {
-			Log.e("PRIO_ACTIVITY", "Fehler beim SQL ausfuehren", e);
+			Log.e("TODO_LIST_ACTIVITY", "Fehler beim SQL ausfuehren", e);
+			Toast.makeText(this, R.string.not_able_to_show_todos, Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -71,9 +73,8 @@ public class TodoListActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView listView, View view, int position, long id) {
 		Intent intent = new Intent(this, TodoDBActivity.class);
-		Log.d("ON_CLICK_PRIORITY", "Position: " + position);
+		Log.d("ON_CLICK_TODO", "Position: " + position);
 		intent.putExtra(TODO_KEY, (Todo) listView.getItemAtPosition(position));
 		startActivity(intent);
 	}
-
 }
