@@ -1,5 +1,5 @@
 #
-# generated on 2013/12/07 01:43:05
+# generated on 2013/12/08 03:09:11
 #
 # --table-start--
 dataClass=mobile.app.dev.ueb06.orm.Category
@@ -11,6 +11,7 @@ generatedId=true
 # --field-end--
 # --field-start--
 fieldName=name
+unique=true
 # --field-end--
 # --table-fields-end--
 # --table-end--
@@ -25,6 +26,7 @@ generatedId=true
 # --field-end--
 # --field-start--
 fieldName=name
+unique=true
 # --field-end--
 # --table-fields-end--
 # --table-end--

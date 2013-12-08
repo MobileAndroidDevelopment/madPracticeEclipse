@@ -1,8 +1,11 @@
 package mobile.app.dev.ueb06.view;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import mobile.app.dev.R;
 import mobile.app.dev.ueb06.orm.Category;
@@ -12,29 +15,29 @@ import mobile.app.dev.ueb06.orm.Priority;
 import mobile.app.dev.ueb06.orm.PriorityDBHelper;
 import mobile.app.dev.ueb06.orm.Todo;
 import mobile.app.dev.ueb06.orm.TodoDBHelper;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 
-public class TodoDBActivity extends OrmLiteBaseActivity<DatabaseHelper> {
+public class TodoDBActivity extends OrmLiteBaseActivity<DatabaseHelper> implements Timeable {
 
 	private TodoDBHelper todoDBHelper = null;
 	private PriorityDBHelper prioDBHelper = null;
 	private CategoryDBHelper categoryDBHelper = null;
 	private Todo todo;
+	private long selectedTimeInMillis;
 	private List<Category> allCategories;
 	private List<Priority> allPriorities;
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +66,17 @@ public class TodoDBActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			((Spinner) findViewById(R.id.spinnerPriority)).setSelection(priorityPosition);
 			int categoryPosition = getPositionInList(allCategories, todo.getCategory());
 			((Spinner) findViewById(R.id.spinnerCategory)).setSelection(categoryPosition);
+			selectedTimeInMillis = todo.getDate();
+		} else {
+			selectedTimeInMillis = Calendar.getInstance().getTimeInMillis();
 		}
+		setFormattedDate();
+	}
+
+	private void setFormattedDate() {
+		String formattedDate = sdf.format(new Date(selectedTimeInMillis));
+		Log.d("TEST", formattedDate);
+		((TextView) findViewById(R.id.todoChosenDateLabel)).setText(formattedDate);
 	}
 
 	/**
@@ -132,6 +145,7 @@ public class TodoDBActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		todo.setDescription(((EditText) findViewById(R.id.todoDescription)).getText().toString());
 		todo.setPriority((Priority) ((Spinner) findViewById(R.id.spinnerPriority)).getSelectedItem());
 		todo.setCategory((Category) ((Spinner) findViewById(R.id.spinnerCategory)).getSelectedItem());
+		todo.setDate(selectedTimeInMillis);
 		try {
 			todoDBHelper.createOrUpdate(this, todo);
 			finish();
@@ -155,26 +169,14 @@ public class TodoDBActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	public void showDatePickerDialog(View v) {
-	    DialogFragment newFragment = new DatePickerFragment();
-	    newFragment.show(getFragmentManager(), "datePicker");
+		DialogFragment newFragment = new DatePickerFragment(this, selectedTimeInMillis);
+		newFragment.show(getFragmentManager(), "datePicker");
 	}
-	
-	public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			// Use the current date as the default date in the picker
-			final Calendar c = Calendar.getInstance();
-			int year = c.get(Calendar.YEAR);
-			int month = c.get(Calendar.MONTH);
-			int day = c.get(Calendar.DAY_OF_MONTH);
-
-			// Create a new instance of DatePickerDialog and return it
-			return new DatePickerDialog(getActivity(), this, year, month, day);
-		}
-
-		public void onDateSet(DatePicker view, int year, int month, int day) {
-			// Do something with the date chosen by the user
-		}
+	@Override
+	public void setTime(long time) {
+		Log.d("TIMEABLE", "Zeit wurde gesetzt: " + time);
+		selectedTimeInMillis = time;
+		setFormattedDate();
 	}
 }
