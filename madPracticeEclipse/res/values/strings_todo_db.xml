@@ -17,6 +17,7 @@
     <string name="priority">Priorität</string>
     <string name="todo_date">Fälligkeitsdatum</string>
     <string name="pick_date">Auswählen</string>
+    <string name="picked_date">01.02.2013</string>
     <string name="category">Kategorie</string>
     <string name="name_already_exists">Name bereits vergeben</string>
     <string name="category_still_existing">Kategorie kann nicht gelöscht werden. Sie wird noch verwendet.</string>
