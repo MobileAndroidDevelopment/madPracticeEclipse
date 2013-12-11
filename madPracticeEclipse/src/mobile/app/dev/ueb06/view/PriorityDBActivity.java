@@ -48,13 +48,17 @@ public class PriorityDBActivity extends Activity {
 		if (priority == null) {
 			priority = new Priority();
 		}
-		String name = ((EditText) findViewById(R.id.priority_name)).getText().toString();
-		priority.setName(name);
 		try {
+			String name = ((EditText) findViewById(R.id.priority_name)).getText().toString();
+			if(name==null || name.isEmpty())
+				throw new EmptyException(getString(R.string.EMPTY_NAME_NOT_POSSIBLE));
+			priority.setName(name);
 			priorityDBHelper.createOrUpdate(this, priority);
 			finish();
 		} catch (SQLException e) {
 			Toast.makeText(this, R.string.name_already_exists, Toast.LENGTH_SHORT).show();
+		} catch(EmptyException e){
+			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 		}
 	}
 

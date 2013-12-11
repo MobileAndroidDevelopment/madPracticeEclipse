@@ -27,5 +27,7 @@
     <string name="not_able_to_show_categories">Kann keine Kategorien anzeigen</string>
     <string name="not_able_to_show_priorities">Kann keine Prioritäten anzeigen</string>
     <string name="not_able_to_show_todos">Kann keine Todos anzeigen</string>
+    <string name="EMPTY_TITLE_NOT_POSSIBLE">Der Titel darf nicht leer sein</string>
+    <string name="EMPTY_NAME_NOT_POSSIBLE">Ein leerer Name ist nicht erlaubt.</string>
 
 </resources>
