@@ -87,6 +87,7 @@
         <activity
             android:name="mobile.app.dev.ueb06.view.TodoDBActivity"
             android:label="@string/title_activity_todo_db"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
         <activity
@@ -102,6 +103,7 @@
         <activity
             android:name="mobile.app.dev.ueb06.view.PriorityDBActivity"
             android:label="@string/title_activity_priority_db"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
         <activity
@@ -112,6 +114,7 @@
         <activity
             android:name="mobile.app.dev.ueb06.view.CategoryDBActivity"
             android:label="@string/title_activity_category_db"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
     </application>

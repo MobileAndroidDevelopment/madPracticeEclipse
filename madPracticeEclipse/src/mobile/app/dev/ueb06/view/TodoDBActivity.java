@@ -153,7 +153,7 @@ public class TodoDBActivity extends OrmLiteBaseActivity<DatabaseHelper> implemen
 			todoDBHelper.createOrUpdate(this, todo);
 			finish();
 		} catch (EmptyException e) {
-			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
+			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 		} catch (SQLException e) {
 			Toast.makeText(this, R.string.saving_not_possible, Toast.LENGTH_SHORT).show();
 		}
