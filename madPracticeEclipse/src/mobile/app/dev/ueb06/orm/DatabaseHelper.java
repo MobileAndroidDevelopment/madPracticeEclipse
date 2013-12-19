@@ -17,6 +17,9 @@ import com.j256.ormlite.table.TableUtils;
  */
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
+	public static final String TODO_TABLE = "table";
+	public static final String PRIORITY_TABLE = "priority";
+	
 	private static final String HAUSHALT = "Haushalt";
 	private static final String HIGH = "hoch";
 	private static final String MEDIUM = "mittel";

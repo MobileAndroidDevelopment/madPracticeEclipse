@@ -1,5 +1,10 @@
 package mobile.app.dev.ueb07;
 
+import java.io.Serializable;
+
+import mobile.app.dev.ueb06.orm.AbstractDBHelper;
+import mobile.app.dev.ueb06.orm.DatabaseHelper;
+import mobile.app.dev.ueb06.orm.PriorityDBHelper;
 import mobile.app.dev.ueb06.orm.TodoDBHelper;
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -8,6 +13,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 public class TodoContentProvider extends ContentProvider {
 
@@ -60,14 +66,17 @@ public class TodoContentProvider extends ContentProvider {
 		int uriCode = URI_MATCHER.match(uri);
 		switch (uriCode) {
 			case TODOS: {
-				getAllTodos(projection, selection, selectionArgs, sortOrder);
-				break;
+				SelectionArguments arguments = new SelectionArguments(DatabaseHelper.TODO_TABLE)
+						.setProjection(projection).setSelection(selection).setSelectionArguments(selectionArgs).setSortOrder(sortOrder);
+				return getAll(arguments, new TodoDBHelper());
 			}
 			case TODO_ID: {
 				break;
 			}
 			case PRIORITIES: {
-				break;
+				SelectionArguments arguments = new SelectionArguments(DatabaseHelper.PRIORITY_TABLE)
+						.setProjection(projection).setSelection(selection).setSelectionArguments(selectionArgs).setSortOrder(sortOrder);
+				return getAll(arguments, new PriorityDBHelper());
 			}
 			case PRIORITY_ID: {
 				break;
@@ -80,16 +89,16 @@ public class TodoContentProvider extends ContentProvider {
 		return null;
 	}
 
-	private Cursor getAllTodos(String[] projection, String selection, String[] selectionArguments, String sortOrder) {
-		TodoDBHelper todoDBHelper = null;
+	private Cursor getAll(SelectionArguments arguments, AbstractDBHelper dbHelper) {
 		try {
-			todoDBHelper = new TodoDBHelper();
-			SQLiteDatabase database = todoDBHelper.getReadableDatabase();
-			return database.query("", projection, selection, selectionArguments, null, null, sortOrder);
+			SQLiteDatabase database = dbHelper.getReadableDatabase();
+			return database.query(arguments.getTableName(), arguments.getProjection(), arguments.getSelection(), arguments.getSelectionArguments(), null, null,
+					arguments.getSortOrder());
 		} catch (Exception e) {
+			Log.e("CONTENT_PROVIDER", "error querying database", e);
 			return null;
 		} finally {
-			todoDBHelper.close();
+			dbHelper.close();
 		}
 	}
 
