@@ -117,6 +117,13 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
+        <provider
+            android:name="mobile.app.dev.ueb07.TodoContentProvider"
+            android:authorities="mobile.app.dev.ueb06.todo"
+            android:enabled="true"
+            android:exported="true"
+			android:permission="mobile.app.dev.ueb06.PERMISSION" >
+        </provider>
     </application>
 
 </manifest>

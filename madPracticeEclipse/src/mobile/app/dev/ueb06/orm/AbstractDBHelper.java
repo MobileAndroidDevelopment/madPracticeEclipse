@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 
@@ -27,6 +28,10 @@ public abstract class AbstractDBHelper<T extends Serializable> {
 			OpenHelperManager.releaseHelper();
 			databaseHelper = null;
 		}
+	}
+	
+	public SQLiteDatabase getReadableDatabase(){
+		return databaseHelper.getReadableDatabase();
 	}
 
 	public abstract List<T> getAll(Context context) throws SQLException;
