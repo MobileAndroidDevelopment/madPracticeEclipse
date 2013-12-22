@@ -28,8 +28,16 @@ public class SelectionArguments {
 		return selection;
 	}
 
-	public SelectionArguments setSelection(String selection) {
-		this.selection = selection;
+	/**
+	 * fügt eine weitere Selektion hinzu
+	 * @param selection
+	 * @return this
+	 */
+	public SelectionArguments addSelection(String selection) {
+		if (selection == null)
+			this.selection = selection;
+		else
+			this.selection += " AND " + selection;
 		return this;
 	}
 

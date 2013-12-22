@@ -10,6 +10,9 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 public class PriorityDBHelper extends AbstractDBHelper<Priority> {
+	
+	public static final String COL_ID = "_id";
+	public static final String COL_NAME = "name";
 
 	public List<Priority> getAll(Context context) throws SQLException {
 		Log.i(Priority.class.getName(), "Show list again");

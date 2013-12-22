@@ -33,6 +33,10 @@ public abstract class AbstractDBHelper<T extends Serializable> {
 	public SQLiteDatabase getReadableDatabase(){
 		return databaseHelper.getReadableDatabase();
 	}
+	
+	public SQLiteDatabase getWritableDatabase(){
+		return databaseHelper.getWritableDatabase();
+	}
 
 	public abstract List<T> getAll(Context context) throws SQLException;
 
