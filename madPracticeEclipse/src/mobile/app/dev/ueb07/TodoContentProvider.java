@@ -41,10 +41,14 @@ public class TodoContentProvider extends ContentProvider {
 	public static final String TODO_URI = "content://de.htwds.mada.todo/todos";
 	public static final String PRIORITY_URI = "content://de.htwds.mada.todo/priorities";
 
+	private TodoDBHelper todoDBHelper;
+	private PriorityDBHelper priorityDBHelper;
+
 	@Override
-	public int delete(Uri uri, String selection, String[] selectionArgs) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean onCreate() {
+		todoDBHelper = new TodoDBHelper();
+		priorityDBHelper = new PriorityDBHelper();
+		return false;
 	}
 
 	@Override
@@ -65,15 +69,60 @@ public class TodoContentProvider extends ContentProvider {
 	}
 
 	@Override
+	public int delete(Uri uri, String selection, String[] selectionArgs) {
+		int uriCode = URI_MATCHER.match(uri);
+		switch (uriCode) {
+			case TODOS: {
+				SelectionArguments args = new SelectionArguments(DatabaseHelper.TODO_TABLE)
+						.addSelection(selection)
+						.setSelectionArguments(selectionArgs);
+				return delete(todoDBHelper, args);
+			}
+			case TODO_ID: {
+				String id = uri.getLastPathSegment();
+				SelectionArguments args = new SelectionArguments(DatabaseHelper.TODO_TABLE)
+						.addSelection(TodoDBHelper.COL_ID + "=" + id)
+						.addSelection(selection)
+						.setSelectionArguments(selectionArgs);
+				return delete(todoDBHelper, args);
+			}
+			case PRIORITIES: {
+				SelectionArguments args = new SelectionArguments(DatabaseHelper.PRIORITY_TABLE)
+						.addSelection(selection)
+						.setSelectionArguments(selectionArgs);
+				return delete(priorityDBHelper, args);
+			}
+			case PRIORITY_ID: {
+				String id = uri.getLastPathSegment();
+				SelectionArguments args = new SelectionArguments(DatabaseHelper.PRIORITY_TABLE)
+						.addSelection(PriorityDBHelper.COL_ID + "=" + id)
+						.addSelection(selection)
+						.setSelectionArguments(selectionArgs);
+				return delete(priorityDBHelper, args);
+			}
+			default: {
+				return 0;
+			}
+		}
+	}
+
+	private int delete(AbstractDBHelper dbHelper, SelectionArguments args) {
+		SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
+		int rowsDeleted = sqlDB.delete(args.getTableName(), args.getSelection(), args.getSelectionArguments());
+		dbHelper.close();
+		return rowsDeleted;
+	}
+
+	@Override
 	public Uri insert(Uri uri, ContentValues values) {
 		int uriCode = URI_MATCHER.match(uri);
 		switch (uriCode) {
 			case TODOS:
-				long newTodoId = insertData(values, new TodoDBHelper(), DatabaseHelper.TODO_TABLE);
+				long newTodoId = insertData(values, todoDBHelper, DatabaseHelper.TODO_TABLE);
 				// URI für neues Todo erstellen und zurückgeben 
 				return ContentUris.appendId(uri.buildUpon(), newTodoId).build();
 			case PRIORITIES:
-				long newPriorityId = insertData(values, new PriorityDBHelper(), DatabaseHelper.PRIORITY_TABLE);
+				long newPriorityId = insertData(values, priorityDBHelper, DatabaseHelper.PRIORITY_TABLE);
 				// URI für neues Todo erstellen und zurückgeben 
 				return ContentUris.appendId(uri.buildUpon(), newPriorityId).build();
 			default:
@@ -95,19 +144,13 @@ public class TodoContentProvider extends ContentProvider {
 	}
 
 	@Override
-	public boolean onCreate() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 		int uriCode = URI_MATCHER.match(uri);
 		switch (uriCode) {
 			case TODOS: {
 				SelectionArguments arguments = new SelectionArguments(DatabaseHelper.TODO_TABLE)
 						.setProjection(projection).addSelection(selection).setSelectionArguments(selectionArgs).setSortOrder(sortOrder);
-				return getAll(arguments, new TodoDBHelper());
+				return getAll(arguments, todoDBHelper);
 			}
 			case TODO_ID: {
 				long todoId = ContentUris.parseId(uri);
@@ -117,12 +160,12 @@ public class TodoContentProvider extends ContentProvider {
 						.addSelection(selection).addSelection(idSelection)
 						.setSelectionArguments(selectionArgs)
 						.setSortOrder(sortOrder);
-				return getAll(arguments, new TodoDBHelper());
+				return getAll(arguments, todoDBHelper);
 			}
 			case PRIORITIES: {
 				SelectionArguments arguments = new SelectionArguments(DatabaseHelper.PRIORITY_TABLE)
 						.setProjection(projection).addSelection(selection).setSelectionArguments(selectionArgs).setSortOrder(sortOrder);
-				return getAll(arguments, new PriorityDBHelper());
+				return getAll(arguments, priorityDBHelper);
 			}
 			case PRIORITY_ID: {
 				long priorityId = ContentUris.parseId(uri);
@@ -132,7 +175,7 @@ public class TodoContentProvider extends ContentProvider {
 						.addSelection(selection).addSelection(idSelection)
 						.setSelectionArguments(selectionArgs)
 						.setSortOrder(sortOrder);
-				return getAll(arguments, new PriorityDBHelper());
+				return getAll(arguments, priorityDBHelper);
 			}
 			default: {
 				return null;
@@ -155,8 +198,53 @@ public class TodoContentProvider extends ContentProvider {
 
 	@Override
 	public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-		// TODO Auto-generated method stub
-		return 0;
+		int uriCode = URI_MATCHER.match(uri);
+		switch (uriCode) {
+			case TODOS: {
+				SelectionArguments arguments = new SelectionArguments(DatabaseHelper.TODO_TABLE)
+						.setValues(values)
+						.addSelection(selection)
+						.setSelectionArguments(selectionArgs);
+				return updateData(todoDBHelper, arguments);
+			}
+			case TODO_ID: {
+				String id = uri.getLastPathSegment();
+				SelectionArguments arguments = new SelectionArguments(DatabaseHelper.TODO_TABLE)
+						.addSelection(TodoDBHelper.COL_ID + "=" + id)
+						.addSelection(selection)
+						.setSelectionArguments(selectionArgs)
+						.setValues(values);
+				return updateData(todoDBHelper, arguments);
+			}
+			case PRIORITIES: {
+				SelectionArguments arguments = new SelectionArguments(DatabaseHelper.PRIORITY_TABLE)
+						.setValues(values)
+						.addSelection(selection)
+						.setSelectionArguments(selectionArgs);
+				return updateData(priorityDBHelper, arguments);
+			}
+			case PRIORITY_ID: {
+				String id = uri.getLastPathSegment();
+				SelectionArguments arguments = new SelectionArguments(DatabaseHelper.PRIORITY_TABLE)
+						.addSelection(TodoDBHelper.COL_ID + "=" + id)
+						.addSelection(selection)
+						.setSelectionArguments(selectionArgs)
+						.setValues(values);
+				return updateData(priorityDBHelper, arguments);
+			}
+			default: {
+				return 0;
+			}
+		}
+	}
+
+	private int updateData(AbstractDBHelper dbHelper, SelectionArguments arguments) {
+		SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
+		int rowsUpdated = sqlDB.update(arguments.getTableName(),
+				arguments.getValues(),
+				arguments.getSelection(),
+				arguments.getSelectionArguments());
+		return rowsUpdated;
 	}
 
 	public static final class Todos implements BaseColumns {

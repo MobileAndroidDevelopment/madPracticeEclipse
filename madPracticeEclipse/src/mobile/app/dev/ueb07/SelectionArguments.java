@@ -1,11 +1,14 @@
 package mobile.app.dev.ueb07;
 
+import android.content.ContentValues;
+
 public class SelectionArguments {
 	private final String tableName;
 	private String[] projection;
 	private String selection;
 	private String[] selectionArguments;
 	private String sortOrder;
+	private ContentValues values;
 
 	public SelectionArguments(String tableName) {
 		this.tableName = tableName;
@@ -34,9 +37,9 @@ public class SelectionArguments {
 	 * @return this
 	 */
 	public SelectionArguments addSelection(String selection) {
-		if (selection == null)
+		if (this.selection == null)
 			this.selection = selection;
-		else
+		else if (selection != null)
 			this.selection += " AND " + selection;
 		return this;
 	}
@@ -58,4 +61,14 @@ public class SelectionArguments {
 		this.sortOrder = sortOrder;
 		return this;
 	}
+
+	public ContentValues getValues() {
+		return values;
+	}
+
+	public SelectionArguments setValues(ContentValues values) {
+		this.values = values;
+		return this;
+	}
+
 }
