@@ -67,7 +67,7 @@ public class PriorityDBActivity extends Activity {
 			Log.d("DELETE_PRIORITY", "Versuche Prioritaet zu loeschen! " + priority);
 			TodoDBHelper todoDBHelper = new TodoDBHelper();
 			try {
-				List<Todo> todos = todoDBHelper.where(this, "category_id", priority.getId());
+				List<Todo> todos = todoDBHelper.where(this, "category_id", priority.get_id());
 				if (todos.size() != 0)
 					throw new SQLException("Kann nicht loeschen, bestehende Referenzen!");
 

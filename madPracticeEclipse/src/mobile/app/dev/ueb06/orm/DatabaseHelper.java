@@ -17,7 +17,7 @@ import com.j256.ormlite.table.TableUtils;
  */
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
-	public static final String TODO_TABLE = "table";
+	public static final String TODO_TABLE = "todo";
 	public static final String PRIORITY_TABLE = "priority";
 	
 	private static final String HAUSHALT = "Haushalt";
@@ -28,7 +28,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	// name of the database file for your application -- change to something appropriate for your app
 	private static final String DATABASE_NAME = "todo.db";
 	// any time you make changes to your database objects, you may have to increase the database version
-	private static final int DATABASE_VERSION = 4;
+	private static final int DATABASE_VERSION = 6;
 
 	// the DAO object we use to access the Todo table
 	private Dao<Todo, Integer> todoDao = null;
@@ -108,7 +108,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			throw new RuntimeException(e);
 		}
 	}
-
+	
 	/**
 	 * Returns the RuntimeExceptionDao (Database Access Object) version of a Dao for our Todo class. It will
 	 * create it or just give the cached value. RuntimeExceptionDao only through RuntimeExceptions.

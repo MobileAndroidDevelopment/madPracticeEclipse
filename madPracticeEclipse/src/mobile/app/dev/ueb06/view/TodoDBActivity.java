@@ -66,7 +66,7 @@ public class TodoDBActivity extends OrmLiteBaseActivity<DatabaseHelper> implemen
 			((Spinner) findViewById(R.id.spinnerPriority)).setSelection(priorityPosition);
 			int categoryPosition = getPositionInList(allCategories, todo.getCategory());
 			((Spinner) findViewById(R.id.spinnerCategory)).setSelection(categoryPosition);
-			selectedTimeInMillis = todo.getDate();
+			selectedTimeInMillis = todo.getDatetime();
 		} else {
 			selectedTimeInMillis = Calendar.getInstance().getTimeInMillis();
 		}
@@ -149,7 +149,7 @@ public class TodoDBActivity extends OrmLiteBaseActivity<DatabaseHelper> implemen
 			todo.setDescription(((EditText) findViewById(R.id.todoDescription)).getText().toString());
 			todo.setPriority((Priority) ((Spinner) findViewById(R.id.spinnerPriority)).getSelectedItem());
 			todo.setCategory((Category) ((Spinner) findViewById(R.id.spinnerCategory)).getSelectedItem());
-			todo.setDate(selectedTimeInMillis);
+			todo.setDatetime(selectedTimeInMillis);
 			todoDBHelper.createOrUpdate(this, todo);
 			finish();
 		} catch (EmptyException e) {

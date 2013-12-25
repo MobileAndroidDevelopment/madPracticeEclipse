@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="de.htwds.mada.todo.READ" />
 
     <application
         android:allowBackup="true"
@@ -117,13 +118,21 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
+        <!-- ContentProvider für die Todos -->
         <provider
             android:name="mobile.app.dev.ueb07.TodoContentProvider"
-            android:authorities="mobile.app.dev.ueb06.todo"
+            android:authorities="de.htwds.mada.todo"
             android:enabled="true"
             android:exported="true"
-			android:permission="mobile.app.dev.ueb06.PERMISSION" >
+            android:permission="de.htwds.mada.todo.READ" >
         </provider>
+        <!-- Auslesehilfsfunktion für die Todos -->
+        <activity
+            android:name="mobile.app.dev.ueb07.TodoReaderActivity"
+            android:label="@string/title_activity_todo_reader"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo" >
+        </activity>
     </application>
 
 </manifest>

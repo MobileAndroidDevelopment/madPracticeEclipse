@@ -34,12 +34,9 @@ public class TodoContentProvider extends ContentProvider {
 		URI_MATCHER.addURI(AUTHORITY, Todos.PATH + "/#", TODO_ID);
 
 		// Priority-URIs
-		URI_MATCHER.addURI(AUTHORITY, Todos.PATH, PRIORITIES);
-		URI_MATCHER.addURI(AUTHORITY, Todos.PATH + "/#", PRIORITY_ID);
+		URI_MATCHER.addURI(AUTHORITY, Priorities.PATH, PRIORITIES);
+		URI_MATCHER.addURI(AUTHORITY, Priorities.PATH + "/#", PRIORITY_ID);
 	}
-
-	public static final String TODO_URI = "content://de.htwds.mada.todo/todos";
-	public static final String PRIORITY_URI = "content://de.htwds.mada.todo/priorities";
 
 	private TodoDBHelper todoDBHelper;
 	private PriorityDBHelper priorityDBHelper;
@@ -107,9 +104,8 @@ public class TodoContentProvider extends ContentProvider {
 	}
 
 	private int delete(AbstractDBHelper dbHelper, SelectionArguments args) {
-		SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
+		SQLiteDatabase sqlDB = dbHelper.getHelper(getContext()).getWritableDatabase();
 		int rowsDeleted = sqlDB.delete(args.getTableName(), args.getSelection(), args.getSelectionArguments());
-		dbHelper.close();
 		return rowsDeleted;
 	}
 
@@ -137,9 +133,8 @@ public class TodoContentProvider extends ContentProvider {
 	 * @return die eingefügte ID
 	 */
 	private long insertData(ContentValues values, AbstractDBHelper dbHelper, String table) {
-		SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
+		SQLiteDatabase sqlDB = dbHelper.getHelper(getContext()).getWritableDatabase();
 		long id = sqlDB.insert(table, null, values);
-		sqlDB.close();
 		return id;
 	}
 
@@ -185,15 +180,13 @@ public class TodoContentProvider extends ContentProvider {
 
 	private Cursor getAll(SelectionArguments arguments, AbstractDBHelper dbHelper) {
 		try {
-			SQLiteDatabase database = dbHelper.getReadableDatabase();
+			SQLiteDatabase database = dbHelper.getHelper(getContext()).getReadableDatabase();
 			return database.query(arguments.getTableName(), arguments.getProjection(), arguments.getSelection(), arguments.getSelectionArguments(), null, null,
 					arguments.getSortOrder());
 		} catch (Exception e) {
 			Log.e("CONTENT_PROVIDER", "error querying database", e);
 			return null;
-		} finally {
-			dbHelper.close();
-		}
+		} 
 	}
 
 	@Override
@@ -239,7 +232,7 @@ public class TodoContentProvider extends ContentProvider {
 	}
 
 	private int updateData(AbstractDBHelper dbHelper, SelectionArguments arguments) {
-		SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
+		SQLiteDatabase sqlDB = dbHelper.getHelper(getContext()).getWritableDatabase();
 		int rowsUpdated = sqlDB.update(arguments.getTableName(),
 				arguments.getValues(),
 				arguments.getSelection(),

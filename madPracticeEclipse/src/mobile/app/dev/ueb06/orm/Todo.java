@@ -9,9 +9,9 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Todo implements Serializable {
 
 	@DatabaseField(generatedId = true)
-	private int id;
+	private int _id;
 	@DatabaseField
-	private long date;
+	private long datetime;
 	@DatabaseField
 	private String title;
 	@DatabaseField
@@ -21,20 +21,20 @@ public class Todo implements Serializable {
 	@DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true)
 	private Priority priority;
 
-	public int getId() {
-		return id;
+	public int get_id() {
+		return _id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void set_id(int _id) {
+		this._id = _id;
 	}
 
-	public long getDate() {
-		return date;
+	public long getDatetime() {
+		return datetime;
 	}
 
-	public void setDate(long date) {
-		this.date = date;
+	public void setDatetime(long datetime) {
+		this.datetime = datetime;
 	}
 
 	public String getTitle() {
