@@ -1,5 +1,7 @@
 package mobile.app.dev.ueb07;
 
+import java.io.Serializable;
+
 import mobile.app.dev.ueb06.orm.AbstractDBHelper;
 import mobile.app.dev.ueb06.orm.DatabaseHelper;
 import mobile.app.dev.ueb06.orm.PriorityDBHelper;
@@ -103,7 +105,7 @@ public class TodoContentProvider extends ContentProvider {
 		}
 	}
 
-	private int delete(AbstractDBHelper dbHelper, SelectionArguments args) {
+	private <T extends Serializable> int delete(AbstractDBHelper<T> dbHelper, SelectionArguments args) {
 		SQLiteDatabase sqlDB = dbHelper.getHelper(getContext()).getWritableDatabase();
 		int rowsDeleted = sqlDB.delete(args.getTableName(), args.getSelection(), args.getSelectionArguments());
 		return rowsDeleted;
@@ -132,7 +134,7 @@ public class TodoContentProvider extends ContentProvider {
 	 * @param dbHelper
 	 * @return die eingefügte ID
 	 */
-	private long insertData(ContentValues values, AbstractDBHelper dbHelper, String table) {
+	private <T extends Serializable> long insertData(ContentValues values, AbstractDBHelper<T> dbHelper, String table) {
 		SQLiteDatabase sqlDB = dbHelper.getHelper(getContext()).getWritableDatabase();
 		long id = sqlDB.insert(table, null, values);
 		return id;
@@ -178,7 +180,7 @@ public class TodoContentProvider extends ContentProvider {
 		}
 	}
 
-	private Cursor getAll(SelectionArguments arguments, AbstractDBHelper dbHelper) {
+	private <T extends Serializable> Cursor getAll(SelectionArguments arguments, AbstractDBHelper<T> dbHelper) {
 		try {
 			SQLiteDatabase database = dbHelper.getHelper(getContext()).getReadableDatabase();
 			return database.query(arguments.getTableName(), arguments.getProjection(), arguments.getSelection(), arguments.getSelectionArguments(), null, null,
@@ -231,7 +233,7 @@ public class TodoContentProvider extends ContentProvider {
 		}
 	}
 
-	private int updateData(AbstractDBHelper dbHelper, SelectionArguments arguments) {
+	private <T extends Serializable> int updateData(AbstractDBHelper<T> dbHelper, SelectionArguments arguments) {
 		SQLiteDatabase sqlDB = dbHelper.getHelper(getContext()).getWritableDatabase();
 		int rowsUpdated = sqlDB.update(arguments.getTableName(),
 				arguments.getValues(),

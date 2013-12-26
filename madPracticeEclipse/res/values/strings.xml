@@ -73,5 +73,8 @@
     <string name="UNKNOWN_ERROR">Es ist ein unbekannter Fehler aufgetreten</string>
     <string name="calculatorsettingsactivity">CalculatorSettingsActivity</string>
     <string name="title_activity_todo_reader">TodoReaderActivity</string>
+    <string name="title_activity_todo_updater">TodoUpdaterActivity</string>
+    <string name="title_activity_priority_updater">PriorityUpdaterActivity</string>
+    <string name="name">Name</string>
 
 </resources>

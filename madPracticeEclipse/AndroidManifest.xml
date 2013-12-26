@@ -133,6 +133,18 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo" >
         </activity>
+        <activity
+            android:name="mobile.app.dev.ueb07.TodoUpdaterActivity"
+            android:label="@string/title_activity_todo_updater"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo" >
+        </activity>
+        <activity
+            android:name="mobile.app.dev.ueb07.PriorityUpdaterActivity"
+            android:label="@string/title_activity_priority_updater"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo" >
+        </activity>
     </application>
 
 </manifest>

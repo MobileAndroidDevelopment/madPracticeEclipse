@@ -11,25 +11,38 @@ import mobile.app.dev.ueb06.orm.TodoDBHelper;
 import mobile.app.dev.ueb07.TodoContentProvider.Priorities;
 import mobile.app.dev.ueb07.TodoContentProvider.Todos;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ListView;
 import android.widget.Switch;
 
 public class TodoReaderActivity extends ListActivity implements OnCheckedChangeListener {
+
+	public static final String TODO_KEY = "todo";
+	public static final String PRIORITY_KEY = "priority";
+	/** Zuständig für die Auswahl Todo/Priority zur Anzeige */
+	private Switch todoSwitch;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_todo_reader);
-		Switch todoSwitch = (Switch) findViewById(R.id.todoSwitch);
+		todoSwitch = (Switch) findViewById(R.id.todoSwitch);
 		todoSwitch.setOnCheckedChangeListener(this);
-		loadTodos();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		loadListWithEntries();
 	}
 
 	@Override
@@ -39,8 +52,14 @@ public class TodoReaderActivity extends ListActivity implements OnCheckedChangeL
 
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-		// Is the toggle on?
-		boolean on = buttonView.isChecked();
+		loadListWithEntries();
+	}
+
+	/**
+	 * Lädt die Liste neu, entsprechend dem Switch-Status
+	 */
+	private void loadListWithEntries() {
+		boolean on = todoSwitch.isChecked();
 		if (on) {
 			loadTodos();
 		} else {
@@ -74,7 +93,7 @@ public class TodoReaderActivity extends ListActivity implements OnCheckedChangeL
 		Log.d("URI", "URI: " + uri);
 		String[] projection = new String[] { TodoDBHelper.COL_ID, TodoDBHelper.COL_TITLE, TodoDBHelper.COL_DATE, TodoDBHelper.COL_DESCRIPTION,
 				TodoDBHelper.COL_PRIORITY_ID };
-		return managedQuery(uri, projection, null, null, null);
+		return getContentResolver().query(uri, projection, null, null, null);
 	}
 
 	private void loadPriorites() {
@@ -99,7 +118,22 @@ public class TodoReaderActivity extends ListActivity implements OnCheckedChangeL
 		Log.d("URI", "URI: " + uri);
 		String[] projection = new String[] { PriorityDBHelper.COL_ID, PriorityDBHelper.COL_NAME };
 
-		return managedQuery(uri, projection, null, null, null);
+		return getContentResolver().query(uri, projection, null, null, null);
+	}
+
+	@Override
+	protected void onListItemClick(ListView listView, View view, int position, long id) {
+		if (todoSwitch.isChecked()) {
+			Intent intent = new Intent(this, TodoUpdaterActivity.class);
+			Log.d("ON_CLICK_TODO", "Position: " + position);
+			intent.putExtra(TODO_KEY, ((Todo) listView.getItemAtPosition(position)).get_id());
+			startActivity(intent);
+		} else {
+			Intent intent = new Intent(this, PriorityUpdaterActivity.class);
+			Log.d("ON_CLICK_PRIORITY", "Position: " + position);
+			intent.putExtra(PRIORITY_KEY, ((Priority) listView.getItemAtPosition(position)).get_id());
+			startActivity(intent);
+		}
 	}
 
 }
