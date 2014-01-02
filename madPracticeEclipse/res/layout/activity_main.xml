@@ -8,7 +8,7 @@
     android:paddingRight="20dp"
     android:paddingTop="20dp"
     android:weightSum="1"
-    tools:context=".MainActivity" >
+    tools:context=".MoneySac" >
 
     <Button
         android:id="@+id/button_uebung1"
@@ -57,5 +57,13 @@
         android:layout_below="@id/button_uebung5"
         android:onClick="uebung6"
         android:text="@string/UEBUNG_6" />
+    
+        <Button
+        android:id="@+id/button_moneysac"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@id/button_uebung6"
+        android:onClick="moneysac"
+        android:text="@string/MONEYSAC" />
 
 </RelativeLayout>

@@ -49,6 +49,11 @@ public class MainActivity extends Activity {
     	Intent intent = new Intent(this, mobile.app.dev.ueb06.view.TodoListActivity.class);
     	startActivity(intent);
     }
+    
+    public void moneysac(View v){
+    	Intent intent = new Intent(this, mobile.app.dev.moneysac.Activities.MoneySac.class);
+    	startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

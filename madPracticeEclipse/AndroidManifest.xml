@@ -114,6 +114,11 @@
             android:label="@string/title_activity_category_db"
             android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
+        <activity
+            android:name="mobile.app.dev.moneysac.Activities.MoneySac"
+            android:label="@string/MONEYSAC" 
+            android:theme="@android:style/Theme.Holo">
+        </activity>
     </application>
 
 </manifest>

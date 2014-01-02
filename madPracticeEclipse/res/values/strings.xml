@@ -36,6 +36,7 @@
     <string name="UEBUNG_4">Übung 4</string>
     <string name="UEBUNG_5">Übung 5</string>
     <string name="UEBUNG_6">Übung 6</string>
+    <string name="MONEYSAC">MoneySac</string>
     <string name="title_activity_todo_list">TodoListActivity</string>
     <string name="title_activity_todo_detail">TodoDetailActivity</string>
     <string name="title_activity_todo_settings">Einstellungen</string>
@@ -71,5 +72,12 @@
     <string name="READ_WRITE_ERROR">Lesen oder Schreiben der Datei war nicht möglich!</string>
     <string name="UNKNOWN_ERROR">Es ist ein unbekannter Fehler aufgetreten</string>
     <string name="calculatorsettingsactivity">CalculatorSettingsActivity</string>
+    
+    <string name="strEinnahmenHead">Einnahmen:</string>
+    <string name="strAusgabenHead">Ausgaben:</string>
+    <string name="strEinnahmen">Einnahmen</string>
+    <string name="strAusgaben">Ausgaben</string>
+    <string name="strBeides">Beides</string>
+    <string name="strAdd">+</string>
 
 </resources>
