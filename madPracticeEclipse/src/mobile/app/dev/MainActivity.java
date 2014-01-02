@@ -55,6 +55,11 @@ public class MainActivity extends Activity {
     	startActivity(intent);
     }
 
+	public void contentProvider(View v) {
+		Intent intent = new Intent(this, mobile.app.dev.ueb07.TodoReaderActivity.class);
+		startActivity(intent);
+	}
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -62,5 +67,5 @@ public class MainActivity extends Activity {
         return true;
     }
     
-}
 
+}

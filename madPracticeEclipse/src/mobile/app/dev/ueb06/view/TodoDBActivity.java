@@ -66,7 +66,7 @@ public class TodoDBActivity extends OrmLiteBaseActivity<DatabaseHelper> implemen
 			((Spinner) findViewById(R.id.spinnerPriority)).setSelection(priorityPosition);
 			int categoryPosition = getPositionInList(allCategories, todo.getCategory());
 			((Spinner) findViewById(R.id.spinnerCategory)).setSelection(categoryPosition);
-			selectedTimeInMillis = todo.getDate();
+			selectedTimeInMillis = todo.getDatetime();
 		} else {
 			selectedTimeInMillis = Calendar.getInstance().getTimeInMillis();
 		}
@@ -141,14 +141,19 @@ public class TodoDBActivity extends OrmLiteBaseActivity<DatabaseHelper> implemen
 		if (todo == null) {
 			todo = new Todo();
 		}
-		todo.setTitle(((EditText) findViewById(R.id.todoTitle)).getText().toString());
-		todo.setDescription(((EditText) findViewById(R.id.todoDescription)).getText().toString());
-		todo.setPriority((Priority) ((Spinner) findViewById(R.id.spinnerPriority)).getSelectedItem());
-		todo.setCategory((Category) ((Spinner) findViewById(R.id.spinnerCategory)).getSelectedItem());
-		todo.setDate(selectedTimeInMillis);
 		try {
+			String title = ((EditText) findViewById(R.id.todoTitle)).getText().toString();
+			if (title == null || title.isEmpty())
+				throw new EmptyException(getString(R.string.EMPTY_TITLE_NOT_POSSIBLE));
+			todo.setTitle(title);
+			todo.setDescription(((EditText) findViewById(R.id.todoDescription)).getText().toString());
+			todo.setPriority((Priority) ((Spinner) findViewById(R.id.spinnerPriority)).getSelectedItem());
+			todo.setCategory((Category) ((Spinner) findViewById(R.id.spinnerCategory)).getSelectedItem());
+			todo.setDatetime(selectedTimeInMillis);
 			todoDBHelper.createOrUpdate(this, todo);
 			finish();
+		} catch (EmptyException e) {
+			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 		} catch (SQLException e) {
 			Toast.makeText(this, R.string.saving_not_possible, Toast.LENGTH_SHORT).show();
 		}

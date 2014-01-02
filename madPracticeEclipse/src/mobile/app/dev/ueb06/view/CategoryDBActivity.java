@@ -48,13 +48,17 @@ public class CategoryDBActivity extends Activity {
 		if (category == null) {
 			category = new Category();
 		}
-		String name = ((EditText) findViewById(R.id.category_name)).getText().toString();
-		category.setName(name);
 		try {
+			String name = ((EditText) findViewById(R.id.category_name)).getText().toString();
+			if (name == null || name.isEmpty())
+				throw new EmptyException(getString(R.string.EMPTY_NAME_NOT_POSSIBLE));
+			category.setName(name);
 			categoryDBHelper.createOrUpdate(this, category);
 			finish();
 		} catch (SQLException e) {
 			Toast.makeText(this, R.string.name_already_exists, Toast.LENGTH_SHORT).show();
+		} catch (EmptyException e) {
+			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 		}
 	}
 

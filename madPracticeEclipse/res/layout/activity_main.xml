@@ -49,7 +49,6 @@
         android:onClick="uebung5"
         android:text="@string/UEBUNG_5" />
     
-    
     <Button
         android:id="@+id/button_uebung6"
         android:layout_width="match_parent"
@@ -58,11 +57,19 @@
         android:onClick="uebung6"
         android:text="@string/UEBUNG_6" />
     
-        <Button
-        android:id="@+id/button_moneysac"
+    <Button
+        android:id="@+id/button_uebung7"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_below="@id/button_uebung6"
+        android:onClick="contentProvider"
+        android:text="@string/UEBUNG_7" />
+    
+    <Button
+        android:id="@+id/button_moneysac"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@id/button_uebung7"
         android:onClick="moneysac"
         android:text="@string/MONEYSAC" />
 

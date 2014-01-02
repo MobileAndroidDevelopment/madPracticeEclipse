@@ -37,6 +37,7 @@
     <string name="UEBUNG_5">Übung 5</string>
     <string name="UEBUNG_6">Übung 6</string>
     <string name="MONEYSAC">MoneySac</string>
+    <string name="UEBUNG_7">Übung 7</string>
     <string name="title_activity_todo_list">TodoListActivity</string>
     <string name="title_activity_todo_detail">TodoDetailActivity</string>
     <string name="title_activity_todo_settings">Einstellungen</string>
@@ -79,5 +80,9 @@
     <string name="strAusgaben">Ausgaben</string>
     <string name="strBeides">Beides</string>
     <string name="strAdd">+</string>
+    <string name="title_activity_todo_reader">TodoReaderActivity</string>
+    <string name="title_activity_todo_updater">TodoUpdaterActivity</string>
+    <string name="title_activity_priority_updater">PriorityUpdaterActivity</string>
+    <string name="name">Name</string>
 
 </resources>

@@ -9,7 +9,7 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Priority implements Serializable {
 
 	@DatabaseField(generatedId = true)
-	private int id;
+	private int _id;
 	@DatabaseField(unique = true)
 	private String name;
 
@@ -20,17 +20,17 @@ public class Priority implements Serializable {
 		this.name = name;
 	}
 
-	public Priority(int id, String name) {
-		this.id = id;
+	public Priority(int _id, String name) {
+		this._id = _id;
 		this.name = name;
 	}
 
-	public int getId() {
-		return id;
+	public int get_id() {
+		return _id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void set_id(int _id) {
+		this._id = _id;
 	}
 
 	public String getName() {
@@ -50,7 +50,7 @@ public class Priority implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + _id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -64,7 +64,7 @@ public class Priority implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Priority other = (Priority) obj;
-		if (id != other.id)
+		if (_id != other._id)
 			return false;
 		return true;
 	}

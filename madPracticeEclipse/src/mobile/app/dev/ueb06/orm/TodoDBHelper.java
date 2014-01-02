@@ -11,6 +11,12 @@ import com.j256.ormlite.stmt.QueryBuilder;
 
 public class TodoDBHelper extends AbstractDBHelper<Todo> {
 
+	public static final String COL_ID = "_id";
+	public static final String COL_TITLE = "title";
+	public static final String COL_DESCRIPTION = "description";
+	public static final String COL_DATE = "datetime";
+	public static final String COL_PRIORITY_ID = "priority_id";
+
 	public List<Todo> getAll(Context context) throws SQLException {
 		Log.d(Todo.class.getName(), "Todos laden");
 		Dao<Todo, Integer> dao = getHelper(context).getTodoDao();
@@ -29,11 +35,10 @@ public class TodoDBHelper extends AbstractDBHelper<Todo> {
 		Dao<Todo, Integer> dao = getHelper(context).getTodoDao();
 		dao.delete(todo);
 	}
-	
 
-	public List<Todo> where(Context context, String column, Object value) throws SQLException{
+	public List<Todo> where(Context context, String column, Object value) throws SQLException {
 		Dao<Todo, Integer> dao = getHelper(context).getTodoDao();
-		List<Todo> categories =dao.queryBuilder().where().eq(column, value).query();
+		List<Todo> categories = dao.queryBuilder().where().eq(column, value).query();
 		return categories;
 	}
 }
