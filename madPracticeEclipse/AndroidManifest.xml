@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-    <uses-permission android:name="de.htwds.mada.todo.READ" />
 
     <application
         android:allowBackup="true"
@@ -128,8 +127,7 @@
             android:name="mobile.app.dev.ueb07.TodoContentProvider"
             android:authorities="de.htwds.mada.todo"
             android:enabled="true"
-            android:exported="true"
-            android:permission="de.htwds.mada.todo.READ" >
+            android:exported="true">
         </provider>
         <!-- Auslesehilfsfunktion für die Todos -->
         <activity
