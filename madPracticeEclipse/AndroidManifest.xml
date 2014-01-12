@@ -119,15 +119,17 @@
         </activity>
         <activity
             android:name="mobile.app.dev.moneysac.Activities.MoneySac"
-            android:label="@string/MONEYSAC" 
-            android:theme="@android:style/Theme.Holo">
-        <!-- ContentProvider für die Todos -->
+            android:label="@string/MONEYSAC"
+            android:theme="@android:style/Theme.Holo" >
+
+            <!-- ContentProvider für die Todos -->
         </activity>
+
         <provider
             android:name="mobile.app.dev.ueb07.TodoContentProvider"
             android:authorities="de.htwds.mada.todo"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true" >
         </provider>
         <!-- Auslesehilfsfunktion für die Todos -->
         <activity
@@ -147,6 +149,10 @@
             android:label="@string/title_activity_priority_updater"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo" >
+        </activity>
+        <activity
+            android:name="mobile.app.dev.moneysac.Activities.EditEntryActivity"
+            android:label="@string/title_activity_edit_entry" >
         </activity>
     </application>
 

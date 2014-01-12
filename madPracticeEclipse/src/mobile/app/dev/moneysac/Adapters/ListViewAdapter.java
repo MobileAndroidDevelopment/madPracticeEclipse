@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 
 import mobile.app.dev.R;
-import mobile.app.dev.moneysac.Model.ListEntry;
+import mobile.app.dev.moneysac.Model.Entry;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +16,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListViewAdapter extends ArrayAdapter<ListEntry> {
+public class ListViewAdapter extends ArrayAdapter<Entry> {
     private final Context context;
-    private final LinkedList<ListEntry> values;
+    private final LinkedList<Entry> values;
 
-    public ListViewAdapter(Context context, LinkedList<ListEntry> values) {
+    public ListViewAdapter(Context context, LinkedList<Entry> values) {
         super(context, R.layout.listrow, values);
         this.context = context;
         this.values = values;

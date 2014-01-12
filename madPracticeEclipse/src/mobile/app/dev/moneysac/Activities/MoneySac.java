@@ -5,19 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Locale;
 
 import mobile.app.dev.R;
 import mobile.app.dev.moneysac.Adapters.DatePickerFragment;
-import mobile.app.dev.moneysac.Adapters.ListViewAdapter;
-import mobile.app.dev.moneysac.Helpers.LocalPersistence;
 import mobile.app.dev.moneysac.Helpers.SegmentedRadioGroup;
-import mobile.app.dev.moneysac.Model.BankAccountList;
-import mobile.app.dev.moneysac.Model.BankAccountMonth;
-import mobile.app.dev.moneysac.Model.ListEntry;
+import mobile.app.dev.moneysac.Model.Entry;
+import mobile.app.dev.ueb03.TodoListActivity;
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -68,23 +65,23 @@ public class MoneySac extends Activity {
         Date today = calendar.getTime();
         Date yesterday = calendar.getTime();
 
-        LinkedList<ListEntry> accountList = new LinkedList<ListEntry>();
-        accountList.add(new ListEntry(yesterday, "Schuhe", 100, false));
-        accountList.add(new ListEntry(yesterday, "Gehalt", 2000, true));
-        accountList.add(new ListEntry(today, "Laptop", 1000, false));
-        accountList.add(new ListEntry(today, "Taschengeld", 100, true));
-        accountList.add(new ListEntry(today, "Essen", 200, false));
+        LinkedList<Entry> accountList = new LinkedList<Entry>();
+        accountList.add(new Entry(yesterday, "Schuhe", 100, false));
+        accountList.add(new Entry(yesterday, "Gehalt", 2000, true));
+        accountList.add(new Entry(today, "Laptop", 1000, false));
+        accountList.add(new Entry(today, "Taschengeld", 100, true));
+        accountList.add(new Entry(today, "Essen", 200, false));
 
         Date thisMonth = calendar.getTime();
 
         //save a month just for example
-        BankAccountMonth bankAccountMonth = new BankAccountMonth(accountList, thisMonth);
-        BankAccountList.addMonthToStorage(this, bankAccountMonth);
-
-        //and load it again
-        BankAccountMonth currentMonth = BankAccountList.getMonthFromStorage(this, thisMonth);
-        ListViewAdapter listAdapter = new ListViewAdapter(this, currentMonth.getEntries());
-        listView.setAdapter(listAdapter);
+//        BankAccountMonth bankAccountMonth = new BankAccountMonth(accountList, thisMonth);
+//        BankAccountList.addMonthToStorage(this, bankAccountMonth);
+//
+//        //and load it again
+//        BankAccountMonth currentMonth = BankAccountList.getMonthFromStorage(this, thisMonth);
+//        ListViewAdapter listAdapter = new ListViewAdapter(this, currentMonth.getEntries());
+//        listView.setAdapter(listAdapter);
         return listView;
     }
 
@@ -92,30 +89,16 @@ public class MoneySac extends Activity {
         Spinner monthSpinner = (Spinner)findViewById(R.id.spinnerMonths);
         ArrayAdapter<String> monthSpinnerAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
-        monthSpinnerAdapter.addAll(getMonths());
+        //TODO monthSpinnerAdapter.addAll(getMonths());
+        LinkedList<String> tempList = new LinkedList<String>();
+        tempList.add("Monat 1");
+        tempList.add("Monat 2");
+        tempList.add("Monat 3");
+        monthSpinnerAdapter.addAll(tempList);
         monthSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         monthSpinner.setAdapter(monthSpinnerAdapter);
         return monthSpinner;
-    }
-
-    private List<String> getMonths() {
-        //TODO load directly from using method at LocalPersistence.java and get the name in the spinner from the date in the entry !
-
-        List<String> list = LocalPersistence.getAllFilesNames(this);
-        List<String> listToReturn = new LinkedList<String>();
-
-        for(int i = 0; i < list.size(); i++){
-            Log.d("filename"+i, list.get(i));
-            try {
-                if(list.get(i).startsWith("20")){
-                    listToReturn.add(sdfOut.format(sdfIn.parse(list.get(i))));
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-        return listToReturn;
     }
 
 
@@ -149,6 +132,18 @@ public class MoneySac extends Activity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void addIncomeClicked(View v){
+    	//TODO add extras in intent bundle 
+    	Intent intent = new Intent(this, EditEntryActivity.class);
+    	startActivity(intent);
+    }
+    
+    public void addExpenseClicked(View v){
+    	//TODO add extras in intent bundle 
+    	Intent intent = new Intent(this, EditEntryActivity.class);
+    	startActivity(intent);
     }
 
 

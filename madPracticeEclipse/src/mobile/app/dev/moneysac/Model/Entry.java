@@ -6,13 +6,13 @@ import java.util.Date;
 /**
  * Created by Kev1n on 05.10.13.
  */
-public class ListEntry implements Serializable{
+public class Entry implements Serializable{
     private String desc;
     private boolean isIncome;
     private double amount;
     private Date date;
 
-    public ListEntry(Date date, String desc, double amount, boolean isIncome) {
+    public Entry(Date date, String desc, double amount, boolean isIncome) {
         this.date = date;
         this.isIncome = isIncome;
         this.desc = desc;

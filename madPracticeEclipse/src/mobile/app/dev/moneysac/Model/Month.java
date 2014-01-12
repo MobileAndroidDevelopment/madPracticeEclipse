@@ -7,26 +7,26 @@ import java.util.LinkedList;
 /**
  * Created by Kev1n on 06.10.13.
  */
-public class BankAccountMonth implements Serializable {
+public class Month implements Serializable {
 
-    private LinkedList<ListEntry> entries;
+    private LinkedList<Entry> entries;
     private Date month;
 
-    public BankAccountMonth(LinkedList<ListEntry> entries, Date month) {
+    public Month(LinkedList<Entry> entries, Date month) {
         this.entries = entries;
         this.month = month;
     }
 
-    public BankAccountMonth(Date month){
+    public Month(Date month){
         this.month = month;
-        this.entries = new LinkedList<ListEntry>();
+        this.entries = new LinkedList<Entry>();
     }
 
-    public LinkedList<ListEntry> getEntries() {
+    public LinkedList<Entry> getEntries() {
         return entries;
     }
 
-    public void setEntries(LinkedList<ListEntry> entries) {
+    public void setEntries(LinkedList<Entry> entries) {
         this.entries = entries;
     }
 

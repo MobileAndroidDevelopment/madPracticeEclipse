@@ -73,16 +73,17 @@
     <string name="READ_WRITE_ERROR">Lesen oder Schreiben der Datei war nicht möglich!</string>
     <string name="UNKNOWN_ERROR">Es ist ein unbekannter Fehler aufgetreten</string>
     <string name="calculatorsettingsactivity">CalculatorSettingsActivity</string>
-    
     <string name="strEinnahmenHead">Einnahmen:</string>
     <string name="strAusgabenHead">Ausgaben:</string>
     <string name="strEinnahmen">Einnahmen</string>
     <string name="strAusgaben">Ausgaben</string>
     <string name="strBeides">Beides</string>
-    <string name="strAdd">+</string>
+    <string name="strAddIncome">+</string>
+    <string name="strAddExpense">-</string>
     <string name="title_activity_todo_reader">TodoReaderActivity</string>
     <string name="title_activity_todo_updater">TodoUpdaterActivity</string>
     <string name="title_activity_priority_updater">PriorityUpdaterActivity</string>
     <string name="name">Name</string>
+    <string name="title_activity_edit_entry">EditEntryActivity</string>
 
 </resources>
