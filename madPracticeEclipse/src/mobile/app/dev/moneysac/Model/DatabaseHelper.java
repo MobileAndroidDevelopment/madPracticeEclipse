@@ -42,9 +42,26 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(connectionSource, SacEntryType.class);
 			TableUtils.createTable(connectionSource, Category.class);
 			TableUtils.createTable(connectionSource, SacEntry.class);
+
+			createEntryTypes();
 		} catch (SQLException e) {
 			Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
 			throw new RuntimeException(e);
+		}
+	}
+
+	private void createEntryTypes() {
+		try {
+			Dao<SacEntryType, Integer> dao = getSacEntryTypeDao();
+			SacEntryType incomeEntryType = new SacEntryType();
+			incomeEntryType.setName("Einnahme");
+			dao.create(incomeEntryType);
+
+			SacEntryType expenseEntryType = new SacEntryType();
+			expenseEntryType.setName("Ausgabe");
+			dao.create(expenseEntryType);
+		} catch (SQLException e) {
+			Log.e("ENTRY_TYPE_CREATE", e.getMessage(), e);
 		}
 	}
 
@@ -73,14 +90,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		}
 		return categoryDao;
 	}
-	
+
 	public Dao<SacEntryType, Integer> getSacEntryTypeDao() throws SQLException {
 		if (sacEntryTypeDao == null) {
 			sacEntryTypeDao = getDao(SacEntryType.class);
 		}
 		return sacEntryTypeDao;
 	}
-	
+
 	public Dao<SacEntry, Integer> getSacEntryDao() throws SQLException {
 		if (sacEntryDao == null) {
 			sacEntryDao = getDao(SacEntry.class);
