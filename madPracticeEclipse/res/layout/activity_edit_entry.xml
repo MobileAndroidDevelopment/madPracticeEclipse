@@ -11,16 +11,16 @@
     <LinearLayout
         android:id="@+id/layoutEntryDesc"
         android:layout_width="match_parent"
-        android:weightSum="1"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_height="wrap_content" >
+        android:weightSum="1" >
 
         <TextView
             android:id="@+id/textViewEntryDesc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Description: "
             android:layout_weight=".4"
+            android:text="Was? "
             android:textSize="20sp" />
 
         <EditText
@@ -28,7 +28,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".6"
-            android:layout_toRightOf="@id/textViewEntryDesc"
             android:text="blah" />
     </LinearLayout>
 
@@ -44,26 +43,84 @@
         <TextView
             android:id="@+id/textViewEntryAmount"
             android:layout_width="0dp"
-            android:layout_weight=".4"
             android:layout_height="wrap_content"
-            android:text="Amount: "
+            android:layout_weight=".4"
+            android:text="Betrag: "
             android:textSize="20sp" />
 
         <EditText
             android:id="@+id/editTextEntryAmount"
             android:layout_width="0dp"
-            android:layout_weight=".55"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/textViewEntryAmount"
+            android:layout_weight=".55"
             android:text="blah" />
 
         <TextView
             android:id="@+id/textViewEntryEuro"
             android:layout_width="0dp"
-            android:layout_weight=".05"
             android:layout_height="wrap_content"
+            android:layout_weight=".05"
             android:text="€"
             android:textSize="20sp" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutEntryCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layoutEntryAmount"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/textViewEntryCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".4"
+            android:text="Kategorie: "
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinnerEntryCategory"
+            style="@android:style/Widget.Holo.Spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".6"
+            android:entries="@array/Kategorien" />
+    </LinearLayout>
+    
+        <LinearLayout
+        android:id="@+id/layoutEntryDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layoutEntryCategory"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/textViewEntryDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".4"
+            android:text="Datum: "
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/buttonEntryDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".6"
+            android:text="18.01.2014" />
+
+    </LinearLayout>
+    
+    <Button 
+        android:id="@+id/buttonUploadPicture"
+        android:layout_below="@id/layoutEntryDate"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Foto der Rechnung anhängen"/>
 
 </RelativeLayout>

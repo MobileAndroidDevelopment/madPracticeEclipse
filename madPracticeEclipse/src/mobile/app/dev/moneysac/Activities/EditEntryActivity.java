@@ -13,6 +13,7 @@ public class EditEntryActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_entry);
+		setTitle("Neue Ausgabe");
 	}
 
 	@Override

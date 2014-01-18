@@ -52,6 +52,13 @@
         <item>mittel</item>
         <item>niedrig</item>
     </string-array>
+    
+    <string-array name="Kategorien">
+        <item>Essen</item>
+        <item>Bildung</item>
+        <item>Auto</item>
+        <item>Kleidung</item>
+    </string-array>
 
     <string name="listRowTitle">Title</string>
     <string name="detailLabelDescription">Beschreibung</string>
@@ -80,6 +87,7 @@
     <string name="strBeides">Beides</string>
     <string name="strAddIncome">+</string>
     <string name="strAddExpense">-</string>
+    <string name="strAddMonth">+</string>
     <string name="title_activity_todo_reader">TodoReaderActivity</string>
     <string name="title_activity_todo_updater">TodoUpdaterActivity</string>
     <string name="title_activity_priority_updater">PriorityUpdaterActivity</string>
