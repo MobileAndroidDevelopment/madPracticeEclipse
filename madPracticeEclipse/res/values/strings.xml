@@ -52,7 +52,6 @@
         <item>mittel</item>
         <item>niedrig</item>
     </string-array>
-    
     <string-array name="Kategorien">
         <item>Essen</item>
         <item>Bildung</item>
@@ -93,5 +92,7 @@
     <string name="title_activity_priority_updater">PriorityUpdaterActivity</string>
     <string name="name">Name</string>
     <string name="title_activity_edit_entry">EditEntryActivity</string>
+    <string name="moneysac_menu_category">Kategorien</string>
+    <string name="title_activity_category_list_view">CategoryListView</string>
 
 </resources>
