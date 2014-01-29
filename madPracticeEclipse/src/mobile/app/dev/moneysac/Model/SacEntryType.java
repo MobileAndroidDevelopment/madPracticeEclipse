@@ -13,6 +13,8 @@ public class SacEntryType implements Serializable, Comparable<SacEntryType> {
 	private int id;
 	@DatabaseField(unique = true)
 	private String name;
+	@DatabaseField(canBeNull = false)
+	private int icon;
 
 	public SacEntryType() {
 	}
@@ -45,6 +47,20 @@ public class SacEntryType implements Serializable, Comparable<SacEntryType> {
 
 	public static Comparator<SacEntryType> getNameComparator() {
 		return new SacEntryTypeNameComparator();
+	}
+
+	/**
+	 * @return the icon
+	 */
+	public int getIcon() {
+		return icon;
+	}
+
+	/**
+	 * @param icon the icon to set
+	 */
+	public void setIcon(int icon) {
+		this.icon = icon;
 	}
 
 	private static class SacEntryTypeNameComparator implements Comparator<SacEntryType> {

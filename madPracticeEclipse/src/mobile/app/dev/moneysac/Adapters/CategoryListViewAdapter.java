@@ -1,6 +1,5 @@
 package mobile.app.dev.moneysac.Adapters;
 
-import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 
 import mobile.app.dev.R;
@@ -32,13 +31,8 @@ public class CategoryListViewAdapter extends ArrayAdapter<Category> {
         ImageView icon = (ImageView) rowView.findViewById(R.id.moneysac_category_img_listrow);
         titleCat.setText(values.get(position).getName());
         type.setText(values.get(position).getType().getName());
-
-      
-        if (values.get(position).getType().getName().equals("Einkommen")) {
-            icon.setImageResource(R.drawable.money_bag_up);
-        } else {
-            icon.setImageResource(R.drawable.money_bag_down);
-        }
+        int iconID = values.get(position).getType().getIcon();
+        icon.setImageResource(iconID);
 
         return rowView;
     }

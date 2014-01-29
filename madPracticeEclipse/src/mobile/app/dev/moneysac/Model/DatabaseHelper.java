@@ -2,6 +2,7 @@ package mobile.app.dev.moneysac.Model;
 
 import java.sql.SQLException;
 
+import mobile.app.dev.R;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -55,10 +56,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			Dao<SacEntryType, Integer> dao = getSacEntryTypeDao();
 			SacEntryType incomeEntryType = new SacEntryType();
 			incomeEntryType.setName("Einnahme");
+			incomeEntryType.setIcon(R.drawable.money_bag_up);
 			dao.create(incomeEntryType);
 
 			SacEntryType expenseEntryType = new SacEntryType();
 			expenseEntryType.setName("Ausgabe");
+			expenseEntryType.setIcon(R.drawable.money_bag_down);
 			dao.create(expenseEntryType);
 		} catch (SQLException e) {
 			Log.e("ENTRY_TYPE_CREATE", e.getMessage(), e);
