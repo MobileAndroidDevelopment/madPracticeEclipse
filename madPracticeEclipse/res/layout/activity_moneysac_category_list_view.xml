@@ -21,20 +21,8 @@
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".5"
-            android:onClick="addIncomeClicked"
+            android:layout_weight="1"
             android:text="@string/strAddIncome"
-            android:textSize="35sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/delCategoryButton"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".5"
-            android:onClick="addExpenseClicked"
-            android:text="@string/strAddExpense"
             android:textSize="35sp"
             android:textStyle="bold" />
     </LinearLayout>

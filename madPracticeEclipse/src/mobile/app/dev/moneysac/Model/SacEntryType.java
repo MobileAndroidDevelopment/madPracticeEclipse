@@ -37,7 +37,9 @@ public class SacEntryType implements Serializable, Comparable<SacEntryType> {
 
 	@Override
 	public String toString() {
-		return "SacEntryType [id=" + id + ", name=" + name + "]";
+		//Auskommentiert, da diese Methode vom Spinner Adapter aufgerufen wird.
+		//return "SacEntryType [id=" + id + ", name=" + name + "]";
+		return getName();
 	}
 
 	@Override

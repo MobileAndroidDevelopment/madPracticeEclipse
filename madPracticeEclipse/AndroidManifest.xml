@@ -157,8 +157,13 @@
         </activity>
         <activity
             android:name="mobile.app.dev.moneysac.Activities.CategoryListView"
-            android:label="@string/title_activity_category_list_view" 
-             android:theme="@android:style/Theme.Holo">
+            android:label="@string/title_activity_category_list_view"
+            android:theme="@android:style/Theme.Holo" >
+        </activity>
+        <activity
+            android:name="mobile.app.dev.moneysac.Activities.CategoryDetailActivity"
+            android:label="@string/title_activity_category_detail"
+            android:theme="@android:style/Theme.Holo" >
         </activity>
     </application>
 

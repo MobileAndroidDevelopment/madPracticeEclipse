@@ -7,20 +7,36 @@ import mobile.app.dev.moneysac.Adapters.CategoryListViewAdapter;
 import mobile.app.dev.moneysac.Model.Category;
 import mobile.app.dev.moneysac.Model.SacEntryType;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class CategoryListView extends Activity {
 	
 	private ListView catList;
+	private Button btAddCat;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_moneysac_category_list_view);
 		initViewElements();
+		setListener();
 		showList();
+	}
+	
+	private void setListener(){
+		btAddCat.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(getApplicationContext(), CategoryDetailActivity.class));
+				
+			}
+		});
 	}
 	
 	
@@ -72,6 +88,7 @@ public class CategoryListView extends Activity {
 	
 	private void initViewElements(){
 		catList = (ListView) findViewById(R.id.moneysac_cetegory_listview);
+		btAddCat = (Button) findViewById(R.id.addCategoryButton);
 	}
 
 	@Override
