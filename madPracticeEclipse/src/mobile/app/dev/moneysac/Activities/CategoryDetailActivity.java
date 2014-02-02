@@ -2,12 +2,13 @@ package mobile.app.dev.moneysac.Activities;
 
 
 import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
 
 import mobile.app.dev.R;
+import mobile.app.dev.moneysac.Model.Category;
 import mobile.app.dev.moneysac.Model.SacEntryType;
 import mobile.app.dev.moneysac.Model.SacEntryTypeDBHelper;
+import mobile.app.dev.ueb03.TodoListActivity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
 
 public class CategoryDetailActivity extends Activity {
@@ -26,6 +26,7 @@ public class CategoryDetailActivity extends Activity {
 	private Button btCancel;
 	private Spinner typeSpinner;
 	private EditText edName;
+	private Category category;
 	
 	private List<SacEntryType> typeList;
 	private SacEntryTypeDBHelper typeDBHelper;
@@ -36,6 +37,9 @@ public class CategoryDetailActivity extends Activity {
 		setContentView(R.layout.activity_category_detail);
 		
 		typeDBHelper = new SacEntryTypeDBHelper();
+		
+
+		category = (Category) getIntent().getExtras().getSerializable(CategoryListView.CATEGORY_EXTRA_ID);
 
 		initViews();
 		setSpinnerValues();
@@ -60,6 +64,7 @@ public class CategoryDetailActivity extends Activity {
 		btCancel = (Button) findViewById(R.id.moneysac_detail_category_bt_cancel);
 		typeSpinner = (Spinner) findViewById(R.id.moneysac_detail_category_typ_spinner);
 		edName = (EditText) findViewById(R.id.moneysac_detail_category_edit_title);
+		edName.setText(category.getName());
 	}
 	
 	private void setListeners(){
